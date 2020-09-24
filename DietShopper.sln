@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{AD0C20B2-CC0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DietShopper.WebAPI", "Src\DietShopper.WebAPI\DietShopper.WebAPI.csproj", "{3BEF6EDA-4DAF-4EA9-AEFA-78EDADDA3225}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DietShopper.WebUI", "Src\DietShopper.WebUI\DietShopper.WebUI.csproj", "{E18C170E-50C4-49BE-9475-6EE1663AFBCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,11 +19,16 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3BEF6EDA-4DAF-4EA9-AEFA-78EDADDA3225} = {AD0C20B2-CC06-44BF-A954-4378AD5731AB}
+		{E18C170E-50C4-49BE-9475-6EE1663AFBCD} = {AD0C20B2-CC06-44BF-A954-4378AD5731AB}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3BEF6EDA-4DAF-4EA9-AEFA-78EDADDA3225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3BEF6EDA-4DAF-4EA9-AEFA-78EDADDA3225}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BEF6EDA-4DAF-4EA9-AEFA-78EDADDA3225}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BEF6EDA-4DAF-4EA9-AEFA-78EDADDA3225}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E18C170E-50C4-49BE-9475-6EE1663AFBCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E18C170E-50C4-49BE-9475-6EE1663AFBCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E18C170E-50C4-49BE-9475-6EE1663AFBCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E18C170E-50C4-49BE-9475-6EE1663AFBCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
