@@ -24,6 +24,9 @@
         <Content Include="ClientApp\src\layouts\exports.js" />
         <Content Include="ClientApp\src\layouts\Index\Index.jsx" />
         <Content Include="ClientApp\src\layouts\Index\Index.scss" />
+        <Content Include="ClientApp\src\views\Dashboard\Dashboard.jsx" />
+        <Content Include="ClientApp\src\views\Dashboard\Dashboard.scss" />
+        <Content Include="ClientApp\src\views\exports.js" />
         <None Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
     </ItemGroup>
