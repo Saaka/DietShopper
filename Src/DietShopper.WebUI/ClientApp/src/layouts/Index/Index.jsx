@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Route, Redirect} from "react-router-dom";
-// import {Loader} from "components/common";
+import {Loader} from "components/common";
 import "./Index.scss";
 
 function Index(props) {
@@ -33,7 +33,7 @@ function Index(props) {
         return (
             <div className="hero has-background-gradient is-fullheight">
                 <div className="hero-body center">
-                    Test
+                    <Loader/>
                 </div>
             </div>
         );
@@ -43,8 +43,7 @@ function Index(props) {
         return (
             <div className="hero has-background-gradient is-fullheight">
                 <div className="hero-body center">
-                    TEST
-                    {/*<Loader/>*/}
+                    <Loader/>
                 </div>
             </div>
         );

@@ -2,8 +2,7 @@ import 'react-app-polyfill/ie11';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-//import {Index} from "layouts/exports"
-import {Dashboard} from "views/exports"
+import {Index} from "layouts/exports"
 
 require("dotenv").config();
 
@@ -12,7 +11,7 @@ const rootElement = document.getElementById('root');
 
 ReactDOM.render(
   <BrowserRouter basename={baseUrl}>
-    <Dashboard />
+    <Index />
   </BrowserRouter>,
   rootElement);
 
