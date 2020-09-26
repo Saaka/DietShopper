@@ -18,6 +18,13 @@
         <Content Remove="$(SpaRoot)**" />
         <Content Include="ClientApp\.env" />
         <Content Include="ClientApp\jsconfig.json" />
+        <Content Include="ClientApp\src\assets\components\_scrollbar.scss" />
+        <Content Include="ClientApp\src\assets\components\__components.scss" />
+        <Content Include="ClientApp\src\assets\_forms.scss" />
+        <Content Include="ClientApp\src\assets\_overrides.scss" />
+        <Content Include="ClientApp\src\assets\_style.scss" />
+        <Content Include="ClientApp\src\assets\_theme.scss" />
+        <Content Include="ClientApp\src\assets\_variables.scss" />
         <Content Include="ClientApp\src\components\common.js" />
         <Content Include="ClientApp\src\components\Loader\Loader.jsx" />
         <Content Include="ClientApp\src\components\Loader\Loader.scss" />

@@ -1,0 +1,12 @@
+//Override default variables here
+$primary: hsl(223, 41%, 22%);
+
+
+// Support for css variables - currently unavailable
+//@import "~css-vars/css-vars";
+//$css-vars-use-native: true;
+//
+//@include css-vars((
+//        --primary: $primary,
+//        --info: $info,
+//))

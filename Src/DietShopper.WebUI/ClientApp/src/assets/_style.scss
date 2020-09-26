@@ -1,0 +1,21 @@
+@import "theme";
+@import "overrides";
+@import "~bulma/bulma";
+@import "components/_components";
+
+html {
+  overflow-y: auto;
+}
+
+//@import "debug";
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.has-background-gradient {
+  background: $primary-dark;
+  background: linear-gradient(180deg, $primary-dark 0%, $primary 100%);
+}
