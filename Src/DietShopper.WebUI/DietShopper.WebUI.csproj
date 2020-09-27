@@ -25,7 +25,9 @@
         <Content Include="ClientApp\src\assets\_style.scss" />
         <Content Include="ClientApp\src\assets\_theme.scss" />
         <Content Include="ClientApp\src\assets\_variables.scss" />
+        <Content Include="ClientApp\src\components\auth.js" />
         <Content Include="ClientApp\src\components\common.js" />
+        <Content Include="ClientApp\src\components\GoogleLogin\GoogleLogin.jsx" />
         <Content Include="ClientApp\src\components\Loader\Loader.jsx" />
         <Content Include="ClientApp\src\components\Loader\Loader.scss" />
         <Content Include="ClientApp\src\layouts\exports.js" />
@@ -33,9 +35,13 @@
         <Content Include="ClientApp\src\layouts\Index\Index.scss" />
         <Content Include="ClientApp\src\routes\appRoutes.js" />
         <Content Include="ClientApp\src\routes\names.js" />
+        <Content Include="ClientApp\src\Services.js" />
+        <Content Include="ClientApp\src\services\ConfigService.js" />
         <Content Include="ClientApp\src\views\Dashboard\Dashboard.jsx" />
         <Content Include="ClientApp\src\views\Dashboard\Dashboard.scss" />
         <Content Include="ClientApp\src\views\exports.js" />
+        <Content Include="ClientApp\src\views\Login\Login.jsx" />
+        <Content Include="ClientApp\src\views\Login\Login.scss" />
         <None Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
     </ItemGroup>
