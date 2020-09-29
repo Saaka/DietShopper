@@ -47,10 +47,10 @@ function Index(props) {
                                                           from={renderProps.path}
                                                           {...renderProps}
                                                           user={user}/>}/>
-                <Route path={RouteNames.Login}
-                       render={(renderProps) => <Login {...renderProps}
-                                                       onLogin={onLogin}
-                                                       user={user}/>}/>
+                {/*<Route path={RouteNames.Login}*/}
+                {/*       render={(renderProps) => <Login {...renderProps}*/}
+                {/*                                       onLogin={onLogin}*/}
+                {/*                                       user={user}/>}/>*/}
                 <Route path={RouteNames.Logout}
                        render={(renderProps) => <Logout {...renderProps}
                                                         onLogout={onLogout}/>}/>

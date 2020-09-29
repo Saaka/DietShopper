@@ -3,12 +3,13 @@ let RouteNames = class RouteNames {};
 RouteNames.Root = "/";
 
 RouteNames.Auth = "/auth";
-RouteNames.Login = "/auth/login";
 RouteNames.Logout = "/auth/logout";
 
 RouteNames.App = "/app";
-RouteNames.Unauthorized = "/app/unauthorized";
 RouteNames.Home = "/app/home";
+RouteNames.Login = "/app/login";
+RouteNames.Dashboard = "/app/dashboard";
+RouteNames.Unauthorized = "/app/unauthorized";
 RouteNames.About = "/app/about";
 
 export {RouteNames};
