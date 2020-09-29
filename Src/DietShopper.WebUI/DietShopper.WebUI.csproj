@@ -40,12 +40,14 @@
         <Content Include="ClientApp\src\Services.js" />
         <Content Include="ClientApp\src\services\AuthService.js" />
         <Content Include="ClientApp\src\services\ConfigService.js" />
+        <Content Include="ClientApp\src\views\About\About.jsx" />
         <Content Include="ClientApp\src\views\Dashboard\Dashboard.jsx" />
         <Content Include="ClientApp\src\views\Dashboard\Dashboard.scss" />
         <Content Include="ClientApp\src\views\exports.js" />
         <Content Include="ClientApp\src\views\Login\Login.jsx" />
         <Content Include="ClientApp\src\views\Login\Login.scss" />
         <Content Include="ClientApp\src\views\Logout\Logout.jsx" />
+        <Content Include="ClientApp\src\views\Unauthorized\Unauthorized.jsx" />
         <None Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
     </ItemGroup>
