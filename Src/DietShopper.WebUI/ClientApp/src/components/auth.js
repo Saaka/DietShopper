@@ -1,1 +1,1 @@
-export {GoogleLogin} from "GoogleLogin/GoogleLogin";
+export {GoogleLogin} from "./GoogleLogin/GoogleLogin";

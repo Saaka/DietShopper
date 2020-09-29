@@ -2,7 +2,7 @@ import React from "react";
 import {GoogleLogin} from "react-google-login";
 import {ConfigService} from "Services";
 
-function GoogleLogin(props) {
+function LoginWithGoogle(props) {
     const configService = new ConfigService();
 
     function onLogin(response) {
@@ -18,10 +18,11 @@ function GoogleLogin(props) {
         <GoogleLogin clientId={configService.GoogleClientId}
                      onSuccess={onLogin}
                      onFailure={onLoginFail}
-                     render={props => (
-                         <button>Sign in with Google</button>
+                     
+                     render={renderProps => (
+                         <button onClick={renderProps.onClick}>Sign in with Google</button>
                      )}/>
     )
 }
 
-export {GoogleLogin};
+export {LoginWithGoogle as GoogleLogin};

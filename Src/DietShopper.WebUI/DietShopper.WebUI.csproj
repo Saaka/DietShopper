@@ -30,6 +30,8 @@
         <Content Include="ClientApp\src\components\GoogleLogin\GoogleLogin.jsx" />
         <Content Include="ClientApp\src\components\Loader\Loader.jsx" />
         <Content Include="ClientApp\src\components\Loader\Loader.scss" />
+        <Content Include="ClientApp\src\layouts\App\App.jsx" />
+        <Content Include="ClientApp\src\layouts\App\App.scss" />
         <Content Include="ClientApp\src\layouts\exports.js" />
         <Content Include="ClientApp\src\layouts\Index\Index.jsx" />
         <Content Include="ClientApp\src\layouts\Index\Index.scss" />
@@ -43,6 +45,7 @@
         <Content Include="ClientApp\src\views\exports.js" />
         <Content Include="ClientApp\src\views\Login\Login.jsx" />
         <Content Include="ClientApp\src\views\Login\Login.scss" />
+        <Content Include="ClientApp\src\views\Logout\Logout.jsx" />
         <None Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
     </ItemGroup>
