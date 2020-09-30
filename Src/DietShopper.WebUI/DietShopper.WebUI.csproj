@@ -20,6 +20,7 @@
         <Content Include="ClientApp\jsconfig.json" />
         <Content Include="ClientApp\src\assets\components\_scrollbar.scss" />
         <Content Include="ClientApp\src\assets\components\__components.scss" />
+        <Content Include="ClientApp\src\assets\vendor\font-awesome.js" />
         <Content Include="ClientApp\src\assets\_forms.scss" />
         <Content Include="ClientApp\src\assets\_overrides.scss" />
         <Content Include="ClientApp\src\assets\_style.scss" />
@@ -30,6 +31,8 @@
         <Content Include="ClientApp\src\components\AuthRoute\AuthRoute.jsx" />
         <Content Include="ClientApp\src\components\common.js" />
         <Content Include="ClientApp\src\components\GoogleLogin\GoogleLogin.jsx" />
+        <Content Include="ClientApp\src\components\GoogleLogin\GoogleLogin.scss" />
+        <Content Include="ClientApp\src\components\Icon\Icon.jsx" />
         <Content Include="ClientApp\src\components\Loader\Loader.jsx" />
         <Content Include="ClientApp\src\components\Loader\Loader.scss" />
         <Content Include="ClientApp\src\components\routing.js" />

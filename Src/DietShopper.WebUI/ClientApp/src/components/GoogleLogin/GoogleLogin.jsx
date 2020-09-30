@@ -1,6 +1,8 @@
 import React from "react";
 import {GoogleLogin} from "react-google-login";
 import {ConfigService} from "Services";
+import {Icon} from "components/common"
+import "./GoogleLogin.scss";
 
 function LoginWithGoogle(props) {
     const configService = new ConfigService();
@@ -18,9 +20,10 @@ function LoginWithGoogle(props) {
         <GoogleLogin clientId={configService.GoogleClientId}
                      onSuccess={onLogin}
                      onFailure={onLoginFail}
-                     
+
                      render={renderProps => (
-                         <button className="button is-primary" onClick={renderProps.onClick}>Sign in with Google</button>
+                         <button className="button is-primary"
+                                 onClick={renderProps.onClick}><Icon name="google"/><span className="button-text">Sign in with Google</span></button>
                      )}/>
     )
 }
