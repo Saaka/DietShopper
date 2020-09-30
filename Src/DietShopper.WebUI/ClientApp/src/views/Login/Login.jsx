@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {GoogleLogin} from "components/auth";
+import "./Login.scss";
 
 function Login(props) {
 
@@ -16,16 +17,14 @@ function Login(props) {
     // const renderLoader = () => (<Loader/>);
 
     return (
-        <section className="hero is-fullheight">
-            <div className="hero-body login-body">
-                <div className="container center login-container">
-                    <h1 className="is-size-4 login-title">Login to Identity Issuer</h1>
-                    <div>
-                        <GoogleLogin onLoggedIn={onLoggedIn} onError={onError}/>
-                    </div>
+        <div className="section is-fullheight">
+            <div className="container login-container center">
+                <div className="login-block center">
+                    <h1 className="is-size-4 login-title">Login using options below</h1>
+                    <GoogleLogin onLoggedIn={onLoggedIn} onError={onError}/>
                 </div>
             </div>
-        </section>
+        </div>
     );
 }
 

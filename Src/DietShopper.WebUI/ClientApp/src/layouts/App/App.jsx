@@ -8,7 +8,6 @@ function App(props) {
 
     return (
         <div className="app-container has-background-gradient">
-            <h1>TITLE</h1>
             <Switch>
                 {appRoutes.map((prop, key) => {
                     if (prop.redirect)

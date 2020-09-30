@@ -20,7 +20,7 @@ function LoginWithGoogle(props) {
                      onFailure={onLoginFail}
                      
                      render={renderProps => (
-                         <button onClick={renderProps.onClick}>Sign in with Google</button>
+                         <button className="button is-primary" onClick={renderProps.onClick}>Sign in with Google</button>
                      )}/>
     )
 }
