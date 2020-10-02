@@ -1,1 +1,1 @@
-# DietShopper
+# DietShopper ![Build status](https://travis-ci.com/Saaka/DietShopper.svg?branch=master)
