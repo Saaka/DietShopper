@@ -22,6 +22,7 @@ namespace DietShopper.WebAPI
         {
             services
                 .AddAppDbContext(Configuration)
+                .AddPersistenceModule()
                 .AddMvcWithFilters()
                 .AddJwtTokenBearerAuthentication(Configuration);
         }
