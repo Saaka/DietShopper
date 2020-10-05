@@ -1,5 +1,7 @@
 using System;
 using System.Net;
+using DietShopper.Domain.Enums;
+using DietShopper.Domain.Exceptions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -21,8 +23,22 @@ namespace DietShopper.WebAPI.Filters
         {
             var exception = context.Exception;
             context.HttpContext.Response.ContentType = "application/json";
-            
-            HandleApplicationExceptions(context, exception);
+
+            if (exception is DomainException domainException)
+                HandleDomainException(context, domainException);
+            else
+                HandleApplicationExceptions(context, exception);
+        }
+
+        private void HandleDomainException(ExceptionContext context, DomainException exception)
+        {
+            context.HttpContext.Response.StatusCode = (int) HttpStatusCode.BadRequest;
+            context.Result = new JsonResult(new
+            {
+                Error = exception.ExceptionCode.ToString(),
+                ErrorDetails = exception.Message,
+                Trace = GetTrace(context)
+            });
         }
 
         private void HandleApplicationExceptions(ExceptionContext context, Exception exception)
@@ -39,8 +55,11 @@ namespace DietShopper.WebAPI.Filters
             context.Result = new JsonResult(new
             {
                 Error = context.Exception.Message,
-                ErrorDetails = !_env.IsProduction() ? context.Exception.StackTrace : string.Empty
+                Trace = GetTrace(context)
             });
         }
+
+        private string GetTrace(ExceptionContext context)
+            => !_env.IsProduction() ? context.Exception.StackTrace : string.Empty;
     }
 }
