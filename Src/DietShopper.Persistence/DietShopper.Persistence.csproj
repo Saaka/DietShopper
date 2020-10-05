@@ -17,6 +17,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\DietShopper.Common\DietShopper.Common.csproj" />
+      <ProjectReference Include="..\DietShopper.Domain\DietShopper.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>

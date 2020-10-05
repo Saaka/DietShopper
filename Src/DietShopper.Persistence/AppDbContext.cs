@@ -1,4 +1,4 @@
-using DietShopper.Persistence.Entities;
+using DietShopper.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DietShopper.Persistence
@@ -16,7 +16,7 @@ namespace DietShopper.Persistence
 
             builder.HasDefaultSchema(Constants.DefaultSchema);
             builder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly,
-                x => x.Namespace == typeof(Entities.Configurations.UserConfiguration).Namespace);
+                x => x.Namespace == typeof(Configurations.UserConfiguration).Namespace);
         }
     }
 }

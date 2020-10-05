@@ -1,8 +1,9 @@
 using DietShopper.Common.Constants.Validation;
+using DietShopper.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DietShopper.Persistence.Entities.Configurations
+namespace DietShopper.Persistence.Configurations
 {
     public class UserConfiguration : IEntityTypeConfiguration<User>
     {
