@@ -10,3 +10,4 @@ cache:
     - node_modules
 script:
 - dotnet build
+- dotnet test Src/Tests/DietShopper.Domain.UnitTests/DietShopper.Domain.UnitTests.csproj

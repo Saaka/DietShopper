@@ -1,4 +1,5 @@
 using System;
+using DietShopper.Common.Constants.Validation;
 using DietShopper.Domain.Enums;
 using DietShopper.Domain.Exceptions;
 
@@ -28,12 +29,31 @@ namespace DietShopper.Domain.Entities
 
         private void Validate()
         {
+            ValidateUserGuid();
+            ValidateDisplayName();
+            ValidateImageUrl();
+        }
+
+        private void ValidateUserGuid()
+        {
             if (UserGuid.Equals(Guid.Empty))
                 throw new DomainException(ExceptionCode.UserGuidRequired);
+        }
+
+        private void ValidateDisplayName()
+        {
             if (string.IsNullOrWhiteSpace(DisplayName))
                 throw new DomainException(ExceptionCode.UserDisplayNameRequired);
+            if (DisplayName.Length > UserValidationConstants.DisplayNameMaxLength)
+                throw new DomainException(ExceptionCode.UserDisplayNameTooLong);
+        }
+
+        private void ValidateImageUrl()
+        {
             if (string.IsNullOrWhiteSpace(ImageUrl))
                 throw new DomainException(ExceptionCode.UserImageUrlRequired);
+            if (ImageUrl.Length > UserValidationConstants.ImageUrlMaxLength)
+                throw new DomainException(ExceptionCode.UserImageUrlTooLong);
         }
     }
 }
