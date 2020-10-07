@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{18E42F2F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DietShopper.Domain.UnitTests", "Src\Tests\DietShopper.Domain.UnitTests\DietShopper.Domain.UnitTests.csproj", "{77847423-1EC9-44F7-9990-A9D789A93FAC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DietShopper.Shared", "Src\DietShopper.Shared\DietShopper.Shared.csproj", "{C13FC46A-CA26-45B9-9997-6AE6B96ED3D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,7 @@ Global
 		{0CC693E6-BACB-46BE-B8AE-1B43A5FE5607} = {28CE0EDE-4D13-4E98-A7D6-8349A2815DD8}
 		{18E42F2F-BD4B-4A90-940E-BDF18D16AEDA} = {AD0C20B2-CC06-44BF-A954-4378AD5731AB}
 		{77847423-1EC9-44F7-9990-A9D789A93FAC} = {18E42F2F-BD4B-4A90-940E-BDF18D16AEDA}
+		{C13FC46A-CA26-45B9-9997-6AE6B96ED3D4} = {804811EC-BDC8-4207-87D6-1AEF2F9D14EF}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3BEF6EDA-4DAF-4EA9-AEFA-78EDADDA3225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -81,5 +84,9 @@ Global
 		{77847423-1EC9-44F7-9990-A9D789A93FAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77847423-1EC9-44F7-9990-A9D789A93FAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77847423-1EC9-44F7-9990-A9D789A93FAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C13FC46A-CA26-45B9-9997-6AE6B96ED3D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C13FC46A-CA26-45B9-9997-6AE6B96ED3D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C13FC46A-CA26-45B9-9997-6AE6B96ED3D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C13FC46A-CA26-45B9-9997-6AE6B96ED3D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

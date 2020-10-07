@@ -24,10 +24,10 @@ namespace DietShopper.Domain.Entities
             ImageUrl = imageUrl;
             IsAdmin = isAdmin;
 
-            Validate();
+            ValidateCreation();
         }
 
-        private void Validate()
+        private void ValidateCreation()
         {
             ValidateUserGuid();
             ValidateDisplayName();
