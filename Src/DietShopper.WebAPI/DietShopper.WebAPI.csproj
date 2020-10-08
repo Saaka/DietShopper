@@ -15,7 +15,9 @@
 
     <ItemGroup>
       <ProjectReference Include="..\DietShopper.Domain\DietShopper.Domain.csproj" />
+      <ProjectReference Include="..\DietShopper.Integration\DietShopper.Integration.csproj" />
       <ProjectReference Include="..\DietShopper.Persistence\DietShopper.Persistence.csproj" />
+      <ProjectReference Include="..\DietShopper.Shared\DietShopper.Shared.csproj" />
     </ItemGroup>
 
 

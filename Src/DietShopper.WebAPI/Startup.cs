@@ -1,4 +1,6 @@
+using DietShopper.Integration;
 using DietShopper.Persistence;
+using DietShopper.Shared;
 using DietShopper.WebAPI.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,6 +25,8 @@ namespace DietShopper.WebAPI
             services
                 .AddAppDbContext(Configuration)
                 .AddPersistenceModule()
+                .AddSharedInfrastructureModule()
+                .AddIntegrationsModule()
                 .AddMvcWithFilters()
                 .AddJwtTokenBearerAuthentication(Configuration);
         }
