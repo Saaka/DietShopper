@@ -9,7 +9,7 @@ namespace DietShopper.WebAPI.Services
 {
     public class WebAppDbInitializer
     {
-        public  static async Task InitializeAsync(IWebHost host)
+        public static async Task InitializeAsync(IWebHost host)
         {
             using (var scope = host.Services.CreateScope())
             {
@@ -18,10 +18,10 @@ namespace DietShopper.WebAPI.Services
                 try
                 {
                     logger.LogInformation("Initializing database");
-                    
+
                     var initializer = services.GetRequiredService<IDbInitializer>();
                     await initializer.ExecuteAsync();
-                    
+
                     logger.LogInformation("Database initialization successful");
                 }
                 catch (Exception ex)
