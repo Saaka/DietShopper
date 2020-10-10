@@ -10,7 +10,7 @@ namespace DietShopper.Application.Auth.Commands.AuthorizeUserWithGoogle
         public override async Task<RequestResult<AuthorizationData>> Handle(
             AuthorizeUserWithGoogleCommand request, CancellationToken cancellationToken)
         {
-            return request.ReturnSuccess(new AuthorizationData());
+            return request.Success(new AuthorizationData());
         }
     }
 }

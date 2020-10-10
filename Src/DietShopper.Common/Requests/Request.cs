@@ -8,16 +8,16 @@ namespace DietShopper.Common.Requests
     {
         public Guid RequestGuid { get; } = Guid.NewGuid();
 
-        public RequestResult<TResult> ReturnFailure(ErrorCode error, string details = null)
+        public RequestResult<TResult> Failure(ErrorCode error, string details = null)
             => new RequestResult<TResult>(error, details);
 
-        public RequestResult<TResult> ReturnSuccess(TResult data)
+        public RequestResult<TResult> Success(TResult data)
             => new RequestResult<TResult>(data);
     }
 
     public abstract class Request : Request<Guid>
     {
-        public RequestResult<Guid> ReturnSuccess()
+        public RequestResult<Guid> Success()
             => new RequestResult<Guid>(RequestGuid);
     }
 }
