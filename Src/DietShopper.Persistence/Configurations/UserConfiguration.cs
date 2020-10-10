@@ -1,4 +1,4 @@
-using DietShopper.Common.Constants.Validation;
+using DietShopper.Domain.Constants.Validation;
 using DietShopper.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

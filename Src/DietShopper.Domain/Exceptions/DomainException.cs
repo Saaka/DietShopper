@@ -5,12 +5,12 @@ namespace DietShopper.Domain.Exceptions
 {
     public class DomainException : ArgumentException
     {
-        public ExceptionCode ExceptionCode { get; private set; }
+        public ErrorCode ErrorCode { get; private set; }
 
-        public DomainException(ExceptionCode exceptionCode, string details = null)
-            : base(details ?? exceptionCode.ToString())
+        public DomainException(ErrorCode errorCode, string details = null)
+            : base(details ?? errorCode.ToString())
         {
-            ExceptionCode = exceptionCode;
+            ErrorCode = errorCode;
         }
     }
 }

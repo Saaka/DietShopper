@@ -1,4 +1,4 @@
-namespace DietShopper.Common.Constants.Validation
+namespace DietShopper.Domain.Constants.Validation
 {
     public static class UserValidationConstants
     {

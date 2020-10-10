@@ -1,6 +1,6 @@
 namespace DietShopper.Domain.Enums
 {
-    public enum ExceptionCode
+    public enum ErrorCode
     {
         UserGuidRequired = 1,
         UserDisplayNameRequired = 2,

@@ -35,7 +35,7 @@ namespace DietShopper.WebAPI.Filters
             context.HttpContext.Response.StatusCode = (int) HttpStatusCode.BadRequest;
             context.Result = new JsonResult(new
             {
-                Error = exception.ExceptionCode.ToString(),
+                Error = exception.ErrorCode.ToString(),
                 ErrorDetails = exception.Message,
                 Trace = GetTrace(context)
             });
