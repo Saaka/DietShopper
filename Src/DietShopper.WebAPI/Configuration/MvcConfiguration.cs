@@ -1,5 +1,7 @@
 using System.Text;
+using DietShopper.Application;
 using DietShopper.WebAPI.Filters;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +18,12 @@ namespace DietShopper.WebAPI.Configuration
                 .AddControllers(options =>
                 {
                     options.Filters.Add<CustomExceptionFilterAttribute>();
+                })
+                .AddFluentValidation(v =>
+                {
+                    v.RegisterValidatorsFromAssembly(typeof(ApplicationModule).Assembly);
+                    v.LocalizationEnabled = false;
+                    v.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
                 });
 
             services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; })

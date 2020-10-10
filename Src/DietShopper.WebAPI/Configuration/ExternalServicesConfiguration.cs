@@ -22,7 +22,8 @@ namespace DietShopper.WebAPI.Configuration
                 })
                 .AddMemoryCache()
                 .AddMediatRBehaviors()
-                .AddMediatR(typeof(ApplicationModule).Assembly);
+                .AddMediatR(typeof(ApplicationModule).Assembly)
+                .AddMediatR(typeof(SharedInfrastructureModule).Assembly);
 
             return services;
         }

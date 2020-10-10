@@ -1,7 +1,10 @@
 using System;
+using System.Linq;
 using System.Net;
 using DietShopper.Domain.Enums;
 using DietShopper.Domain.Exceptions;
+using DietShopper.Shared.Exceptions;
+using DietShopper.WebAPI.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -26,6 +29,8 @@ namespace DietShopper.WebAPI.Filters
 
             if (exception is DomainException domainException)
                 HandleDomainException(context, domainException);
+            if (exception is CommandValidationException validationException)
+                HandleValidationException(context, validationException);
             else
                 HandleApplicationExceptions(context, exception);
         }
@@ -39,6 +44,16 @@ namespace DietShopper.WebAPI.Filters
                 ErrorDetails = exception.Message,
                 Trace = GetTrace(context)
             });
+        }
+
+        private void HandleValidationException(ExceptionContext context, CommandValidationException validationException)
+        {
+            context.HttpContext.Response.StatusCode = (int) HttpStatusCode.BadRequest;
+            context.Result = new JsonResult(new ErrorResponse(
+                code: ErrorCode.ValidationError,
+                details: validationException.Failures
+                    .Select(f => new {field = f.Key, errors = f.Value}))
+            );
         }
 
         private void HandleApplicationExceptions(ExceptionContext context, Exception exception)
