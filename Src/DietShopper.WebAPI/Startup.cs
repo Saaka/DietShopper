@@ -27,6 +27,7 @@ namespace DietShopper.WebAPI
                 .AddPersistenceModule()
                 .AddSharedInfrastructureModule()
                 .AddIntegrationsModule()
+                .AddExternalServices()
                 .AddMvcWithFilters()
                 .AddJwtTokenBearerAuthentication(Configuration);
         }

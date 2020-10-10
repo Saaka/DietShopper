@@ -28,7 +28,6 @@ namespace DietShopper.Persistence
 
             return services;
         }
-        
 
         public static IServiceCollection AddPersistenceModuleBehaviors(this IServiceCollection services)
         {

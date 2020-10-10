@@ -8,7 +8,6 @@ namespace DietShopper.Common.Requests
         public bool IsSuccess { get; }
         public ErrorCode Error { get; set; }
         public string ErrorDetails { get; set; }
-        public Guid RequestGuid { get; } = Guid.NewGuid();
 
         public RequestResult()
             => IsSuccess = true;
