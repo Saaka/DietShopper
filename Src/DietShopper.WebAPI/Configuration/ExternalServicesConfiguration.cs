@@ -17,7 +17,8 @@ namespace DietShopper.WebAPI.Configuration
             services
                 .AddAutoMapper(new Assembly[]
                 {
-                    typeof(IntegrationModule).Assembly
+                    typeof(IntegrationModule).Assembly,
+                    typeof(Startup).Assembly
                 })
                 .AddMemoryCache()
                 .AddMediatRBehaviors()

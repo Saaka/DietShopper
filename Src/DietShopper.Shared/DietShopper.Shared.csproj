@@ -14,6 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DietShopper.Application\DietShopper.Application.csproj" />
       <ProjectReference Include="..\DietShopper.Common\DietShopper.Common.csproj" />
     </ItemGroup>
 
