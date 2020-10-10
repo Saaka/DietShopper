@@ -18,7 +18,8 @@ namespace DietShopper.Shared
         public static IServiceCollection AddSharedModuleBehaviors(this IServiceCollection services)
         {
             services
-                .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestLogger<,>));
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestLogger<,>))
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(CommandValidationBehavior<,>));
 
             return services;
         }

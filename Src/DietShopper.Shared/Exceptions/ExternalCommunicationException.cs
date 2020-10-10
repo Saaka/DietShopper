@@ -1,6 +1,6 @@
 using System;
 
-namespace DietShopper.Domain.Exceptions
+namespace DietShopper.Shared.Exceptions
 {
     public class ExternalCommunicationException : Exception
     {

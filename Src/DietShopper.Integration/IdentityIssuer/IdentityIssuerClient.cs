@@ -1,8 +1,7 @@
-using System;
 using System.Threading.Tasks;
 using DietShopper.Application.Auth.Models;
 using DietShopper.Application.Auth.Services;
-using DietShopper.Domain.Exceptions;
+using DietShopper.Shared.Exceptions;
 using DietShopper.Shared.Http;
 using RestSharp;
 
