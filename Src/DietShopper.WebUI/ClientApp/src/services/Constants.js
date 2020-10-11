@@ -6,4 +6,16 @@ Constants.UserRoles = class UserRoles {
     }
 };
 
+Constants.ApiRoutes = class ApiRoutes {
+    static get GOOGLE() {
+        return "auth/google";
+    }
+    static get FACEBOOK() {
+        return "auth/facebook";
+    }
+    static get GET_USER() {
+        return "auth/user";
+    }
+};
+
 export {Constants};
