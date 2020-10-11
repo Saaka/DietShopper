@@ -9,7 +9,9 @@ namespace DietShopper.Integration
         public static IServiceCollection AddIntegrationsModule(this IServiceCollection services)
         {
             services
-                .AddTransient<IGoogleAuthorizationClient, IdentityIssuerClient>();
+                .AddTransient<IGoogleAuthorizationClient, IdentityIssuerClient>()
+                .AddTransient<IIdentityIssuerConfiguration, IdentityIssuerConfiguration>()
+                ;
 
             return services;
         }

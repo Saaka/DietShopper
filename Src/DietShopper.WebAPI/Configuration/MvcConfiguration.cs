@@ -12,9 +12,21 @@ namespace DietShopper.WebAPI.Configuration
 {
     public static class MvcConfiguration
     {
-        public static IServiceCollection AddMvcWithFilters(this IServiceCollection services)
+        public static IServiceCollection AddMvcWithFilters(this IServiceCollection services, IConfiguration configuration)
         {
             services
+                .AddCors(opt =>
+                {
+                    opt.AddDefaultPolicy(
+                        builder =>
+                        {
+                            builder
+                                .AllowCredentials()
+                                .AllowAnyHeader()
+                                .AllowAnyMethod()
+                                .WithOrigins(configuration[ApplicationSettings.AuthAllowedOrigin]);
+                        });
+                })
                 .AddControllers(options =>
                 {
                     options.Filters.Add<CustomExceptionFilterAttribute>();

@@ -28,7 +28,7 @@ namespace DietShopper.WebAPI
                 .AddSharedInfrastructureModule()
                 .AddIntegrationsModule()
                 .AddExternalServices()
-                .AddMvcWithFilters()
+                .AddMvcWithFilters(Configuration)
                 .AddJwtTokenBearerAuthentication(Configuration);
         }
 
@@ -45,6 +45,7 @@ namespace DietShopper.WebAPI
 
             application
                 .UseRouting()
+                .UseCors()
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseEndpoints(e => { e.MapControllers(); });
