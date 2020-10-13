@@ -1,12 +1,26 @@
 import React, {useEffect, useState} from "react";
 import {GoogleLogin} from "components/auth";
 import {Loader} from "components/common";
+import {AuthService} from "Services";
 import "./Login.scss";
 
 function Login(props) {
-
+    const authService = new AuthService();
     const [isLoading, setLoading] = useState(false);
 
+    useEffect(() => {
+        if (props.user.isLoggedIn)
+            redirectToMainPage();
+    }, []);
+
+    function redirectToMainPage() {
+        props.history.replace("/");
+    }
+
+    function redirectToPath(path) {
+        props.history.push(path);
+    }
+    
     function onLoggedIn(userData) {
         var user = userData;
     }

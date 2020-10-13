@@ -1,8 +1,9 @@
 import React from 'react';
 import {Switch, Route, Redirect} from "react-router";
-import {AuthRoute, AdminRoute} from "components/routing";
+import {AuthRoute, AdminRoute, RegularRoute} from "components/routing";
 import appRoutes from "routes/appRoutes";
 import "./App.scss";
+import {RouteNames} from "../../routes/names";
 
 function App(props) {
 
@@ -20,7 +21,8 @@ function App(props) {
                             return (<AuthRoute path={prop.path} component={prop.component} name={prop.name} key={key}
                                                user={props.user}/>);
                     else
-                        return <Route path={prop.path} component={prop.component} name={prop.name} key={key}/>;
+                        return <RegularRoute path={prop.path} component={prop.component} name={prop.name} key={key}
+                                      user={props.user}/>;
                 })}
             </Switch>
         </div>

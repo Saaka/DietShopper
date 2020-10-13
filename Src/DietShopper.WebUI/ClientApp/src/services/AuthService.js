@@ -21,22 +21,24 @@ export class AuthService {
 
         this.tokenService
             .setToken(response.data.token);
-        return {
-            ...response.data.user,
-            token: response.data.token
-        };
+        
+        return this.getUser();
     };
     
     getUser = () => {
-        const token = this.tokenService
-            .getToken();
-        return this.authHttpService
-            .get(Constants.ApiRoutes.GET_USER)
-            .then(resp => {
-                return {
-                    ...resp.data,
-                    token: token
-                };
-            });
+        let authData = this.tokenService
+            .getTokenData();
+
+        return this.getUserFromTokenData(authData);
+    };
+
+    getUserFromTokenData = (authData) => {
+        return {
+            userGuid: authData.sub,
+            name: authData.name,
+            email: authData.email,
+            avatar: authData.avatar,
+            roles: authData.role
+        }
     };
 }

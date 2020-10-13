@@ -4,21 +4,43 @@ import {Loader} from "components/common";
 import {RouteNames} from "routes/names";
 import {Login, Logout} from "views/exports";
 import {App} from "layouts/exports";
+import {AuthService} from "Services";
 import "./Index.scss";
 
 function Index(props) {
+    const authService = new AuthService();
     const [isLoading, setIsLoading] = useState(true);
     const [user, setUser] = useState({isLoggedIn: false});
 
     useEffect(() => {
-        hideLoader();
+        if(authService.isLoggedIn())
+            loadUserData();
+        else {
+            removeUser();
+            hideLoader();
+        }
     }, []);
+
+    function loadUserData() {
+        let userData = authService
+            .getUser();
+        updateUser(userData);
+
+        hideLoader();
+    }
 
     function updateUser(user) {
         setUser({
             ...user,
             isLoggedIn: true
         });
+    }
+
+    function removeUser() {
+        setUser({
+            isLoggedIn: false
+        });
+        return authService.logout()
     }
 
     function onError(err) {
