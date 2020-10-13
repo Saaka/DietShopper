@@ -1,4 +1,4 @@
-import { AuthHttpService, HttpService, Constants, UserTokenService } from 'Services';
+import {AuthHttpService, Constants, HttpService, UserTokenService} from 'Services';
 
 export class AuthService {
     httpService = new HttpService();
@@ -14,17 +14,19 @@ export class AuthService {
             .post(Constants.ApiRoutes.GOOGLE, {
                 googleToken: token
             })
-            .then(this.onLogin);
+            .then(response => {
+                return this.onLogin(response);
+            });
     };
-    
+
     onLogin = (response) => {
 
         this.tokenService
             .setToken(response.data.token);
-        
+
         return this.getUser();
     };
-    
+
     getUser = () => {
         let authData = this.tokenService
             .getTokenData();

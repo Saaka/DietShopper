@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import queryString from "query-string";
 import {GoogleLogin} from "components/auth";
 import {Loader} from "components/common";
 import {AuthService} from "Services";
@@ -21,8 +22,12 @@ function Login(props) {
         props.history.push(path);
     }
     
-    function onLoggedIn(userData) {
-        var user = userData;
+    function onLoggedIn() {
+        let parsedQuery = queryString.parse(props.location.search);
+        if (!!parsedQuery && parsedQuery.redirect)
+            redirectToPath(parsedQuery.redirect);
+        else
+            redirectToMainPage();
     }
 
     function onError(err) {
