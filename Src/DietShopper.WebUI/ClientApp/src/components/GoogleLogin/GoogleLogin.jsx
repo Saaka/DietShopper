@@ -10,6 +10,7 @@ function LoginWithGoogle(props) {
     const [showLoader, toggleLoader] = useState(false);
 
     function onLogin(response) {
+        toggleLoader(true);
         authService
             .loginWithGoogle(response.tokenId)
             .then(props.onLoggedIn)
@@ -22,27 +23,31 @@ function LoginWithGoogle(props) {
     }
 
     function onClick(renderProps) {
-        renderProps.onClick();
         toggleLoader(true);
+        renderProps.onClick();
         props.onLogin();
     }
 
-    const renderLoader = () => (<Loader size="xs"/>);
+    const renderLoader = () => (<Loader size="xs" dark/>);
 
     return (
         <React.Fragment>
             <GoogleLogin clientId={configService.GoogleClientId}
                          onSuccess={onLogin}
                          onFailure={onLoginFail}
-                         disabled={props.isLoading}
+                         disabled={props.disabled}
 
                          render={renderProps => (
-                             <button className="button is-primary"
-                                     disabled={props.isLoading}
-                                     onClick={() => onClick(renderProps)}><Icon name="google"/><span
-                                 className="button-text">Sign in with Google</span>
-                                 {showLoader ? <span className="button-loader">{renderLoader()}</span> : ""}
-                             </button>
+                             <React.Fragment>
+                                 <div>
+                                     <button className="button is-primary"
+                                             disabled={props.disabled}
+                                             onClick={() => onClick(renderProps)}><Icon name="google"/><span
+                                         className="button-text">Sign in with Google</span>
+                                     </button>
+                                     {showLoader ? <span className="button-loader">{renderLoader()}</span> : ""}
+                                 </div>
+                             </React.Fragment>
                          )}/>
         </React.Fragment>
     )

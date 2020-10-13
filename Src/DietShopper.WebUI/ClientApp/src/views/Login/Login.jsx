@@ -7,13 +7,21 @@ import "./Login.scss";
 
 function Login(props) {
     const authService = new AuthService();
-    const [isLoading, setLoading] = useState(false);
+    const [loginInProgress, setLoginInProgress] = useState(false);
 
     useEffect(() => {
         if (props.user.isLoggedIn)
-            redirectToMainPage();
+            redirectToAppRoute();
     }, []);
 
+    function redirectToAppRoute(){
+        let parsedQuery = queryString.parse(props.location.search);
+        if (!!parsedQuery && parsedQuery.redirect)
+            redirectToPath(parsedQuery.redirect);
+        else
+            redirectToMainPage();
+    }
+    
     function redirectToMainPage() {
         props.history.replace("/");
     }
@@ -21,17 +29,15 @@ function Login(props) {
     function redirectToPath(path) {
         props.history.push(path);
     }
-    
-    function onLoggedIn() {
-        let parsedQuery = queryString.parse(props.location.search);
-        if (!!parsedQuery && parsedQuery.redirect)
-            redirectToPath(parsedQuery.redirect);
-        else
-            redirectToMainPage();
+
+    function onLoggedIn(userData) {
+        props.updateUser(userData);
+        redirectToAppRoute();
     }
 
     function onError(err) {
-        setLoading(false);
+        console.log(err);
+        setLoginInProgress(false);
     }
 
     const renderLoader = () => (<Loader/>);
@@ -41,7 +47,8 @@ function Login(props) {
             <div className="container login-container center">
                 <div className="login-block center">
                     <h1 className="is-size-4 login-title">Login using options below</h1>
-                    <GoogleLogin onLoggedIn={onLoggedIn} onError={onError} onLogin={() => setLoading(true)} isLoading={isLoading}/>
+                    <GoogleLogin onLoggedIn={onLoggedIn} onError={onError} disabled={loginInProgress}
+                                 onLogin={() => setLoginInProgress(true)}/>
                 </div>
             </div>
         </div>

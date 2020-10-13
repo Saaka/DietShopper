@@ -10,10 +10,12 @@ import "./Index.scss";
 function Index(props) {
     const authService = new AuthService();
     const [isLoading, setIsLoading] = useState(true);
-    const [user, setUser] = useState({isLoggedIn: false});
+    const [user, setUser] = useState({
+        isLoggedIn: false
+    });
 
     useEffect(() => {
-        if(authService.isLoggedIn())
+        if (authService.isLoggedIn())
             loadUserData();
         else {
             removeUser();
@@ -29,9 +31,9 @@ function Index(props) {
         hideLoader();
     }
 
-    function updateUser(user) {
+    function updateUser(userValues) {
         setUser({
-            ...user,
+            ...userValues,
             isLoggedIn: true
         });
     }
@@ -41,10 +43,6 @@ function Index(props) {
             isLoggedIn: false
         });
         return authService.logout()
-    }
-
-    function onError(err) {
-        console.error(err);
     }
 
     const onLogin = (user) => {
@@ -68,7 +66,8 @@ function Index(props) {
                        render={(renderProps) => <Redirect to={RouteNames.App}
                                                           from={renderProps.path}
                                                           {...renderProps}
-                                                          user={user}/>}/>
+                                                          user={user}
+                                                          updateUser={updateUser}/>}/>
                 {/*<Route path={RouteNames.Login}*/}
                 {/*       render={(renderProps) => <Login {...renderProps}*/}
                 {/*                                       onLogin={onLogin}*/}
@@ -77,7 +76,9 @@ function Index(props) {
                        render={(renderProps) => <Logout {...renderProps}
                                                         onLogout={onLogout}/>}/>
                 <Route path={RouteNames.App}
-                       render={(props) => <App {...props} user={user}/>}/>
+                       render={(props) => <App {...props} 
+                                               user={user}
+                                               updateUser={updateUser}/>}/>
             </React.Fragment>
         );
     }
