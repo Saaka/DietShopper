@@ -34,8 +34,7 @@ const appRoutes = [
     {
         redirect: true,
         path: RouteNames.App,
-        to: RouteNames.Dashboard,
-        name: "Dashboard"
+        to: RouteNames.About,
     }
 ];
 
