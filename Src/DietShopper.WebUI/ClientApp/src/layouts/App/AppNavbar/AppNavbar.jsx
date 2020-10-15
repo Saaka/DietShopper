@@ -6,14 +6,13 @@ import {RouteNames} from "routes/names";
 function AppNavbar(props) {
     const [isMenuActive, setActiveMenu] = useState(false);
 
-    function logout() {
-        props.history.replace(RouteNames.Logout)
-    }
+    const logout = () => props.history.replace(RouteNames.Logout);
+    const login = () => props.history.replace(RouteNames.Login);
 
     const toggleNavbarMenu = () => setActiveMenu(prevState => !prevState);
 
-    const menuClasses = () => isMenuActive ? "navbar-menu is-active": "navbar-menu";
-    const burgerClasses = () => isMenuActive ? "navbar-burger burger is-active": "navbar-burger burger";
+    const menuClasses = () => isMenuActive ? "navbar-menu is-active" : "navbar-menu";
+    const burgerClasses = () => isMenuActive ? "navbar-burger burger is-active" : "navbar-burger burger";
 
     return (
         <nav className="navbar is-primary" role="navigation" aria-label="main site navigation">
@@ -31,12 +30,18 @@ function AppNavbar(props) {
                 </div>
                 <div className={menuClasses()} id="app-navbar-menu">
                     <div className="navbar-start">
-                        <Link className="navbar-item" to={RouteNames.Home} onClick={() => toggleNavbarMenu()}>Dashboard</Link>
-                        <Link className="navbar-item" to={RouteNames.About} onClick={() => toggleNavbarMenu()}>About</Link>
+                        <Link className="navbar-item" to={RouteNames.Home}
+                              onClick={() => toggleNavbarMenu()}>Dashboard</Link>
+                        <Link className="navbar-item" to={RouteNames.About}
+                              onClick={() => toggleNavbarMenu()}>About</Link>
                     </div>
                     <div className="navbar-end">
                         <div className="navbar-item">
-                            <a className="button is-primary is-inverted is-outlined" onClick={logout}>Log out</a>
+                            {
+                                props.user.isLoggedIn 
+                                ? (<a className="button is-primary is-inverted is-outlined" onClick={logout}>Log out</a>)
+                                : (<a className="button is-primary is-inverted is-outlined" onClick={login}>Log in</a>)
+                            }
                         </div>
                     </div>
                 </div>
