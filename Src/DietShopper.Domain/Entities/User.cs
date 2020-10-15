@@ -10,6 +10,7 @@ namespace DietShopper.Domain.Entities
         public int UserId { get; private set; }
         public Guid UserGuid { get; private set; }
         public string DisplayName { get; private set; }
+        public string Email { get; private set; }
         public string ImageUrl { get; private set; }
         public bool IsAdmin { get; private set; }
 
@@ -17,19 +18,33 @@ namespace DietShopper.Domain.Entities
         {
         }
 
-        public User(Guid userGuid, string displayName, string imageUrl, bool isAdmin = false)
+        public User(Guid userGuid, string displayName, string email, string imageUrl, bool isAdmin = false)
         {
             UserGuid = userGuid;
             DisplayName = displayName;
+            Email = email;
             ImageUrl = imageUrl;
             IsAdmin = isAdmin;
 
             ValidateCreation();
         }
 
+        public User Update(string displayName, string imageUrl, bool isAdmin)
+        {
+            DisplayName = displayName;
+            ImageUrl = imageUrl;
+            IsAdmin = isAdmin;
+            
+            ValidateDisplayName();
+            ValidateImageUrl();
+
+            return this;
+        }
+
         private void ValidateCreation()
         {
             ValidateUserGuid();
+            ValidateEmail();
             ValidateDisplayName();
             ValidateImageUrl();
         }
@@ -38,6 +53,12 @@ namespace DietShopper.Domain.Entities
         {
             if (UserGuid.Equals(Guid.Empty))
                 throw new DomainException(ErrorCode.UserGuidRequired);
+        }
+
+        private void ValidateEmail()
+        {
+            if (string.IsNullOrWhiteSpace(Email))
+                throw new DomainException(ErrorCode.UserEmailRequired);
         }
 
         private void ValidateDisplayName()

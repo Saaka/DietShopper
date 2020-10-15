@@ -8,5 +8,6 @@ namespace DietShopper.Domain.Enums
         UserImageUrlRequired = 4,
         UserDisplayNameTooLong = 5,
         UserImageUrlTooLong = 6,
+        UserEmailRequired = 7,
     }
 }
