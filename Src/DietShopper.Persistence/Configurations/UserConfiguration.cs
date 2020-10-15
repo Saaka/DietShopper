@@ -31,6 +31,12 @@ namespace DietShopper.Persistence.Configurations
                 .Property(x => x.IsAdmin)
                 .IsRequired()
                 .HasDefaultValue(false);
+
+            builder
+                .Property(x => x.Email)
+                .IsRequired()
+                .HasMaxLength(UserValidationConstants.EmailMaxLength)
+                .HasDefaultValue(string.Empty);
         }
     }
 }
