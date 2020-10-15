@@ -1,4 +1,6 @@
+using DietShopper.Application.Users.Repositories;
 using DietShopper.Persistence.Behaviors;
+using DietShopper.Persistence.Repositories;
 using DietShopper.Persistence.Utils;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +14,8 @@ namespace DietShopper.Persistence
         public static IServiceCollection AddPersistenceModule(this IServiceCollection services)
         {
             services
-                .AddTransient<IDbInitializer, DbInitializer>();
+                .AddTransient<IDbInitializer, DbInitializer>()
+                .AddTransient<IUsersRepository, UsersRepository>();
 
             return services;
         }
