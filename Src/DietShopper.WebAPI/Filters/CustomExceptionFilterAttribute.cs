@@ -31,6 +31,8 @@ namespace DietShopper.WebAPI.Filters
                 HandleDomainException(context, domainException);
             if (exception is CommandValidationException validationException)
                 HandleValidationException(context, validationException);
+            if (exception is InternalException internalException)
+                HandleInternalException(context, internalException);
             else
                 HandleApplicationExceptions(context, exception);
         }
@@ -41,6 +43,18 @@ namespace DietShopper.WebAPI.Filters
             context.Result = new JsonResult(new
             {
                 Error = exception.ErrorCode.ToString(),
+                ErrorDetails = exception.Message,
+                Trace = GetTrace(context)
+            });
+        }
+
+        private void HandleInternalException(ExceptionContext context, InternalException exception)
+        {
+            context.HttpContext.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+            context.Result = new JsonResult(new
+            {
+                Error = nameof(InternalException),
+                Code = (int)exception.ErrorCode,
                 ErrorDetails = exception.Message,
                 Trace = GetTrace(context)
             });
