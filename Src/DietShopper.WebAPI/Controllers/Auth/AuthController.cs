@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DietShopper.WebAPI.Controllers.Auth
 {
-    [Route("api/[controller]")]
     public class AuthController : BaseApiController
     {
         [HttpPost("google")]

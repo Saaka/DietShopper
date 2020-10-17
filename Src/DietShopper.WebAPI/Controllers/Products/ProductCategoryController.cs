@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DietShopper.WebAPI.Controllers.Products
 {
-    [Route("api/[controller]")]
     public class ProductCategoryController : BaseApiController
     {
         [HttpGet]

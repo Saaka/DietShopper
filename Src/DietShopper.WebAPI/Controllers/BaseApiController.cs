@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace DietShopper.WebAPI.Controllers
 {
     [ApiController]
+    [Route("api/[controller]")]
     public class BaseApiController : ControllerBase
     {
         private IMediator _mediator;
