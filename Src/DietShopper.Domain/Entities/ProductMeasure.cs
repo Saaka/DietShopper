@@ -18,7 +18,7 @@ namespace DietShopper.Domain.Entities
 
         private ProductMeasure() { }
 
-        public ProductMeasure(Guid productMeasureGuid, Product product, Measure measure, int valueInGrams)
+        public ProductMeasure(Guid productMeasureGuid, Product product, Measure measure, decimal valueInGrams)
         {
             ProductMeasureGuid = productMeasureGuid;
             Product = product;
