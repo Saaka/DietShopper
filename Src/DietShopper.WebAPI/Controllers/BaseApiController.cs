@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DietShopper.WebAPI.Controllers
 {
-    [ApiController]
     public class BaseApiController : ControllerBase
     {
         private IMediator _mediator;
@@ -21,7 +20,6 @@ namespace DietShopper.WebAPI.Controllers
         protected IGuid GuidProvider 
             => _guid ??= HttpContext.RequestServices.GetService<IGuid>();
         
-
         protected ActionResult<TResponseType> GetResponse<TResponseType>(RequestResult<TResponseType> result)
         {
             if (result.IsSuccess)

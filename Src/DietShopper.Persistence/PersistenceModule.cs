@@ -1,3 +1,4 @@
+using DietShopper.Application.Products.Repositories;
 using DietShopper.Application.Users.Repositories;
 using DietShopper.Persistence.Behaviors;
 using DietShopper.Persistence.Repositories;
@@ -15,7 +16,9 @@ namespace DietShopper.Persistence
         {
             services
                 .AddTransient<IDbInitializer, DbInitializer>()
-                .AddTransient<IUsersRepository, UsersRepository>();
+                
+                .AddTransient<IUsersRepository, UsersRepository>()
+                .AddTransient<IProductCategoriesRepository, ProductCategoryRepository>();
 
             return services;
         }
