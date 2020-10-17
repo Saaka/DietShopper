@@ -22,15 +22,19 @@ namespace DietShopper.Persistence.Configurations
                 .IsRequired();
 
             builder.Property(x => x.Carbohydrates)
+                .HasColumnType(Constants.SqlTypes.Decimal)
                 .IsRequired();
 
             builder.Property(x => x.Proteins)
+                .HasColumnType(Constants.SqlTypes.Decimal)
                 .IsRequired();
 
             builder.Property(x => x.Fat)
+                .HasColumnType(Constants.SqlTypes.Decimal)
                 .IsRequired();
 
             builder.Property(x => x.SaturatedFat)
+                .HasColumnType(Constants.SqlTypes.Decimal)
                 .IsRequired();
         }
     }

@@ -31,6 +31,7 @@ namespace DietShopper.Persistence.Configurations
                 .IsRequired();
 
             builder.Property(x => x.ValueInGrams)
+                .HasColumnType(Constants.SqlTypes.Decimal)
                 .IsRequired(false);
 
             builder.Property(x => x.IsActive)

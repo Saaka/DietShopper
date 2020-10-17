@@ -6,5 +6,10 @@ namespace DietShopper.Persistence
 
         public const string DefaultSchema = "dietshopper";
         public const string DefaultMigrationsTable = "MigrationsDietShopper";
+
+        internal class SqlTypes
+        {
+            public const string Decimal = "decimal(18,2)";
+        }
     }
 }
