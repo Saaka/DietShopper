@@ -28,5 +28,9 @@ namespace DietShopper.Domain.Enums
         ProductCategoryNameRequired = 24,
         ProductCategoryNameTooLong = 25,
         ProductCategoryGuidRequired = 26,
+        ProductMeasureGuidRequired = 27,
+        ProductRequiredForProductMeasure = 28,
+        MeasureRequiredForProductMeasure = 29,
+        WeightMustBeGreaterThanZero = 30,
     }
 }
