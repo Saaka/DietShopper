@@ -32,5 +32,14 @@ namespace DietShopper.Domain.Enums
         ProductRequiredForProductMeasure = 28,
         MeasureRequiredForProductMeasure = 29,
         WeightMustBeGreaterThanZero = 30,
+        ProductNutrientsGuidRequired = 31,
+        ProductInProductNutrientsRequired = 32,
+        CaloriesMustBeGreaterOrEqualZero = 33,
+        CarbohydratesMustBeGreaterOrEqualZero = 34,
+        ProteinsMustBeGreaterOrEqualZero = 35,
+        FatMustBeGreaterOrEqualZero = 36,
+        SaturatedFatMustBeGreaterOrEqualZero = 37,
+        SaturatedFatContentCantBeGraterThanFatContent = 38,
+        ProductNutrientsRequired = 39,
     }
 }

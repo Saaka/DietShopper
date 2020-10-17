@@ -17,6 +17,7 @@ namespace DietShopper.Domain.Entities
 
         public virtual Measure DefaultMeasure { get; private set; }
         public virtual ProductCategory ProductCategory { get; private set; }
+        public virtual ProductNutrients    ProductNutrients { get; private set; }
 
         private Product() { }
 
@@ -31,6 +32,13 @@ namespace DietShopper.Domain.Entities
             DefaultMeasureId = defaultMeasureId;
 
             ValidateCreation();
+        }
+
+        public Product SetProductNutrients(ProductNutrients nutrients)
+        {
+            ProductNutrients = nutrients ?? throw new InternalException(ErrorCode.ProductNutrientsRequired);
+
+            return this;
         }
 
         public Product SetCategory(ProductCategory category)
