@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DietShopper.Domain.Constants.Validation;
 using DietShopper.Domain.Enums;
 using DietShopper.Domain.Exceptions;
@@ -14,10 +15,14 @@ namespace DietShopper.Domain.Entities
         public string Description { get; private set; }
         public int ProductCategoryId { get; private set; }
         public int DefaultMeasureId { get; private set; }
+        public bool IsActive { get; private set; }
 
         public virtual Measure DefaultMeasure { get; private set; }
         public virtual ProductCategory ProductCategory { get; private set; }
-        public virtual ProductNutrients    ProductNutrients { get; private set; }
+        public virtual ProductNutrients ProductNutrients { get; private set; }
+
+        private readonly List<ProductMeasure> _productMeasures = new List<ProductMeasure>();
+        public virtual IReadOnlyCollection<ProductMeasure> ProductMeasures => _productMeasures.AsReadOnly();
 
         private Product() { }
 
@@ -30,10 +35,17 @@ namespace DietShopper.Domain.Entities
             Description = description;
             ProductCategoryId = productCategoryId;
             DefaultMeasureId = defaultMeasureId;
+            IsActive = true;
 
             ValidateCreation();
         }
 
+        public Product Deactivate()
+        {
+            IsActive = false;
+            return this;
+        }
+        
         public Product SetProductNutrients(ProductNutrients nutrients)
         {
             ProductNutrients = nutrients ?? throw new InternalException(ErrorCode.ProductNutrientsRequired);

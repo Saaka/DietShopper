@@ -14,9 +14,13 @@ namespace DietShopper.Domain.Entities
         public string ShortName { get; set; }
         public bool IsWeight { get; set; }
         public decimal? ValueInGrams { get; set; }
+        public bool IsActive { get; set; }
 
         private readonly List<Product> _defaultProducts = new List<Product>();
         public virtual IReadOnlyCollection<Product> DefaultProducts => _defaultProducts.AsReadOnly();
+
+        private readonly List<ProductMeasure> _productMeasures = new List<ProductMeasure>();
+        public virtual IReadOnlyCollection<ProductMeasure> ProductMeasures => _productMeasures.AsReadOnly();
 
         private Measure() { }
 
@@ -27,8 +31,15 @@ namespace DietShopper.Domain.Entities
             ShortName = shortName;
             IsWeight = isWeight;
             ValueInGrams = valueInGrams;
+            IsActive = true;
 
             ValidateCreation();
+        }
+
+        public Measure Deactivate()
+        {
+            IsActive = false;
+            return this;
         }
 
         private void ValidateCreation()
@@ -44,7 +55,7 @@ namespace DietShopper.Domain.Entities
         {
             if (IsWeight)
             {
-                if(ValueInGrams == null || ValueInGrams == 0)
+                if (ValueInGrams == null || ValueInGrams == 0)
                     throw new DomainException(ErrorCode.MeasureValueInGramsRequiredForWeightType);
             }
         }

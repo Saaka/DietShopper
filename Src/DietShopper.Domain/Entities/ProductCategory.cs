@@ -11,6 +11,7 @@ namespace DietShopper.Domain.Entities
         public int ProductCategoryId { get; private set; }
         public Guid ProductCategoryGuid { get; private set; }
         public string Name { get; private set; }
+        public bool IsActive { get; private set; }
 
         private readonly List<Product> _products = new List<Product>();
         public virtual IReadOnlyCollection<Product> Products => _products.AsReadOnly();
@@ -21,8 +22,15 @@ namespace DietShopper.Domain.Entities
         {
             ProductCategoryGuid = productCategoryGuid;
             Name = name;
+            IsActive = true;
 
             ValidateCreation();
+        }
+
+        public ProductCategory Deactivate()
+        {
+            IsActive = false;
+            return this;
         }
 
         public ProductCategory SetName(string name)
