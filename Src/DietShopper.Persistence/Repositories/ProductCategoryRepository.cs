@@ -19,5 +19,11 @@ namespace DietShopper.Persistence.Repositories
         {
             return _context.ProductCategories.Where(x => x.IsActive).ToReadOnlyCollectionAsync();
         }
+
+        public Task Save(ProductCategory productCategory)
+        {
+            _context.Attach(productCategory);
+            return _context.SaveChangesAsync();
+        }
     }
 }

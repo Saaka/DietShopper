@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DietShopper.Application.Products.Commands;
 using DietShopper.Application.Products.Models;
 using DietShopper.Application.Products.Queries;
+using DietShopper.WebAPI.Controllers.Products.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DietShopper.WebAPI.Controllers.Products
@@ -15,6 +17,14 @@ namespace DietShopper.WebAPI.Controllers.Products
             var result = await Mediator.Send(new GetProductCategoriesQuery());
 
             return GetResponse(result);
-        } 
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<ProductCategoryDto>> CreateProductCategory(CreateProductCategoryRequest request)
+        {
+            var result = await Mediator.Send(Mapper.Map<CreateProductCategoryCommand>(request));
+
+            return GetResponse(result);
+        }
     }
 }

@@ -7,5 +7,6 @@ namespace DietShopper.Application.Products.Repositories
     public interface IProductCategoriesRepository
     {
         Task<IReadOnlyCollection<ProductCategory>> GetActiveProductCategories();
+        Task Save(ProductCategory productCategory);
     }
 }
