@@ -27,14 +27,21 @@ namespace DietShopper.WebAPI.Filters
             var exception = context.Exception;
             context.HttpContext.Response.ContentType = "application/json";
 
-            if (exception is DomainException domainException)
-                HandleDomainException(context, domainException);
-            if (exception is CommandValidationException validationException)
-                HandleValidationException(context, validationException);
-            if (exception is InternalException internalException)
-                HandleInternalException(context, internalException);
-            else
-                HandleApplicationExceptions(context, exception);
+            switch (exception)
+            {
+                case DomainException domainException:
+                    HandleDomainException(context, domainException);
+                    break;
+                case CommandValidationException validationException:
+                    HandleValidationException(context, validationException);
+                    break;
+                case InternalException internalException:
+                    HandleInternalException(context, internalException);
+                    break;
+                default:
+                    HandleApplicationExceptions(context,  exception);
+                    break;
+            }
         }
 
         private void HandleDomainException(ExceptionContext context, DomainException exception)
