@@ -4,7 +4,7 @@ const About = (props) => {
 
     return (
         <div className="columns">
-            <div className="column is-half is-offset-3">
+            <div className="column is-half-desktop is-offset-3-desktop">
                 <div className="tile is-parent">
                     <article className="tile is-child notification is-primary">
                         <p className="title">DietShopper</p>
