@@ -19,7 +19,7 @@ namespace DietShopper.WebAPI.Controllers.Products
             return GetResponse(result);
         }
 
-        [HttpPost]
+        [HttpPut]
         public async Task<ActionResult<ProductCategoryDto>> CreateProductCategory(CreateProductCategoryRequest request)
         {
             var result = await Mediator.Send(Mapper.Map<CreateProductCategoryCommand>(request));

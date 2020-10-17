@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DietShopper.WebAPI.Controllers
 {
+    [ApiController]
     public class BaseApiController : ControllerBase
     {
         private IMediator _mediator;
