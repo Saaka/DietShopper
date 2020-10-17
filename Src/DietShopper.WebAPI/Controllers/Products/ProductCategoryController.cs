@@ -4,10 +4,12 @@ using DietShopper.Application.Products.Commands;
 using DietShopper.Application.Products.Models;
 using DietShopper.Application.Products.Queries;
 using DietShopper.WebAPI.Controllers.Products.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DietShopper.WebAPI.Controllers.Products
 {
+    [Authorize]
     public class ProductCategoryController : BaseApiController
     {
         [HttpGet]
