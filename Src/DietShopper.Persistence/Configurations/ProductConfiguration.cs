@@ -34,20 +34,10 @@ namespace DietShopper.Persistence.Configurations
             builder.Property(x => x.IsActive)
                 .IsRequired();
 
-            builder.HasOne(x => x.ProductCategory)
-                .WithMany(x => x.Products)
-                .HasForeignKey(x => x.ProductCategoryId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasOne(x => x.DefaultMeasure)
-                .WithMany(x => x.DefaultProducts)
-                .HasForeignKey(x => x.DefaultMeasureId)
-                .OnDelete(DeleteBehavior.Restrict);
-
             builder.HasMany(x => x.ProductMeasures)
                 .WithOne(x => x.Product)
                 .HasForeignKey(x => x.ProductId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(x => x.ProductNutrients)
                 .WithOne(x => x.Product)

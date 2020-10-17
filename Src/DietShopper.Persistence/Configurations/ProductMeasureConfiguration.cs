@@ -18,16 +18,6 @@ namespace DietShopper.Persistence.Configurations
                 .IncludeProperties(x => x.ProductMeasureId)
                 .IsUnique();
 
-            builder.HasOne(x => x.Product)
-                .WithMany(x => x.ProductMeasures)
-                .HasForeignKey(x => x.ProductId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasOne(x => x.Measure)
-                .WithMany(x => x.ProductMeasures)
-                .HasForeignKey(x => x.MeasureId)
-                .OnDelete(DeleteBehavior.Restrict);
-
             builder.Property(x => x.ValueInGrams)
                 .IsRequired();
 
