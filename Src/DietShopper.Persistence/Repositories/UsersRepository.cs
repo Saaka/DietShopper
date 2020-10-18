@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using DietShopper.Application.Users.Repositories;
 using DietShopper.Domain.Entities;
@@ -18,6 +19,14 @@ namespace DietShopper.Persistence.Repositories
         public Task<User> GetByGuid(Guid userGuid)
         {
             return _context.Users.FirstOrDefaultAsync(x => x.UserGuid == userGuid);
+        }
+
+        public Task<int> GetUserIdByGuid(Guid userGuid)
+        {
+            return _context.Users
+                .Where(x => x.UserGuid == userGuid)
+                .Select(x => x.UserId)
+                .FirstOrDefaultAsync();
         }
 
         public Task Upsert(User user)

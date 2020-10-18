@@ -36,8 +36,10 @@ namespace DietShopper.WebAPI.Configuration
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPreProcessorBehavior<,>))
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPostProcessorBehavior<,>))
 
-                .AddSharedModuleBehaviors()
-                .AddPersistenceModuleBehaviors();            
+                .AddSharedLoggerBehavior()
+                .AddAuthorizationBehavior()
+                .AddPersistenceModuleBehaviors()
+                .AddCommandValidationBehavior();            
 
             return services;
         }

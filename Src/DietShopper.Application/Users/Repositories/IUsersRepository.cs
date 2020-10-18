@@ -7,6 +7,7 @@ namespace DietShopper.Application.Users.Repositories
     public interface IUsersRepository
     {
         Task<User> GetByGuid(Guid userGuid);
+        Task<int> GetUserIdByGuid(Guid userGuid);
         Task Upsert(User user);
     }
 }

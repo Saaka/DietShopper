@@ -26,6 +26,7 @@ namespace DietShopper.WebAPI
                 .AddAppDbContext(Configuration)
                 .AddPersistenceModule()
                 .AddSharedInfrastructureModule()
+                .AddApiModule()
                 .AddIntegrationsModule()
                 .AddExternalServices()
                 .AddMvcWithFilters(Configuration)

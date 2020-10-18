@@ -1,5 +1,6 @@
 using DietShopper.Application.Services;
 using DietShopper.Shared.Behaviors;
+using DietShopper.Shared.Cache;
 using DietShopper.Shared.Http;
 using DietShopper.Shared.Services;
 using MediatR;
@@ -13,15 +14,22 @@ namespace DietShopper.Shared
         {
             services
                 .AddTransient<IRestsharpClientFactory, RestsharpClientFactory>()
-                .AddTransient<IGuid, GuidProvider>();
+                .AddTransient<IGuid, GuidProvider>()
+                .AddTransient<ICacheStore, MemoryCacheStore>();
 
             return services;
         }
 
-        public static IServiceCollection AddSharedModuleBehaviors(this IServiceCollection services)
+        public static IServiceCollection AddSharedLoggerBehavior(this IServiceCollection services)
         {
             services
-                .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestLogger<,>))
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestLogger<,>));
+            return services;
+        }
+
+        public static IServiceCollection AddCommandValidationBehavior(this IServiceCollection services)
+        {
+            services
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(CommandValidationBehavior<,>));
 
             return services;
