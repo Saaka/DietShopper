@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Hosting;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace DietShopper.WebAPI.Filters
 {
@@ -50,7 +51,7 @@ namespace DietShopper.WebAPI.Filters
             context.Result = new JsonResult(new
             {
                 Error = exception.ErrorCode.ToString(),
-                ErrorDetails = exception.Message,
+                ErrorDetails = JsonSerializer.Serialize(exception.ErrorDetails),
                 Trace = GetTrace(context)
             });
         }

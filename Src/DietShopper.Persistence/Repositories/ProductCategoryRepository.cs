@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DietShopper.Application.Products.Repositories;
 using DietShopper.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DietShopper.Persistence.Repositories
 {
@@ -24,6 +25,11 @@ namespace DietShopper.Persistence.Repositories
         {
             _context.Attach(productCategory);
             return _context.SaveChangesAsync();
+        }
+
+        public Task<bool> IsNameTaken(string name)
+        {
+            return _context.ProductCategories.AnyAsync(x => x.Name == name && x.IsActive);
         }
     }
 }

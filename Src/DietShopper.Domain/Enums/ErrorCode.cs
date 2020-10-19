@@ -42,5 +42,6 @@ namespace DietShopper.Domain.Enums
         SaturatedFatContentCantBeGraterThanFatContent = 38,
         ProductNutrientsRequired = 39,
         AuthProviderTokenRequired = 40,
+        ProductCategoryNameTaken = 41,
     }
 }

@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace DietShopper.Application.Products.Commands.CreateProductCategory
 {
-    public class CreateProductCategoryCommandValidator: AbstractValidator<CreateProductCategoryCommand>
+    public class CreateProductCategoryCommandValidator : AbstractValidator<CreateProductCategoryCommand>
     {
         public CreateProductCategoryCommandValidator()
         {

@@ -6,6 +6,8 @@ using DietShopper.Application.Products.Repositories;
 using DietShopper.Application.Services;
 using DietShopper.Common.Requests;
 using DietShopper.Domain.Entities;
+using DietShopper.Domain.Enums;
+using DietShopper.Domain.Exceptions;
 
 namespace DietShopper.Application.Products.Commands.CreateProductCategory
 {
@@ -24,10 +26,13 @@ namespace DietShopper.Application.Products.Commands.CreateProductCategory
             _mapper = mapper;
             _productCategoriesRepository = productCategoriesRepository;
         }
-        
+
         public override async Task<RequestResult<ProductCategoryDto>> Handle(
             CreateProductCategoryCommand request, CancellationToken cancellationToken)
         {
+            if (await _productCategoriesRepository.IsNameTaken(request.Name))
+                throw new DomainException(ErrorCode.ProductCategoryNameTaken, new {request.Name});
+
             var productCategory = new ProductCategory(_guid.GetGuid(), request.Name);
             await _productCategoriesRepository.Save(productCategory);
 

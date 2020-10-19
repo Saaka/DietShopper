@@ -8,5 +8,6 @@ namespace DietShopper.Application.Products.Repositories
     {
         Task<IReadOnlyCollection<ProductCategory>> GetActiveProductCategories();
         Task Save(ProductCategory productCategory);
+        Task<bool> IsNameTaken(string name);
     }
 }
