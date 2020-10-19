@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
-import "./AppNavbar.scss";
 import {RouteNames} from "routes/names";
+import "./AppNavbar.scss";
 
 function AppNavbar(props) {
     const [isMenuActive, setActiveMenu] = useState(false);
@@ -21,6 +21,11 @@ function AppNavbar(props) {
             requireAuth: true,
         },
         {
+            label: "Admin",
+            route: RouteNames.Admin,
+            requireAdmin: true
+        },
+        {
             label: "About",
             route: RouteNames.About,
             requireAuth: false,
@@ -28,7 +33,12 @@ function AppNavbar(props) {
     ];
 
     const renderLink = (item) =>
-        (<Link className="navbar-item" to={item.route} onClick={() => toggleNavbarMenu()}>{item.label}</Link>);
+        (<Link className="navbar-item" to={item.route} onClick={() => toggleNavbarMenu()} key={item.label} >{item.label}</Link>);
+
+    const shouldRenderLink = (item) => {
+        return (!item.requireAuth || props.user.isLoggedIn) &&
+            (!item.requireAdmin || props.user.isAdmin());
+    }
 
     return (
         <nav className="navbar is-primary" role="navigation" aria-label="main site navigation">
@@ -48,9 +58,9 @@ function AppNavbar(props) {
                     <div className="navbar-start">
                         {
                             navbarItems.map(item => (
-                                !item.requireAuth || props.user.isLoggedIn
-                                ? renderLink(item)
-                                : ""
+                                shouldRenderLink(item)
+                                    ? renderLink(item)
+                                    : ""
                             ))
                         }
                     </div>

@@ -5,14 +5,13 @@ import {RouteNames} from "routes/names";
 import {Login, Logout} from "views/exports";
 import {App} from "layouts/exports";
 import {AuthService} from "Services";
+import {User} from "Models";
 import "./Index.scss";
 
 function Index(props) {
     const authService = new AuthService();
     const [isLoading, setIsLoading] = useState(true);
-    const [user, setUser] = useState({
-        isLoggedIn: false
-    });
+    const [user, setUser] = useState(new User(false));
 
     useEffect(() => {
         if (authService.isLoggedIn())
@@ -24,37 +23,30 @@ function Index(props) {
     }, []);
 
     function loadUserData() {
-        let userData = authService
+        let userModel = authService
             .getUser();
-        updateUser(userData);
+        setUser(userModel);
 
         hideLoader();
     }
 
-    function updateUser(userValues) {
-        setUser({
-            ...userValues,
-            isLoggedIn: true
-        });
+    function updateUser(userData) {
+        setUser(new User(true, userData));
     }
+    
+    const clearUser = () => setUser(new User(false));
 
     function removeUser() {
-        setUser({
-            isLoggedIn: false
-        });
+        clearUser();
         return authService.logout()
     }
 
-    const onLogin = (user) => {
+    const onLogin = (userData) => {
         hideLoader();
-        updateUser(user);
+        updateUser(userData);
     };
 
-    const onLogout = () => {
-        setUser({
-            isLoggedIn: false
-        });
-    };
+    const onLogout = () => clearUser();
 
     const hideLoader = () => setIsLoading(false);
 

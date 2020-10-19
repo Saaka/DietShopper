@@ -1,4 +1,4 @@
-import {Dashboard, Unauthorized, About, Login} from "views/exports";
+import {Admin, Dashboard, Unauthorized, About, Login} from "views/exports";
 import {RouteNames} from "./names";
 
 const appRoutes = [
@@ -9,6 +9,14 @@ const appRoutes = [
         component: Dashboard,
         name: "Dashboard",
         icon: "home"
+    },
+    {
+        requireAuth: true,
+        requireAdmin: true,
+        path: RouteNames.Admin,
+        component: Admin,
+        name: "Admin",
+        icon: "admin"
     },
     {
         requireAuth: false,

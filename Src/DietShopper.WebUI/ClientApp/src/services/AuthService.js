@@ -1,4 +1,5 @@
-import {AuthHttpService, Constants, HttpService, UserTokenService} from 'Services';
+import {AuthHttpService, Constants, HttpService, UserTokenService} from "Services";
+import {User} from "Models";
 
 export class AuthService {
     httpService = new HttpService();
@@ -35,12 +36,15 @@ export class AuthService {
     };
 
     getUserFromTokenData = (authData) => {
-        return {
+        if (authData === null)
+            return new User(false);
+
+        return new User(true, {
             userGuid: authData.sub,
             name: authData.name,
             email: authData.email,
             avatar: authData.avatar,
             roles: authData.role
-        }
+        });
     };
 }
