@@ -13,6 +13,8 @@ RouteNames.Unauthorized = "/app/unauthorized";
 RouteNames.About = "/app/about";
 
 RouteNames.Admin = "/app/admin";
-RouteNames.ProductCategories = "/app/admin/productCategories";
+RouteNames.AdminProductCategories = "/app/admin/productCategories";
+RouteNames.AdminUnitsOfMeasures = "/app/admin/unitsOfMeasures";
+RouteNames.AdminProducts = "/app/admin/products";
 
 export {RouteNames};
