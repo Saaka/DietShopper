@@ -1,15 +1,15 @@
 import React from "react"
-import "./ProductCategories.scss";
+import "./UnitsOfMeasures.scss";
 
-function ProductCategories(props) {
+function UnitsOfMeasures(props) {
 
     return (
         <section className="columns">
             <div className="column is-half-desktop is-offset-3-desktop">
-                <p className="title has-text-light">Products categories</p>
+                <p className="title has-text-light">Units of measures</p>
             </div>
         </section>
     );
 }
 
-export {ProductCategories};
+export {UnitsOfMeasures};

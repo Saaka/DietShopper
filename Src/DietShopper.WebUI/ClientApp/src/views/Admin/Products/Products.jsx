@@ -1,15 +1,15 @@
 import React from "react"
-import "./ProductCategories.scss";
+import "./Products.scss";
 
-function ProductCategories(props) {
+function Products(props) {
 
     return (
         <section className="columns">
             <div className="column is-half-desktop is-offset-3-desktop">
-                <p className="title has-text-light">Products categories</p>
+                <p className="title has-text-light">Products</p>
             </div>
         </section>
     );
 }
 
-export {ProductCategories};
+export {Products};

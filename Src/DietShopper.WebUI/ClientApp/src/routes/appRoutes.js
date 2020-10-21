@@ -1,5 +1,5 @@
 import {Admin, Dashboard, Unauthorized, About, Login} from "views/exports";
-import {ProductCategories} from "views/Admin/exports";
+import {Products as AdminProducts, ProductCategories, UnitsOfMeasures} from "views/Admin/exports";
 import {RouteNames} from "./names";
 
 const appRoutes = [
@@ -14,17 +14,9 @@ const appRoutes = [
     {
         requireAuth: true,
         requireAdmin: true,
-        path: RouteNames.Admin,
-        component: Admin,
-        name: "Admin",
-        icon: "admin"
-    },
-    {
-        requireAuth: true,
-        requireAdmin: true,
         path: RouteNames.AdminProducts,
-        component: Admin,
-        name: "Admin",
+        component: AdminProducts,
+        name: "Products",
         icon: "admin"
     },
     {
@@ -39,6 +31,14 @@ const appRoutes = [
         requireAuth: true,
         requireAdmin: true,
         path: RouteNames.AdminUnitsOfMeasures,
+        component: UnitsOfMeasures,
+        name: "Admin",
+        icon: "admin"
+    },
+    {
+        requireAuth: true,
+        requireAdmin: true,
+        path: RouteNames.Admin,
         component: Admin,
         name: "Admin",
         icon: "admin"

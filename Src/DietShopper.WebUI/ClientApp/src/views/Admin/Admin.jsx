@@ -1,11 +1,13 @@
 import React from "react"
+import {useHistory} from "react-router-dom";
 import {RouteNames} from "routes/names";
 import "./Admin.scss";
 
 function Admin(props) {
 
+    const history = useHistory();
     function redirectTo(route){
-        props.history.push(route);
+        history.push(route);
     }
     
     return (
@@ -24,7 +26,7 @@ function Admin(props) {
                     <div className="tile is-parent" onClick={() => redirectTo(RouteNames.AdminUnitsOfMeasures)}>
                         <div className="tile box">
                             <div className="content">
-                                <p className="title">Units of measure</p>
+                                <p className="title">Units of measures</p>
                                 <p className="subtitle">Setup units of measures</p>
                             </div>
                         </div>
