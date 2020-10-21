@@ -14,6 +14,6 @@ export class User {
     isAdmin = () => this.isInRole(Constants.UserRoles.ADMIN);
 
     isInRole(roleName) {
-        return this.roles.includes(roleName);
+        return !!this.roles && this.roles.includes(roleName);
     };
 }
