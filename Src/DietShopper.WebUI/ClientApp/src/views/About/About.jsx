@@ -1,6 +1,9 @@
 import React from "react";
+import {useDocumentTitle} from "Hooks";
 
 const About = (props) => {
+    
+    useDocumentTitle("About page");
 
     return (
         <div className="columns">

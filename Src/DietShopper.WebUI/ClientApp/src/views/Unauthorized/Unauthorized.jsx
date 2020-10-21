@@ -1,6 +1,8 @@
 import React from "react";
+import {useDocumentTitle} from "Hooks";
 
 const Unauthorized = (props) => {
+    useDocumentTitle("Unauthorized");
     return (
         <div className="columns">
             <div className="column is-half is-offset-3">

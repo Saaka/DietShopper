@@ -1,7 +1,9 @@
 import React from "react"
+import {useDocumentTitle} from "Hooks";
 import "./Dashboard.scss";
 
 function Dashboard(props) {
+    useDocumentTitle("Dashboard");
 
     return (
         <section className="section center">

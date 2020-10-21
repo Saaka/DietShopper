@@ -1,15 +1,17 @@
-import React from "react"
+import React, {useEffect} from "react"
 import {useHistory} from "react-router-dom";
+import {useDocumentTitle} from "Hooks";
 import {RouteNames} from "routes/names";
 import "./Admin.scss";
 
 function Admin(props) {
-
+    useDocumentTitle("Admin page");
     const history = useHistory();
-    function redirectTo(route){
+
+    function redirectTo(route) {
         history.push(route);
     }
-    
+
     return (
         <section className="columns">
             <div className="column is-half-desktop is-offset-3-desktop">
@@ -19,7 +21,8 @@ function Admin(props) {
                         <div className="tile box">
                             <div className="content">
                                 <p className="title">Products</p>
-                                <p className="subtitle">Manage categories, configure the nutritional values and units of measures available for each product</p>
+                                <p className="subtitle">Manage categories, configure the nutritional values and units of
+                                    measures available for each product</p>
                             </div>
                         </div>
                     </div>

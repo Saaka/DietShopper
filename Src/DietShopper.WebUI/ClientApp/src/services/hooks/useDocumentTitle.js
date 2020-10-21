@@ -10,7 +10,7 @@ function useDocumentTitle(pageTitle) {
         }
 
         if (!!pageTitle)
-            setDocumentTitle(`${pageTitle} - ${appName}`)
+            setDocumentTitle(`${pageTitle} | ${appName}`)
         else
             setDocumentTitle(appName);
 

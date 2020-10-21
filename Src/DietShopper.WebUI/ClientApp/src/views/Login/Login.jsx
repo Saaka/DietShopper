@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {useDocumentTitle} from "Hooks";
 import queryString from "query-string";
 import {GoogleLogin} from "components/auth";
 import {Loader} from "components/common";
@@ -6,6 +7,7 @@ import {AuthService} from "Services";
 import "./Login.scss";
 
 function Login(props) {
+    useDocumentTitle("Login page");
     const authService = new AuthService();
     const [loginInProgress, setLoginInProgress] = useState(false);
 

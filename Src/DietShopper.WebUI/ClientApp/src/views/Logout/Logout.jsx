@@ -1,8 +1,10 @@
 import React, {useEffect} from "react";
+import {useDocumentTitle} from "Hooks";
 import {AuthService} from "services/AuthService";
 import {Loader} from "components/common";
 
 function Logout(props) {
+    useDocumentTitle("Logout page");
     useEffect(() => {
         if (props.onLogout)
             props.onLogout();

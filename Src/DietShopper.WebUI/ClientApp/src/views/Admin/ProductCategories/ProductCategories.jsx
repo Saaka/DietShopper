@@ -1,7 +1,9 @@
 import React from "react"
+import {useDocumentTitle} from "Hooks";
 import "./ProductCategories.scss";
 
 function ProductCategories(props) {
+    useDocumentTitle("Product categories - Admin page")
 
     return (
         <section className="columns">
