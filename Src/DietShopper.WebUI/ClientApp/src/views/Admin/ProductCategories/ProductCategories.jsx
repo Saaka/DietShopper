@@ -1,6 +1,6 @@
 import React from "react"
 import {useDocumentTitle} from "Hooks";
-import {Icon} from "components/common";
+import {CategoryForm} from "./CategoryForm/CategoryForm";
 import "./ProductCategories.scss";
 
 function ProductCategories(props) {
@@ -18,7 +18,7 @@ function ProductCategories(props) {
                     </div>
                     <div className="column is-half">
                         <div className="box">
-                            <p className="subtitle">Add category</p>
+                            <CategoryForm />
                         </div>
                     </div>
                 </div>
