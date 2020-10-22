@@ -6,8 +6,8 @@ function Products(props) {
     useDocumentTitle("Products - Admin page");
 
     return (
-        <section className="columns">
-            <div className="column is-half-desktop is-offset-3-desktop">
+        <section className="columns is-centered">
+            <div className="column is-half-desktop">
                 <p className="title has-text-light">Products</p>
             </div>
         </section>

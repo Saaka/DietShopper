@@ -1,0 +1,17 @@
+@import "src/assets/variables";
+
+@media(max-width: $mobile) {
+  .columns.columns-content {
+    flex-direction: column-reverse;
+    display: flex;
+  }
+}
+
+.box {
+  p.subtitle {
+    margin-bottom: 0.5rem;
+  }
+  hr {
+    margin-top: 0;
+  }
+}

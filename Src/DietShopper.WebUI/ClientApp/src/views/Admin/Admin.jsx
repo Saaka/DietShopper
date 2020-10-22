@@ -13,8 +13,8 @@ function Admin(props) {
     }
 
     return (
-        <section className="columns">
-            <div className="column is-half-desktop is-offset-3-desktop">
+        <section className="columns is-centered">
+            <div className="column is-half-desktop">
                 <p className="title has-text-light">Admin Page</p>
                 <div className="tile is-ancestor">
                     <div className="tile is-parent">
