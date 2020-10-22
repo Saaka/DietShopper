@@ -16,6 +16,7 @@ function CategoryForm(props) {
     function submitCategory(ev) {
         ev.preventDefault();
         alert(category.name);
+        clearForm();
     }
 
     function getInputClass(field) {

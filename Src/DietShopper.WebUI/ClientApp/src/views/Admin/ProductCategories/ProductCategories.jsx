@@ -6,6 +6,14 @@ import "./ProductCategories.scss";
 function ProductCategories(props) {
     useDocumentTitle("Product categories - Admin page")
 
+    function renderForm() {
+        return (
+            <div className="box">
+                <CategoryForm/>
+            </div>
+        );
+    }
+
     return (
         <section className="columns is-centered">
             <div className="column is-half-desktop">
@@ -17,9 +25,7 @@ function ProductCategories(props) {
                         </div>
                     </div>
                     <div className="column is-half">
-                        <div className="box">
-                            <CategoryForm />
-                        </div>
+                        {renderForm()}
                     </div>
                 </div>
             </div>
