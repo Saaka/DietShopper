@@ -17,8 +17,8 @@ function Admin(props) {
             <div className="column is-half-desktop is-offset-3-desktop">
                 <p className="title has-text-light">Admin Page</p>
                 <div className="tile is-ancestor">
-                    <div className="tile is-parent" onClick={() => redirectTo(RouteNames.AdminProducts)}>
-                        <div className="tile box">
+                    <div className="tile is-parent">
+                        <div className="tile box" onClick={() => redirectTo(RouteNames.AdminProducts)}>
                             <div className="content">
                                 <p className="title">Products</p>
                                 <p className="subtitle">Manage categories, configure the nutritional values and units of
@@ -26,16 +26,16 @@ function Admin(props) {
                             </div>
                         </div>
                     </div>
-                    <div className="tile is-parent" onClick={() => redirectTo(RouteNames.AdminUnitsOfMeasures)}>
-                        <div className="tile box">
+                    <div className="tile is-parent">
+                        <div className="tile box" onClick={() => redirectTo(RouteNames.AdminUnitsOfMeasures)}>
                             <div className="content">
                                 <p className="title">Units of measures</p>
                                 <p className="subtitle">Setup units of measures</p>
                             </div>
                         </div>
                     </div>
-                    <div className="tile is-parent" onClick={() => redirectTo(RouteNames.AdminProductCategories)}>
-                        <div className="tile box">
+                    <div className="tile is-parent">
+                        <div className="tile box" onClick={() => redirectTo(RouteNames.AdminProductCategories)}>
                             <div className="content">
                                 <p className="title">Product Categories</p>
                                 <p className="subtitle">Manage product categories</p>
