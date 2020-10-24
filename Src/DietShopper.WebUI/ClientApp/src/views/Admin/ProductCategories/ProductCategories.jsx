@@ -54,12 +54,14 @@ function ProductCategories(props) {
         setEdited(category);
         setFormVisible(true);
     }
-    
+
     function deleteCategory(category) {
-        modal.toggle()
-        // return categoriesService
-        //     .removeProductCategory(category)
-        //     .then(loadCategories);
+        modal.showModal(`Do you want to remove product category "${category.name}"?`, () => {
+                setIsLoading(true);
+                return categoriesService
+                    .removeProductCategory(category)
+                    .then(loadCategories);
+            });
     }
 
     function renderList() {
@@ -99,7 +101,7 @@ function ProductCategories(props) {
                     </div>
                 </div>
             </div>
-            {modal.modalRender()}
+            {modal.render()}
         </section>
     );
 }

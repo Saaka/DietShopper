@@ -9,7 +9,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "axios": "^0.19.2",
     "babel-eslint": "10.1.0",
-    "bulma": "^0.8.2",
+    "bulma": "^0.9.1",
     "css-vars": "^2.2.0",
     "dotenv": "^8.2.0",
     "jwt-decode": "^2.2.0",
