@@ -9,8 +9,15 @@
 
 .box {
   p.subtitle {
+    display: flex;
+    flex-wrap: wrap;
     margin-bottom: 0.5rem;
+    
+    .add-category {
+      margin-left: 2rem;
+    }
   }
+
   hr {
     margin-top: 0;
   }

@@ -18,4 +18,13 @@ Constants.ApiRoutes = class ApiRoutes {
     }
 };
 
+Constants.ApiRoutes.Admin = class AdminRoutes {
+    static get GET_PRODUCT_CATEGORIES() {
+        return "productCategory";
+    }
+    static get PUT_PRODUCT_CATEGORY() {
+        return "productCategory";
+    }
+};
+
 export {Constants};
