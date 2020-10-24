@@ -5,11 +5,11 @@ export function CategoriesList(props) {
 
     return (
         <div>
-            <table className="table is-hoverable is-fullwidth is-striped">
+            <table className="table is-hoverable is-fullwidth">
                 <tbody>
                 {props.categories.map(cat =>
                     (
-                        <tr>
+                        <tr key={cat.productCategoryGuid}>
                             <td>{cat.name}</td>
                         </tr>
                     )

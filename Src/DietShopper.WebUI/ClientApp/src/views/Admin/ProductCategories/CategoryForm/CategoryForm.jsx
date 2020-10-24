@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from "react"
 import "./CategoryForm.scss";
+import {ProductCategoriesService} from "../ProductCategoriesService";
 
 function CategoryForm(props) {
     const [category, setCategory] = useState({name: "", productCategoryGuid: ""});
+    const [error, setError] = useState("");
+    const categoriesService = new ProductCategoriesService();
 
     function handleChange(ev) {
         const {name, value} = ev.target;
@@ -15,10 +18,21 @@ function CategoryForm(props) {
 
     function submitCategory(ev) {
         ev.preventDefault();
-        alert(category.name);
-        clearForm();
+        setError("");
+        categoriesService.createProductCategory(category)
+            .then(props.onCreated)
+            .then(clearForm)
+            .catch(err => setError(err.error));
     }
-    
+
+    function renderError() {
+        return (
+            !!error
+                ? <p className="help is-danger">{error}</p>
+                : ""
+        );
+    }
+
     function closeForm(ev) {
         clearForm(ev);
         props.onClose();
@@ -45,6 +59,7 @@ function CategoryForm(props) {
                                onChange={handleChange}
                                className={"input " + getInputClass("categoryName")}/>
                     </div>
+                    {renderError()}
                 </div>
                 <div className="field is-grouped">
                     <div className="control">

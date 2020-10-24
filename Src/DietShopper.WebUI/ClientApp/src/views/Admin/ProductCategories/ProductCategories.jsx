@@ -14,19 +14,24 @@ function ProductCategories(props) {
     const [ifFormVisible, setFormVisible] = useState(false);
 
     useEffect(() => {
-        categoriesService
+        loadCategories();
+    }, []);
+
+    function loadCategories() {
+        setIsLoading(true);
+        return categoriesService
             .getProductCategories()
             .then((data) => {
                 setCategories(data);
                 setIsLoading(false);
             });
-    }, []);
+    }
 
     function renderForm() {
         return (
             ifFormVisible ?
                 <div className="box">
-                    <CategoryForm onClose={() => setFormVisible(false)}/>
+                    <CategoryForm onClose={() => setFormVisible(false)} onCreated={() => loadCategories()}/>
                 </div>
                 : ""
         );
@@ -52,7 +57,9 @@ function ProductCategories(props) {
                                     <p className="subtitle">Categories list</p>
                                 </div>
                                 <div className="column">
-                                    <button className="button is-small add-category" onClick={() => setFormVisible(true)}>Add category</button>
+                                    <button className="button is-small add-category"
+                                            onClick={() => setFormVisible(true)}>Add category
+                                    </button>
                                 </div>
                             </div>
                             <hr/>

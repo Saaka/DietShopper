@@ -5,7 +5,7 @@ export class ProductCategoriesService {
 
     createProductCategory = (productCategory) => {
         return this.authHttpService
-            .post(Constants.ApiRoutes.Admin.PUT_PRODUCT_CATEGORY, productCategory)
+            .put(Constants.ApiRoutes.Admin.PUT_PRODUCT_CATEGORY, productCategory)
             .then(response => response.data);
     };
     
