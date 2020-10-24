@@ -35,7 +35,10 @@ function ProductCategories(props) {
                     <CategoryForm toEdit={editedCategory}
                                   onClose={() => closeEditForm()}
                                   onSaved={() => loadCategories()}
-                                  onUpdated={() => setEdited(null)}/>
+                                  onUpdated={() => {
+                                      closeEditForm();
+                                      return loadCategories();
+                                  }}/>
                 </div>
                 : ""
         );
