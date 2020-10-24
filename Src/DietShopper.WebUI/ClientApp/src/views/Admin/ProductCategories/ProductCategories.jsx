@@ -26,7 +26,7 @@ function ProductCategories(props) {
         return (
             ifFormVisible ?
                 <div className="box">
-                    <CategoryForm/>
+                    <CategoryForm onClose={() => setFormVisible(false)}/>
                 </div>
                 : ""
         );
@@ -42,12 +42,19 @@ function ProductCategories(props) {
 
     return (
         <section className="columns is-centered">
-            <div className="column is-half-desktop">
+            <div className="column is-responsive">
                 <p className="title has-text-light">Products categories</p>
                 <div className="columns columns-content">
                     <div className="column is-half">
                         <div className="box">
-                            <p className="subtitle">Categories list<button className="button is-small add-category">Add category</button></p>
+                            <div className="columns is-mobile subtitle-container">
+                                <div className="column">
+                                    <p className="subtitle">Categories list</p>
+                                </div>
+                                <div className="column">
+                                    <button className="button is-small add-category" onClick={() => setFormVisible(true)}>Add category</button>
+                                </div>
+                            </div>
                             <hr/>
                             {renderList()}
                         </div>

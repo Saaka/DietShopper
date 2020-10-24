@@ -8,13 +8,18 @@
 }
 
 .box {
-  p.subtitle {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 0.5rem;
-    
-    .add-category {
-      margin-left: 2rem;
+  div.subtitle-container {
+    margin: 0;
+
+    .column {
+      padding: 0;
+      .subtitle {
+        margin-bottom: 0.5rem;
+      }
+
+      .button.add-category {
+        float: right;
+      }
     }
   }
 

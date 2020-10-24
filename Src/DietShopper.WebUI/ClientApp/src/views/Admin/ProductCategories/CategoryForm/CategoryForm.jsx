@@ -18,6 +18,11 @@ function CategoryForm(props) {
         alert(category.name);
         clearForm();
     }
+    
+    function closeForm(ev) {
+        clearForm(ev);
+        props.onClose();
+    }
 
     function getInputClass(field) {
         return "";
@@ -25,7 +30,9 @@ function CategoryForm(props) {
 
     return (
         <div>
-            <p className="subtitle">Category</p>
+            <div>
+                <p className="subtitle">Category</p>
+            </div>
             <hr/>
             <form name="categoryForm" onSubmit={(ev) => submitCategory(ev)} noValidate>
                 <div className="field">
@@ -44,8 +51,8 @@ function CategoryForm(props) {
                         <button type="submit" className="button is-primary">Submit</button>
                     </div>
                     <div className="control">
-                        <button type="button" onClick={(ev) => clearForm(ev)}
-                                className="button is-link is-light">Cancel
+                        <button type="button" onClick={(ev) => closeForm(ev)}
+                                className="button is-link is-light">Close
                         </button>
                     </div>
                 </div>
