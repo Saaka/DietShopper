@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import {useDocumentTitle} from "Hooks";
+import {useDocumentTitle, useModal} from "Hooks";
 import {CategoryForm} from "./CategoryForm/CategoryForm";
 import {CategoriesList} from "./CateoriesList/CategoriesList";
 import {ProductCategoriesService} from "./ProductCategoriesService";
@@ -13,6 +13,7 @@ function ProductCategories(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [ifFormVisible, setFormVisible] = useState(false);
     const [editedCategory, setEdited] = useState(null);
+    const modal = useModal();
 
     useEffect(() => {
         loadCategories();
@@ -55,9 +56,10 @@ function ProductCategories(props) {
     }
     
     function deleteCategory(category) {
-        return categoriesService
-            .removeProductCategory(category)
-            .then(loadCategories);
+        modal.toggle()
+        // return categoriesService
+        //     .removeProductCategory(category)
+        //     .then(loadCategories);
     }
 
     function renderList() {
@@ -97,6 +99,7 @@ function ProductCategories(props) {
                     </div>
                 </div>
             </div>
+            {modal.modalRender()}
         </section>
     );
 }
