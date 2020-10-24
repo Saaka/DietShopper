@@ -17,3 +17,9 @@ html {
   background: $primary-dark;
   background: linear-gradient(180deg, $primary-dark 0%, $primary 100%);
 }
+
+.is-responsive {
+  @extend .is-half-fullhd;
+  @extend .is-two-thirds-widescreen;
+  @extend .is-three-quarters-desktop;
+}
