@@ -43,7 +43,7 @@ function ProductCategories(props) {
                 : ""
         );
     }
-    
+
     function closeEditForm() {
         setEdited(null);
         setFormVisible(false);
@@ -53,12 +53,21 @@ function ProductCategories(props) {
         setEdited(category);
         setFormVisible(true);
     }
+    
+    function deleteCategory(category) {
+        return categoriesService
+            .removeProductCategory(category)
+            .then(loadCategories);
+    }
 
     function renderList() {
         return (
             isLoading
                 ? <div className="center"><Loader size="xs" dark/></div>
-                : <CategoriesList editedCategory={editedCategory} onEdit={displayEditForm} categories={categories}/>
+                : <CategoriesList categories={categories}
+                                  editedCategory={editedCategory}
+                                  onEdit={displayEditForm}
+                                  onDelete={deleteCategory}/>
         );
     }
 

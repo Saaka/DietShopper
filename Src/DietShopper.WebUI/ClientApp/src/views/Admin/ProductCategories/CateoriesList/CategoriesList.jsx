@@ -9,7 +9,7 @@ export function CategoriesList(props) {
     }
 
     function remove(category){
-
+        props.onDelete(category);
     }
     
     return (
