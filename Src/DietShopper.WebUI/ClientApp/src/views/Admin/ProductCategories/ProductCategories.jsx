@@ -12,6 +12,7 @@ function ProductCategories(props) {
     const [categories, setCategories] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [ifFormVisible, setFormVisible] = useState(false);
+    const [editedCategory, setEdited] = useState(null);
 
     useEffect(() => {
         loadCategories();
@@ -31,17 +32,30 @@ function ProductCategories(props) {
         return (
             ifFormVisible ?
                 <div className="box">
-                    <CategoryForm onClose={() => setFormVisible(false)} onCreated={() => loadCategories()}/>
+                    <CategoryForm toEdit={editedCategory}
+                                  onClose={() => closeEditForm()}
+                                  onSaved={() => loadCategories()}
+                                  onUpdated={() => setEdited(null)}/>
                 </div>
                 : ""
         );
+    }
+    
+    function closeEditForm() {
+        setEdited(null);
+        setFormVisible(false);
+    }
+
+    function displayEditForm(category) {
+        setEdited(category);
+        setFormVisible(true);
     }
 
     function renderList() {
         return (
             isLoading
                 ? <div className="center"><Loader size="xs" dark/></div>
-                : <CategoriesList categories={categories}/>
+                : <CategoriesList editedCategory={editedCategory} onEdit={displayEditForm} categories={categories}/>
         );
     }
 

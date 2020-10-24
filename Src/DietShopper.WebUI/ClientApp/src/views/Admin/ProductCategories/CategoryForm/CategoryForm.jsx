@@ -9,6 +9,12 @@ function CategoryForm(props) {
     const [error, setError] = useState("");
     const categoriesService = new ProductCategoriesService();
 
+    useEffect(() => {
+        if (!!props.toEdit) {
+            setCategory(props.toEdit);
+        }
+    }, [props.toEdit]);
+
     function handleChange(ev) {
         const {name, value} = ev.target;
         setCategory(cat => ({...cat, [name]: value}));
@@ -22,12 +28,27 @@ function CategoryForm(props) {
         ev.preventDefault();
         setError("");
         setLoading(true);
-        
-        categoriesService.createProductCategory(category)
-            .then(props.onCreated)
-            .then(clearForm)
-            .catch(err => setError(err.error))
-            .finally(() => setLoading(false));
+
+        function createCategory() {
+            categoriesService.createProductCategory(category)
+                .then(props.onSaved)
+                .then(clearForm)
+                .catch(err => setError(err.error))
+                .finally(() => setLoading(false));
+        }
+
+        function editCategory() {
+            categoriesService.updateProductCategory(category)
+                .then(props.onUpdated)
+                .then(clearForm)
+                .catch(err => setError(err.error))
+                .finally(() => setLoading(false));
+        }
+
+        if (!!props.toEdit)
+            editCategory();
+        else
+            createCategory();
     }
 
     function renderError() {

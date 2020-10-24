@@ -5,13 +5,25 @@ export class ProductCategoriesService {
 
     createProductCategory = (productCategory) => {
         return this.authHttpService
-            .put(Constants.ApiRoutes.Admin.PUT_PRODUCT_CATEGORY, productCategory)
+            .put(Constants.ApiRoutes.Admin.PRODUCT_CATEGORIES, productCategory)
+            .then(response => response.data);
+    };
+    
+    updateProductCategory = (productCategory) => {
+        return this.authHttpService
+            .post(Constants.ApiRoutes.Admin.PRODUCT_CATEGORIES, productCategory)
+            .then(response => response.data);
+    };
+
+    removeProductCategory = (productCategory) => {
+        return this.authHttpService
+            .delete(Constants.ApiRoutes.Admin.PRODUCT_CATEGORIES, productCategory)
             .then(response => response.data);
     };
     
     getProductCategories = () => {
       return this.authHttpService
-          .get(Constants.ApiRoutes.Admin.GET_PRODUCT_CATEGORIES)
+          .get(Constants.ApiRoutes.Admin.PRODUCT_CATEGORIES)
           .then(resp => resp.data);
     };
 }

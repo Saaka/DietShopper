@@ -56,6 +56,22 @@ class HttpService {
         });
     };
 
+    delete = (address, data) => {
+        let baseAddress = this.getAddress();
+
+        return Axios({
+            method: "delete",
+            url: `${baseAddress}` + address,
+            data: data,
+            headers: this.getHeaders()
+        }).catch(err => {
+            if (err.response)
+                throw err.response.data;
+            else
+                throw err.message;
+        });
+    };
+
     getAddress = () => {
         if(this.baseAddress.endsWith("/"))
             return this.baseAddress;
