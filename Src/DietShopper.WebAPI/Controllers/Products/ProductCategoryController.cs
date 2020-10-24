@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DietShopper.Application.Products.Commands;
@@ -24,6 +25,22 @@ namespace DietShopper.WebAPI.Controllers.Products
         public async Task<ActionResult<ProductCategoryDto>> CreateProductCategory(CreateProductCategoryRequest request)
         {
             var result = await Mediator.Send(Mapper.Map<CreateProductCategoryCommand>(request));
+
+            return GetResponse(result);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<ProductCategoryDto>> UpdateProductCategory(UpdateProductCategoryRequest request)
+        {
+            var result = await Mediator.Send(Mapper.Map<UpdateProductCategoryCommand>(request));
+
+            return GetResponse(result);
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult<Guid>> RemoveProductCategory(RemoveProductCategoryRequest request)
+        {
+            var result = await Mediator.Send(Mapper.Map<RemoveProductCategoryCommand>(request));
 
             return GetResponse(result);
         }
