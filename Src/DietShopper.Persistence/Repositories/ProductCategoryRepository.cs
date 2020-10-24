@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +19,10 @@ namespace DietShopper.Persistence.Repositories
 
         public Task<IReadOnlyCollection<ProductCategory>> GetActiveProductCategories()
         {
-            return _context.ProductCategories.Where(x => x.IsActive).ToReadOnlyCollectionAsync();
+            return _context.ProductCategories
+                .Where(x => x.IsActive)
+                .OrderBy(x => x.Name)
+                .ToReadOnlyCollectionAsync();
         }
 
         public Task Save(ProductCategory productCategory)
@@ -27,9 +31,23 @@ namespace DietShopper.Persistence.Repositories
             return _context.SaveChangesAsync();
         }
 
+        public Task<ProductCategory> GetProductCategory(Guid productCategoryGuid)
+        {
+            return _context.ProductCategories.FirstOrDefaultAsync(x => x.ProductCategoryGuid == productCategoryGuid);
+        }
+
         public Task<bool> IsNameTaken(string name)
         {
             return _context.ProductCategories.AnyAsync(x => x.Name == name && x.IsActive);
+        }
+
+        public Task<bool> IsNameTaken(Guid productCategoryGuid, string name)
+        {
+            return _context.ProductCategories
+                .AnyAsync(x =>
+                    x.ProductCategoryGuid != productCategoryGuid
+                    && x.Name == name
+                    && x.IsActive);
         }
     }
 }
