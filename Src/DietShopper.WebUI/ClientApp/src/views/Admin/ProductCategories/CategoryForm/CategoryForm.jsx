@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from "react"
 import "./CategoryForm.scss";
+import {Loader} from "components/common";
 import {ProductCategoriesService} from "../ProductCategoriesService";
 
 function CategoryForm(props) {
     const [category, setCategory] = useState({name: "", productCategoryGuid: ""});
+    const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const categoriesService = new ProductCategoriesService();
 
@@ -19,10 +21,13 @@ function CategoryForm(props) {
     function submitCategory(ev) {
         ev.preventDefault();
         setError("");
+        setLoading(true);
+        
         categoriesService.createProductCategory(category)
             .then(props.onCreated)
             .then(clearForm)
-            .catch(err => setError(err.error));
+            .catch(err => setError(err.error))
+            .finally(() => setLoading(false));
     }
 
     function renderError() {
@@ -57,19 +62,22 @@ function CategoryForm(props) {
                                name="name"
                                value={category.name}
                                onChange={handleChange}
+                               disabled={isLoading}
                                className={"input " + getInputClass("categoryName")}/>
                     </div>
                     {renderError()}
                 </div>
                 <div className="field is-grouped">
                     <div className="control">
-                        <button type="submit" className="button is-primary">Submit</button>
+                        <button type="submit" className="button is-primary" disabled={isLoading}>Submit</button>
                     </div>
                     <div className="control">
                         <button type="button" onClick={(ev) => closeForm(ev)}
-                                className="button is-link is-light">Close
+                                className="button is-link is-light"
+                                disabled={isLoading}>Close
                         </button>
                     </div>
+                    {isLoading ? <Loader size="xs" dark/> : ""}
                 </div>
             </form>
         </div>
