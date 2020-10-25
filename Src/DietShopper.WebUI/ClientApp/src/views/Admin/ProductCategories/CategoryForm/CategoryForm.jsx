@@ -48,14 +48,10 @@ function CategoryForm(props) {
                 });
     }
 
-
     function getInputClass(field) {
         //TODO Validation
         return "";
     }
-    
-    //TODO fadeout
-    const onCloseEffect = () => "";
 
     const closeForm = (ev) => props.onClose();
 
@@ -70,7 +66,7 @@ function CategoryForm(props) {
     const renderError = () => !!error ? <p className="help is-danger">{error}</p> : "";
 
     return (
-        <div className={"box fadein" + onCloseEffect()}>
+        <div className="box">
             <div>
                 <p className="subtitle">Category</p>
             </div>
