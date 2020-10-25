@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from "react"
 import {Loader} from "components/common";
+import {Form} from "components/forms";
 import {ProductCategoriesService} from "../ProductCategoriesService";
 import "./CategoryForm.scss";
 
@@ -65,13 +66,24 @@ function CategoryForm(props) {
 
     const renderError = () => !!error ? <p className="help is-danger">{error}</p> : "";
 
+    const renderFormError = () => !!error ?
+        <article className="message is-danger is-small">
+            <div className="message-body">
+                {error}
+            </div>
+        </article> : "";
+
     return (
         <div className="box">
             <div>
                 <p className="subtitle">Category</p>
             </div>
             <hr/>
-            <form name="categoryForm" onSubmit={(ev) => submitCategory(ev)} noValidate>
+            <Form name="categoryForm"
+                  onSubmitted={submitCategory}
+                  onClosed={closeForm}
+                  isLoading={isLoading}
+                  errorText={error}>
                 <div className="field">
                     <label className="label">Name</label>
                     <div className="control">
@@ -88,19 +100,7 @@ function CategoryForm(props) {
                     </div>
                     {renderError()}
                 </div>
-                <div className="field is-grouped">
-                    <div className="control">
-                        <button type="submit" className="button is-primary" disabled={isLoading}>Submit</button>
-                    </div>
-                    <div className="control">
-                        <button type="button" onClick={(ev) => closeForm(ev)}
-                                className="button"
-                                disabled={isLoading}>Close
-                        </button>
-                    </div>
-                    {renderLoader()}
-                </div>
-            </form>
+            </Form>
         </div>
     );
 }
