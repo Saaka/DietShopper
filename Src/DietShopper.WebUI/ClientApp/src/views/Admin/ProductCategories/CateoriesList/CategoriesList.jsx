@@ -18,7 +18,7 @@ export function CategoriesList(props) {
                 <tbody>
                 {props.categories.map(cat =>
                     (
-                        <tr key={cat.productCategoryGuid} className={props.editedCategory === cat ? "is-selected" : ""}>
+                        <tr key={cat.productCategoryGuid} className={props.selectedCategory === cat ? "is-selected" : ""}>
                             <td>{cat.name}</td>
                             <td className="list-action" onClick={(ev) => edit(cat)}><Icon name="edit" /></td>
                             <td className="list-action" onClick={(ev) => remove(cat)}><Icon name="ban" /></td>

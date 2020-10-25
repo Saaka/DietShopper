@@ -10,7 +10,7 @@ function CategoryForm(props) {
     const categoriesService = new ProductCategoriesService();
 
     useEffect(() => {
-        if (!!props.toEdit) {
+        if (isEditing()) {
             setCategory(props.toEdit);
         }
     }, [props.toEdit]);
@@ -45,7 +45,7 @@ function CategoryForm(props) {
                 .finally(() => setLoading(false));
         }
 
-        if (!!props.toEdit)
+        if (isEditing())
             editCategory();
         else
             createCategory();
@@ -68,8 +68,12 @@ function CategoryForm(props) {
         return "";
     }
 
+    function isEditing() {
+        return !!props.toEdit
+    }
+
     return (
-        <div>
+        <div className="box">
             <div>
                 <p className="subtitle">Category</p>
             </div>
@@ -94,7 +98,7 @@ function CategoryForm(props) {
                     </div>
                     <div className="control">
                         <button type="button" onClick={(ev) => closeForm(ev)}
-                                className="button is-link is-light"
+                                className="button"
                                 disabled={isLoading}>Close
                         </button>
                     </div>

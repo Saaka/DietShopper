@@ -11,38 +11,39 @@ function ProductCategories(props) {
     const categoriesService = new ProductCategoriesService();
     const [categories, setCategories] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [ifFormVisible, setFormVisible] = useState(false);
+    const [isFormVisible, setFormVisible] = useState(false);
     const [editedCategory, setEdited] = useState(null);
     const modal = useModal();
 
     useEffect(() => {
-        loadCategories();
+        setIsLoading(true);
+        loadCategories()
+            .then(() => setIsLoading(false));
     }, []);
 
     function loadCategories() {
-        setIsLoading(true);
         return categoriesService
             .getProductCategories()
             .then((data) => {
                 setCategories(data);
-                setIsLoading(false);
             });
     }
 
-    function renderForm() {
-        return (
-            ifFormVisible ?
-                <div className="box">
-                    <CategoryForm toEdit={editedCategory}
-                                  onClose={() => closeEditForm()}
-                                  onSaved={() => loadCategories()}
-                                  onUpdated={() => {
-                                      closeEditForm();
-                                      return loadCategories();
-                                  }}/>
-                </div>
-                : ""
-        );
+    const renderForm = () => isFormVisible
+        ? <CategoryForm toEdit={editedCategory} onClose={closeEditForm} onSaved={handleCategorySaved} onUpdated={handleCategoryUpdate}/>
+        : "";
+
+    function handleCategoryUpdate() {
+        setIsLoading(true);
+        closeEditForm();
+        return loadCategories()
+            .then(() => setIsLoading(false));
+    }
+
+    function handleCategorySaved() {
+        setIsLoading(true);
+        return loadCategories()
+            .then(() => setIsLoading(false));
     }
 
     function closeEditForm() {
@@ -57,11 +58,12 @@ function ProductCategories(props) {
 
     function deleteCategory(category) {
         modal.showModal(`Do you want to remove product category "${category.name}"?`, () => {
-                setIsLoading(true);
-                return categoriesService
-                    .removeProductCategory(category)
-                    .then(loadCategories);
-            });
+            setIsLoading(true);
+            return categoriesService
+                .removeProductCategory(category)
+                .then(loadCategories)
+                .then(() => setIsLoading(false));
+        });
     }
 
     function renderList() {
@@ -69,7 +71,7 @@ function ProductCategories(props) {
             isLoading
                 ? <div className="center"><Loader size="xs" dark/></div>
                 : <CategoriesList categories={categories}
-                                  editedCategory={editedCategory}
+                                  selectedCategory={editedCategory}
                                   onEdit={displayEditForm}
                                   onDelete={deleteCategory}/>
         );
