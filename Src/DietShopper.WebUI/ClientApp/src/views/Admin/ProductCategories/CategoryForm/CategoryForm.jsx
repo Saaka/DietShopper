@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from "react"
-import "./CategoryForm.scss";
 import {Loader} from "components/common";
 import {ProductCategoriesService} from "../ProductCategoriesService";
+import "./CategoryForm.scss";
 
 function CategoryForm(props) {
     const nameInput = useRef(null);
@@ -15,8 +15,6 @@ function CategoryForm(props) {
             setCategory(props.toEdit);
             focusInput();
         }
-        return () => {
-        };
     }, [props.toEdit]);
 
     useEffect(() => focusInput(), [isLoading]);
@@ -24,10 +22,6 @@ function CategoryForm(props) {
     function handleChange(ev) {
         const {name, value} = ev.target;
         setCategory(cat => ({...cat, [name]: value}));
-    }
-
-    function clearForm() {
-        setCategory(cat => ({...cat, name: "", productCategoryGuid: ""}));
     }
 
     function submitCategory(ev) {
@@ -54,20 +48,23 @@ function CategoryForm(props) {
                 });
     }
 
-    const renderError = () => !!error ? <p className="help is-danger">{error}</p> : "";
-
-    const closeForm = (ev) => {
-        clearForm(ev);
-        props.onClose();
-    }
 
     function getInputClass(field) {
+        //TODO Validation
         return "";
     }
+    
+    const closeForm = (ev) => props.onClose();
+
+    const clearForm = () => setCategory(cat => ({...cat, name: "", productCategoryGuid: ""}));
 
     const isEditing = () => !!props.toEdit;
 
     const focusInput = () => nameInput.current.focus();
+    
+    const renderLoader = () => isLoading ? <Loader size="xs" dark/> : "";
+    
+    const renderError = () => !!error ? <p className="help is-danger">{error}</p> : "";
 
     return (
         <div className="box">
@@ -102,7 +99,7 @@ function CategoryForm(props) {
                                 disabled={isLoading}>Close
                         </button>
                     </div>
-                    {isLoading ? <Loader size="xs" dark/> : ""}
+                    {renderLoader()}
                 </div>
             </form>
         </div>
