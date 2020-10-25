@@ -54,6 +54,9 @@ function CategoryForm(props) {
         return "";
     }
     
+    //TODO fadeout
+    const onCloseEffect = () => "";
+
     const closeForm = (ev) => props.onClose();
 
     const clearForm = () => setCategory(cat => ({...cat, name: "", productCategoryGuid: ""}));
@@ -61,13 +64,13 @@ function CategoryForm(props) {
     const isEditing = () => !!props.toEdit;
 
     const focusInput = () => nameInput.current.focus();
-    
+
     const renderLoader = () => isLoading ? <Loader size="xs" dark/> : "";
-    
+
     const renderError = () => !!error ? <p className="help is-danger">{error}</p> : "";
 
     return (
-        <div className="box">
+        <div className={"box fadein" + onCloseEffect()}>
             <div>
                 <p className="subtitle">Category</p>
             </div>
