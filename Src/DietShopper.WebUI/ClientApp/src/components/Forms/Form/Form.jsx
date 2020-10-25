@@ -7,7 +7,7 @@ export function Form(props) {
     
     const handleSubmit = (ev) => {
         setIsSubmitted(true);
-        return props.onSubmitted(ev);
+        return props.onSubmit(ev);
     };
 
     const loader = () => props.isLoading ? <Loader size="xs" dark/> : "";
@@ -18,7 +18,7 @@ export function Form(props) {
                 <button type="submit" className="button is-primary" disabled={props.isLoading}>Submit</button>
             </div>
             <div className="control">
-                <button type="button" onClick={(ev) => props.onClosed(ev)}
+                <button type="button" onClick={(ev) => props.onClose(ev)}
                         className="button"
                         disabled={props.isLoading}>Close
                 </button>

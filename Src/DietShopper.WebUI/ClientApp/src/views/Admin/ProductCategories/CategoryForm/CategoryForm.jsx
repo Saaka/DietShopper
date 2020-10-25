@@ -79,11 +79,7 @@ function CategoryForm(props) {
                 <p className="subtitle">Category</p>
             </div>
             <hr/>
-            <Form name="categoryForm"
-                  onSubmitted={submitCategory}
-                  onClosed={closeForm}
-                  isLoading={isLoading}
-                  errorText={error}>
+            <Form name="categoryForm" onSubmit={submitCategory} onClose={closeForm} isLoading={isLoading} errorText={error}>
                 <div className="field">
                     <label className="label">Name</label>
                     <div className="control">
