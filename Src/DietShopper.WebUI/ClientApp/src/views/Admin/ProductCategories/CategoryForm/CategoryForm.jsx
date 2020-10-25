@@ -1,19 +1,25 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect, useRef} from "react"
 import "./CategoryForm.scss";
 import {Loader} from "components/common";
 import {ProductCategoriesService} from "../ProductCategoriesService";
 
 function CategoryForm(props) {
+    const nameInput = useRef(null);
     const [category, setCategory] = useState({name: "", productCategoryGuid: ""});
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const categoriesService = new ProductCategoriesService();
 
     useEffect(() => {
-        if (isEditing()) {
+        if (!isLoading && isEditing()) {
             setCategory(props.toEdit);
+            focusInput();
         }
+        return () => {
+        };
     }, [props.toEdit]);
+
+    useEffect(() => focusInput(), [isLoading]);
 
     function handleChange(ev) {
         const {name, value} = ev.target;
@@ -29,37 +35,28 @@ function CategoryForm(props) {
         setError("");
         setLoading(true);
 
-        function createCategory() {
-            categoriesService.createProductCategory(category)
-                .then(props.onSaved)
-                .then(clearForm)
-                .catch(err => setError(err.error))
-                .finally(() => setLoading(false));
-        }
-
-        function editCategory() {
-            categoriesService.updateProductCategory(category)
-                .then(props.onUpdated)
-                .then(clearForm)
-                .catch(err => setError(err.error))
-                .finally(() => setLoading(false));
-        }
-
         if (isEditing())
-            editCategory();
+            return categoriesService.updateProductCategory(category)
+                .then(() => setLoading(false))
+                .then(props.onUpdated)
+                .catch(err => {
+                    setError(err.error);
+                    setLoading(false);
+                });
         else
-            createCategory();
+            return categoriesService.createProductCategory(category)
+                .then(() => setLoading(false))
+                .then(clearForm)
+                .then(props.onCreated)
+                .catch(err => {
+                    setError(err.error);
+                    setLoading(false);
+                });
     }
 
-    function renderError() {
-        return (
-            !!error
-                ? <p className="help is-danger">{error}</p>
-                : ""
-        );
-    }
+    const renderError = () => !!error ? <p className="help is-danger">{error}</p> : "";
 
-    function closeForm(ev) {
+    const closeForm = (ev) => {
         clearForm(ev);
         props.onClose();
     }
@@ -68,9 +65,9 @@ function CategoryForm(props) {
         return "";
     }
 
-    function isEditing() {
-        return !!props.toEdit
-    }
+    const isEditing = () => !!props.toEdit;
+
+    const focusInput = () => nameInput.current.focus();
 
     return (
         <div className="box">
@@ -88,6 +85,9 @@ function CategoryForm(props) {
                                value={category.name}
                                onChange={handleChange}
                                disabled={isLoading}
+                               ref={nameInput}
+                               required
+                               autoComplete="off"
                                className={"input " + getInputClass("categoryName")}/>
                     </div>
                     {renderError()}

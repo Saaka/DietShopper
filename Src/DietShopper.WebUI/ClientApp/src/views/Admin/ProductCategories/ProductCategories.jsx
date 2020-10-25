@@ -30,7 +30,7 @@ function ProductCategories(props) {
     }
 
     const renderForm = () => isFormVisible
-        ? <CategoryForm toEdit={editedCategory} onClose={closeEditForm} onSaved={handleCategorySaved} onUpdated={handleCategoryUpdate}/>
+        ? <CategoryForm toEdit={editedCategory} onClose={closeEditForm} onCreated={handleCategoryCreated} onUpdated={handleCategoryUpdate}/>
         : "";
 
     function handleCategoryUpdate() {
@@ -40,7 +40,7 @@ function ProductCategories(props) {
             .then(() => setIsLoading(false));
     }
 
-    function handleCategorySaved() {
+    function handleCategoryCreated() {
         setIsLoading(true);
         return loadCategories()
             .then(() => setIsLoading(false));
