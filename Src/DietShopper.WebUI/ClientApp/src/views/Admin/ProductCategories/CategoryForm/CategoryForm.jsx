@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from "react"
 import {Loader} from "components/common";
-import {Form} from "components/forms";
+import {Form, TextInput} from "components/forms";
 import {ProductCategoriesService} from "../ProductCategoriesService";
 import "./CategoryForm.scss";
 
@@ -64,15 +64,6 @@ function CategoryForm(props) {
 
     const renderLoader = () => isLoading ? <Loader size="xs" dark/> : "";
 
-    const renderError = () => !!error ? <p className="help is-danger">{error}</p> : "";
-
-    const renderFormError = () => !!error ?
-        <article className="message is-danger is-small">
-            <div className="message-body">
-                {error}
-            </div>
-        </article> : "";
-
     return (
         <div className="box">
             <div>
@@ -80,22 +71,15 @@ function CategoryForm(props) {
             </div>
             <hr/>
             <Form name="categoryForm" onSubmit={submitCategory} onClose={closeForm} isLoading={isLoading} errorText={error}>
-                <div className="field">
-                    <label className="label">Name</label>
-                    <div className="control">
-                        <input type="text"
-                               id="category-name"
-                               name="name"
-                               value={category.name}
-                               onChange={handleChange}
-                               disabled={isLoading}
-                               ref={nameInput}
-                               required
-                               autoComplete="off"
-                               className={"input " + getInputClass("categoryName")}/>
-                    </div>
-                    {renderError()}
-                </div>
+                <TextInput id="category-name"
+                           label="Name"
+                           name="name"
+                           value={category.name}
+                           onChange={handleChange}
+                           disabled={isLoading}
+                           inputRef={nameInput}
+                           required
+                           error="Category name is required"/>
             </Form>
         </div>
     );

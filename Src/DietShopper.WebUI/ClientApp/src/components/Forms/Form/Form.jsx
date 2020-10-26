@@ -9,6 +9,8 @@ export function Form(props) {
         setIsSubmitted(true);
         return props.onSubmit(ev);
     };
+    
+    const getFormClass = () => isSubmitted ? "is-validated" : "";
 
     const loader = () => props.isLoading ? <Loader size="xs" dark/> : "";
 
@@ -35,7 +37,7 @@ export function Form(props) {
         : "";
 
     return (
-        <form name={props.name} noValidate onSubmit={(ev) => handleSubmit(ev)}>
+        <form name={props.name} noValidate onSubmit={(ev) => handleSubmit(ev)} className={getFormClass()}>
             {props.children}
             {buttonGroup()}
             {formError()}
