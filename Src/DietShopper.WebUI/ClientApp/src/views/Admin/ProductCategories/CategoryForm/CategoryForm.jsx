@@ -80,6 +80,7 @@ function CategoryForm(props) {
                            onChange={handleChange}
                            disabled={isLoading}
                            inputRef={nameInput}
+                           maxLength="32"
                            required
                            error="Category name is required"/>
             </Form>
