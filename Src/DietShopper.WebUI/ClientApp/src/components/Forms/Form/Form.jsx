@@ -4,12 +4,19 @@ import "./Form.scss";
 
 export function Form(props) {
     const [isSubmitted, setIsSubmitted] = useState(false);
-    
+
     const handleSubmit = (ev) => {
         setIsSubmitted(true);
-        return props.onSubmit(ev);
+        return props.onSubmit(ev)
+            .then(clearSubmittedState);
     };
-    
+
+    const clearSubmittedState = (res) => {
+        if (!(res && res.error))
+            setIsSubmitted(false);
+        return res;
+    }
+
     const getFormClass = () => isSubmitted ? "is-validated" : "";
 
     const loader = () => props.isLoading ? <Loader size="xs" dark/> : "";

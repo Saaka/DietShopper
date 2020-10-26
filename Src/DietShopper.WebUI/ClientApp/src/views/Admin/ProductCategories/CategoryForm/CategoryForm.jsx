@@ -37,6 +37,7 @@ function CategoryForm(props) {
                 .catch(err => {
                     setError(err.error);
                     setLoading(false);
+                    return err;
                 });
         else
             return categoriesService.createProductCategory(category)
@@ -46,6 +47,7 @@ function CategoryForm(props) {
                 .catch(err => {
                     setError(err.error);
                     setLoading(false);
+                    return err;
                 });
     }
 
