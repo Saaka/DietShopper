@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DietShopper.WebAPI.Controllers.Products
 {
     [Authorize]
-    public class ProductCategoryController : BaseApiController
+    public class ProductCategoriesController : BaseApiController
     {
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductCategoryDto>>> GetProductCategories()
@@ -21,7 +21,7 @@ namespace DietShopper.WebAPI.Controllers.Products
             return GetResponse(result);
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<ActionResult<ProductCategoryDto>> CreateProductCategory(CreateProductCategoryRequest request)
         {
             var result = await Mediator.Send(Mapper.Map<CreateProductCategoryCommand>(request));
@@ -29,8 +29,9 @@ namespace DietShopper.WebAPI.Controllers.Products
             return GetResponse(result);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<ProductCategoryDto>> UpdateProductCategory(UpdateProductCategoryRequest request)
+        [HttpPut]
+        [Route("{productCategoryGuid}")]
+        public async Task<ActionResult<ProductCategoryDto>> UpdateProductCategory(Guid productCategoryGuid, UpdateProductCategoryRequest request)
         {
             var result = await Mediator.Send(Mapper.Map<UpdateProductCategoryCommand>(request));
 
@@ -38,9 +39,10 @@ namespace DietShopper.WebAPI.Controllers.Products
         }
 
         [HttpDelete]
-        public async Task<ActionResult<Guid>> RemoveProductCategory(RemoveProductCategoryRequest request)
+        [Route("{productCategoryGuid}")]
+        public async Task<ActionResult<Guid>> RemoveProductCategory(Guid productCategoryGuid)
         {
-            var result = await Mediator.Send(Mapper.Map<RemoveProductCategoryCommand>(request));
+            var result = await Mediator.Send(new RemoveProductCategoryCommand(productCategoryGuid));
 
             return GetResponse(result);
         }

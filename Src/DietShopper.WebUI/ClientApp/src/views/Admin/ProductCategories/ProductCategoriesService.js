@@ -5,19 +5,19 @@ export class ProductCategoriesService {
 
     createProductCategory = (productCategory) => {
         return this.authHttpService
-            .put(Constants.ApiRoutes.Admin.PRODUCT_CATEGORIES, productCategory)
+            .post(Constants.ApiRoutes.Admin.PRODUCT_CATEGORIES, productCategory)
             .then(response => response.data);
     };
     
     updateProductCategory = (productCategory) => {
         return this.authHttpService
-            .post(Constants.ApiRoutes.Admin.PRODUCT_CATEGORIES, productCategory)
+            .put(`${Constants.ApiRoutes.Admin.PRODUCT_CATEGORIES}/${productCategory.productCategoryGuid}`, productCategory)
             .then(response => response.data);
     };
 
-    removeProductCategory = (productCategory) => {
+    removeProductCategory = (productCategoryGuid) => {
         return this.authHttpService
-            .delete(Constants.ApiRoutes.Admin.PRODUCT_CATEGORIES, productCategory)
+            .delete(`${Constants.ApiRoutes.Admin.PRODUCT_CATEGORIES}/${productCategoryGuid}`)
             .then(response => response.data);
     };
     

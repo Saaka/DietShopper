@@ -60,7 +60,7 @@ function ProductCategories(props) {
         modal.showModal(`Do you want to remove product category "${category.name}"?`, () => {
             setIsLoading(true);
             return categoriesService
-                .removeProductCategory(category)
+                .removeProductCategory(category.productCategoryGuid)
                 .then(loadCategories)
                 .then(() => setIsLoading(false));
         });

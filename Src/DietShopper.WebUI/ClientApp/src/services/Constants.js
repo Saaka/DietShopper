@@ -20,7 +20,7 @@ Constants.ApiRoutes = class ApiRoutes {
 
 Constants.ApiRoutes.Admin = class AdminRoutes {
     static get PRODUCT_CATEGORIES() {
-        return "productCategory";
+        return "productCategories";
     }
 };
 
