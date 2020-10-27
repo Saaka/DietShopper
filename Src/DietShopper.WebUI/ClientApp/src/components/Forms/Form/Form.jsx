@@ -1,23 +1,15 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Loader} from "components/common";
 import "./Form.scss";
 
 export function Form(props) {
-    const [isSubmitted, setIsSubmitted] = useState(false);
-
+    
     const handleSubmit = (ev) => {
-        setIsSubmitted(true);
-        return props.onSubmit(ev)
-            .then(clearSubmittedState);
+        props.object._isSubmitted_ = true;
+        return props.onSubmit(ev);
     };
 
-    const clearSubmittedState = (res) => {
-        if (!(res && res.error))
-            setIsSubmitted(false);
-        return res;
-    }
-
-    const getFormClass = () => isSubmitted ? "is-validated" : "";
+    const getFormClass = () => props.object._isSubmitted_ ? "is-validated" : "";
 
     const loader = () => props.isLoading ? <Loader size="xs" dark/> : "";
 

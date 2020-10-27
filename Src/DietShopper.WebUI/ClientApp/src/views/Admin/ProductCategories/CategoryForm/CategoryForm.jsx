@@ -35,8 +35,8 @@ function CategoryForm(props) {
                 .then(() => setLoading(false))
                 .then(props.onUpdated)
                 .catch(err => {
-                    setError(err.error);
                     setLoading(false);
+                    setError(err.error);
                     return err;
                 });
         else
@@ -45,26 +45,19 @@ function CategoryForm(props) {
                 .then(clearForm)
                 .then(props.onCreated)
                 .catch(err => {
-                    setError(err.error);
                     setLoading(false);
+                    setError(err.error);
                     return err;
                 });
     }
 
-    function getInputClass(field) {
-        //TODO Validation
-        return "";
-    }
-
     const closeForm = (ev) => props.onClose();
 
-    const clearForm = () => setCategory(cat => ({...cat, name: "", productCategoryGuid: ""}));
+    const clearForm = () => setCategory({name: "", productCategoryGuid: ""});
 
     const isEditing = () => !!props.toEdit;
 
     const focusInput = () => nameInput.current.focus();
-
-    const renderLoader = () => isLoading ? <Loader size="xs" dark/> : "";
 
     return (
         <div className="box">
@@ -72,7 +65,7 @@ function CategoryForm(props) {
                 <p className="subtitle">Category</p>
             </div>
             <hr/>
-            <Form name="categoryForm" onSubmit={submitCategory} onClose={closeForm} isLoading={isLoading} errorText={error}>
+            <Form name="categoryForm" onSubmit={submitCategory} onClose={closeForm} isLoading={isLoading} errorText={error} object={category}>
                 <TextInput id="category-name"
                            label="Name"
                            name="name"
