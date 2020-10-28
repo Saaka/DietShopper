@@ -8,13 +8,14 @@ namespace DietShopper.Domain.Entities
 {
     public class Measure
     {
-        public int MeasureId { get; set; }
-        public Guid MeasureGuid { get; set; }
-        public string Name { get; set; }
-        public string ShortName { get; set; }
-        public bool IsWeight { get; set; }
-        public decimal? ValueInGrams { get; set; }
-        public bool IsActive { get; set; }
+        public int MeasureId { get; private set; }
+        public Guid MeasureGuid { get; private set; }
+        public string Name { get; private set; }
+        public string ShortName { get; private set; }
+        public bool IsWeight { get; private set; }
+        public decimal? ValueInGrams { get; private set; }
+        public bool IsActive { get; private set; }
+        public bool IsBaseline { get; private set; }
 
         private readonly List<Product> _defaultProducts = new List<Product>();
         public virtual IReadOnlyCollection<Product> DefaultProducts => _defaultProducts.AsReadOnly();

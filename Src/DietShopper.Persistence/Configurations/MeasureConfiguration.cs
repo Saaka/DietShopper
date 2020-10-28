@@ -37,6 +37,9 @@ namespace DietShopper.Persistence.Configurations
             builder.Property(x => x.IsActive)
                 .IsRequired();
 
+            builder.Property(x => x.IsBaseline)
+                .IsRequired();
+
             builder.HasMany(x => x.DefaultProducts)
                 .WithOne(x => x.DefaultMeasure)
                 .HasForeignKey(x => x.DefaultMeasureId)
