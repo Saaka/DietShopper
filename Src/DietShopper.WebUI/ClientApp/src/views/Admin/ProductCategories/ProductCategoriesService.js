@@ -5,13 +5,13 @@ export class ProductCategoriesService {
 
     createProductCategory = (productCategory) => {
         return this.authHttpService
-            .post(Constants.ApiRoutes.Admin.PRODUCT_CATEGORIES, productCategory)
+            .post(Constants.ApiRoutes.Admin.PRODUCT_CATEGORIES_CREATE, productCategory)
             .then(response => response.data);
     };
     
     updateProductCategory = (productCategory) => {
         return this.authHttpService
-            .put(`${Constants.ApiRoutes.Admin.PRODUCT_CATEGORIES}/${productCategory.productCategoryGuid}`, productCategory)
+            .post(Constants.ApiRoutes.Admin.PRODUCT_CATEGORIES_UPDATE, productCategory)
             .then(response => response.data);
     };
 
