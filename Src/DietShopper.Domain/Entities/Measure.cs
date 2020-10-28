@@ -11,7 +11,7 @@ namespace DietShopper.Domain.Entities
         public int MeasureId { get; private set; }
         public Guid MeasureGuid { get; private set; }
         public string Name { get; private set; }
-        public string ShortName { get; private set; }
+        public string Symbol { get; private set; }
         public bool IsWeight { get; private set; }
         public decimal? ValueInGrams { get; private set; }
         public bool IsActive { get; private set; }
@@ -25,11 +25,11 @@ namespace DietShopper.Domain.Entities
 
         private Measure() { }
 
-        public Measure(Guid measureGuid, string name, string shortName, bool isWeight, decimal? valueInGrams)
+        public Measure(Guid measureGuid, string name, string symbol, bool isWeight, decimal? valueInGrams)
         {
             MeasureGuid = measureGuid;
             Name = name;
-            ShortName = shortName;
+            Symbol = symbol;
             IsWeight = isWeight;
             ValueInGrams = valueInGrams;
             IsActive = true;
@@ -71,9 +71,9 @@ namespace DietShopper.Domain.Entities
 
         private void ValidateShortName()
         {
-            if (string.IsNullOrWhiteSpace(ShortName))
+            if (string.IsNullOrWhiteSpace(Symbol))
                 throw new DomainException(ErrorCode.MeasureShortNameRequired);
-            if (ShortName.Length > MeasureValidationConstants.MeasureShortNameMaxLength)
+            if (Symbol.Length > MeasureValidationConstants.MeasureSymbolMaxLength)
                 throw new DomainException(ErrorCode.MeasureShortNameTooLong);
         }
     }
