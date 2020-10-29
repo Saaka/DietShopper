@@ -19,7 +19,7 @@ namespace DietShopper.Persistence.Repositories
         {
             return _context.Measures
                 .Where(x => x.IsActive)
-                .OrderBy(x => x.Name)
+                .OrderByDescending(x => x.IsBaseline).ThenByDescending(x => x.IsWeight).ThenBy(x => x.Name)
                 .ToReadOnlyCollectionAsync();
         }
     }

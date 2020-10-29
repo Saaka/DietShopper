@@ -18,7 +18,9 @@ namespace DietShopper.Persistence
                 .AddTransient<IDbInitializer, DbInitializer>()
                 
                 .AddTransient<IUsersRepository, UsersRepository>()
-                .AddTransient<IProductCategoriesRepository, ProductCategoryRepository>();
+                .AddTransient<IProductCategoriesRepository, ProductCategoryRepository>()
+                .AddTransient<IMeasuresRepository, MeasuresRepository>()
+                ;
 
             return services;
         }
