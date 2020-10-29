@@ -28,6 +28,9 @@ Constants.ApiRoutes.Admin = class AdminRoutes {
     static get PRODUCT_CATEGORIES_UPDATE() {
         return "productCategories/update";
     }
+    static get MEASURES() {
+        return "measures";
+    }
 };
 
 export {Constants};
