@@ -9,6 +9,7 @@ namespace DietShopper.Application.Products
         public ProductsMapperProfile()
         {
             CreateMap<ProductCategory, ProductCategoryDto>();
+            CreateMap<Measure, MeasureDto>();
         }
     }
 }
