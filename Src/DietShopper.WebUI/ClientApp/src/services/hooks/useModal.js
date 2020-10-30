@@ -1,20 +1,16 @@
 import React, {useState} from "react";
-import {Modal} from "components/common";
+import {ModalProps} from "components/modal";
 
 export function useModal() {
     const [isVisible, setVisible] = useState(false);
-    const [modalSettings, setModalSettings] = useState({});
+    const [modalProps, setModalProps] = useState({});
 
     function toggle() {
         setVisible(prev => !prev);
     }
 
-    function showModal(text, onConfirm, onCancel) {
-        setModalSettings({
-            modalText: text,
-            handleConfirm: onConfirm,
-            handleCancel: onCancel
-        });
+    function showModal(props) {
+        setModalProps(props);
 
         setVisible(true);
     }
@@ -22,11 +18,7 @@ export function useModal() {
     function render() {
         return (
             isVisible
-                ? <Modal toggle={toggle}
-                         text={modalSettings.modalText}
-                         onConfirm={modalSettings.handleConfirm}
-                         onCancel={modalSettings.handleCancel}
-                />
+                ? modalProps.buildModal(toggle)
                 : ""
         )
     }

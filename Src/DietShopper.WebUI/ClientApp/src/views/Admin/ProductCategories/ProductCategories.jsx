@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react"
-import {useDocumentTitle, useModal} from "Hooks";
+import {useDocumentTitle} from "Hooks";
+import {useModal, QuestionModal} from "Modal";
 import {CategoryForm} from "./CategoryForm/CategoryForm";
 import {CategoriesList} from "./CateoriesList/CategoriesList";
 import {ProductCategoriesService} from "./ProductCategoriesService";
@@ -57,13 +58,13 @@ function ProductCategories(props) {
     }
 
     function deleteCategory(category) {
-        modal.showModal(`Do you want to remove product category "${category.name}"?`, () => {
+        modal.showModal(new QuestionModal(`Do you want to remove product category "${category.name}"?`, () => {
             setIsLoading(true);
             return categoriesService
                 .removeProductCategory(category.productCategoryGuid)
                 .then(loadCategories)
                 .then(() => setIsLoading(false));
-        });
+        }));
     }
 
     function renderList() {

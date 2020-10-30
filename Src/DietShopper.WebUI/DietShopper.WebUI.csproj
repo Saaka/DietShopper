@@ -35,6 +35,7 @@
         <Content Include="ClientApp\src\components\Icon\Icon.jsx" />
         <Content Include="ClientApp\src\components\Loader\Loader.jsx" />
         <Content Include="ClientApp\src\components\Loader\Loader.scss" />
+        <Content Include="ClientApp\src\components\Modal\QuestionModal\QuestionModal.js" />
         <Content Include="ClientApp\src\components\routing.js" />
         <Content Include="ClientApp\src\layouts\App\App.jsx" />
         <Content Include="ClientApp\src\layouts\App\App.scss" />
