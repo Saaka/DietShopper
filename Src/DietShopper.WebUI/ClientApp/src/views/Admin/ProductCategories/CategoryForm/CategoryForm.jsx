@@ -57,11 +57,13 @@ function CategoryForm(props) {
     const isEditing = () => !!props.toEdit;
 
     const focusInput = () => nameInput.current.focus();
+    
+    const getTitle = () => isEditing() ? "Update product category" : "Create product category";
 
     return (
         <div className="box">
             <div>
-                <p className="subtitle">Category</p>
+                <p className="subtitle">{getTitle()}</p>
             </div>
             <hr/>
             <Form name="categoryForm" onSubmit={submitCategory} onClose={closeForm} isLoading={isLoading} errorText={error} object={category}>

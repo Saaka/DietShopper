@@ -16,4 +16,12 @@ export class UnitsOfMeasuresService {
             .post(Constants.ApiRoutes.Admin.MEASURES_CREATE, measure)
             .then(response => response.data);
     };
+
+    updateMeasure = (measure) => {
+        if(!measure.isWeight)
+            measure.valueInGrams = null;
+        return this.authHttpService
+            .post(Constants.ApiRoutes.Admin.MEASURES_UPDATE, measure)
+            .then(response => response.data);
+    };
 }

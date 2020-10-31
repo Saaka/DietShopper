@@ -20,7 +20,7 @@ function MeasureForm(props) {
     });
 
     useEffect(() => {
-        if (!!props.toEdit) {
+        if (isEditing()) {
             setMeasure({...props.toEdit, valueInGrams: props.toEdit.valueInGrams ?? 0});
         }
         focusInput();
@@ -47,7 +47,7 @@ function MeasureForm(props) {
     const handleSubmit = (ev) => {
         ev.preventDefault();
         setIsLoading(true);
-        return service.createMeasure({...measure})
+        return saveMeasure(measure)
             .then(res => props.onSubmitted(res.data))
             .then(() => props.toggle())
             .catch(err => {
@@ -57,14 +57,25 @@ function MeasureForm(props) {
             });
     }
 
+    const saveMeasure = (measure) => {
+        if (isEditing())
+            return service.updateMeasure({...measure})
+
+        return service.createMeasure({...measure})
+    }
+    
+    const isEditing = () => !!props.toEdit;
+
     const focusInput = () => nameInput.current.focus();
 
     const displayNotEditableInfo = () => measure.isBaseline ? <Message className="is-info is-small">Base measure can't be edited</Message> : "";
+    
+    const getTitle = () => isEditing() ? "Update measure" : "Create measure";
 
     return (
         <Modal {...props}>
             <div className="box">
-                <p className="subtitle">Categories list</p>
+                <p className="subtitle">{getTitle()}</p>
                 <hr/>
                 <Form name="measureForm" object={measure} onSubmit={(ev) => handleSubmit(ev)} onClose={props.toggle} isLoading={isLoading} disabled={measure.isBaseline} errorText={error}>
                     <TextInput id="measure-name"
