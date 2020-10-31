@@ -4,6 +4,8 @@ import "./Checkbox.scss";
 
 export function Checkbox(props) {
 
+    const icon = () => props.value ? <Icon name="check-square" size="lg"/> : <Icon name="square" size="lg"/>;
+    
     return (
         <div className="field">
             <label>
@@ -13,7 +15,7 @@ export function Checkbox(props) {
                        checked={props.value}
                        onChange={props.onChange}
                        className="hidden-checkbox" />
-                {props.label} {" " + props.value}
+                {icon()} {props.label}
             </label>
         </div>
     );
