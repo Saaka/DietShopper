@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react"
+import React from "react"
 import {Icon} from "components/common";
 import "./CategoriesList.scss";
 

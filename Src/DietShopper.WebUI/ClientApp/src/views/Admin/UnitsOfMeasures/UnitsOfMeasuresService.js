@@ -24,4 +24,10 @@ export class UnitsOfMeasuresService {
             .post(Constants.ApiRoutes.Admin.MEASURES_UPDATE, measure)
             .then(response => response.data);
     };
+
+    removeMeasure = (measureGuid) => {
+        return this.authHttpService
+            .delete(`${Constants.ApiRoutes.Admin.MEASURES}/${measureGuid}`)
+            .then(response => response.data);
+    };
 }

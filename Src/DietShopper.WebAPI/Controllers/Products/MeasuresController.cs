@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DietShopper.Application.Products.Commands;
@@ -34,6 +35,15 @@ namespace DietShopper.WebAPI.Controllers.Products
         public async Task<ActionResult<MeasureDto>> UpdateMeasure(UpdateMeasureRequest request)
         {
             var result = await Mediator.Send(Mapper.Map<UpdateMeasureCommand>(request));
+
+            return GetResponse(result);
+        }
+
+        [HttpDelete]
+        [Route("{measureGuid}")]
+        public async Task<ActionResult<Guid>> UpdateMeasure(Guid measureGuid)
+        {
+            var result = await Mediator.Send(new RemoveMeasureCommand(measureGuid));
 
             return GetResponse(result);
         }

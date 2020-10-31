@@ -1,7 +1,8 @@
 import React from "react";
+import {Icon} from "components/common";
 import "./MeasuresList.scss";
 
-export const MeasuresList = ({measures, onEdit}) => {
+export const MeasuresList = ({measures, onEdit, onRemove}) => {
 
     return (
         <div>
@@ -9,13 +10,17 @@ export const MeasuresList = ({measures, onEdit}) => {
                 <thead>
                 <tr>
                     <td>Name</td>
+                    <td />
+                    <td />
                 </tr>
                 </thead>
                 <tbody>
                 {measures.map(measure =>
                     (
-                        <tr key={measure.measureGuid} onClick={(ev) => onEdit(measure)}>
+                        <tr key={measure.measureGuid}>
                             <td>{measure.name}</td>
+                            <td className="list-action" onClick={(ev) => onEdit(measure)}><Icon name="edit"/></td>
+                            <td className="list-action" onClick={(ev) => onRemove(measure)}><Icon name="ban"/></td>
                         </tr>
                     )
                 )}

@@ -37,12 +37,22 @@ function UnitsOfMeasures(props) {
     const addMeasure = () => modal.showModal(new MeasureFormModal(handleMeasureSaved));
     
     const editMeasure = (measure) => modal.showModal(new MeasureFormModal(handleMeasureSaved, measure));
+    
+    const removeMeasure = (measure) => {
+        setIsLoading(true);
+        return measuresService
+            .removeMeasure(measure.measureGuid)
+            .then(() => loadMeasures())
+            .then(() => setIsLoading(false));
+        
+        
+    }
 
     function renderList() {
         return (
             isLoading
                 ? <div className="center"><Loader size="xs" dark/></div>
-                : <MeasuresList measures={measures} onEdit={editMeasure}/>
+                : <MeasuresList measures={measures} onEdit={editMeasure} onRemove={removeMeasure}/>
         );
     }
 
