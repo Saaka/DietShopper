@@ -6,7 +6,7 @@ namespace DietShopper.Application.Products.Commands
 {
     public class UpdateMeasureCommand : Request<MeasureDto>
     {
-        public Guid MeasureGuid { get; set; }
+        public Guid MeasureGuid { get; }
         public string Name { get; }
         public string Symbol { get; }
         public bool IsWeight { get; }

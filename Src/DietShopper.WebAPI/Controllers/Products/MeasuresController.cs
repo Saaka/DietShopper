@@ -22,9 +22,18 @@ namespace DietShopper.WebAPI.Controllers.Products
 
         [HttpPost]
         [Route("create")]
-        public async Task<ActionResult<MeasureDto>> CreateProductCategory(CreateMeasureRequest request)
+        public async Task<ActionResult<MeasureDto>> CreateMeasure(CreateMeasureRequest request)
         {
             var result = await Mediator.Send(Mapper.Map<CreateMeasureCommand>(request));
+
+            return GetResponse(result);
+        }
+
+        [HttpPost]
+        [Route("update")]
+        public async Task<ActionResult<MeasureDto>> UpdateMeasure(UpdateMeasureRequest request)
+        {
+            var result = await Mediator.Send(Mapper.Map<UpdateMeasureCommand>(request));
 
             return GetResponse(result);
         }
