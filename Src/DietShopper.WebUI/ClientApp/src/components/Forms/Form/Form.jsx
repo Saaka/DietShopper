@@ -38,6 +38,9 @@ export function Form(props) {
     return (
         <form name={props.name} noValidate onSubmit={(ev) => handleSubmit(ev)} className={getFormClass()}>
             {props.children}
+            <div>
+                <hr />
+            </div>
             {buttonGroup()}
             {formError()}
         </form>
