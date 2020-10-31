@@ -2,24 +2,27 @@ import React, {useState, useEffect, useRef} from "react";
 import {Form, TextInput, Checkbox, NumberInput} from "components/forms";
 import {Message} from "components/common";
 import {Modal} from "Modal";
+import {UnitsOfMeasuresService} from "../UnitsOfMeasuresService";
 import "./MeasureForm.scss";
 
 function MeasureForm(props) {
+    const service = new UnitsOfMeasuresService();
     const nameInput = useRef(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState("");
     const [measure, setMeasure] = useState({
         measureGuid: "",
         name: "",
         symbol: "",
         isWeight: false,
-        valueInGrams: "",
+        valueInGrams: 0,
         isBaseline: false
     });
 
     useEffect(() => {
-        if (!!props.toEdit)
-            setMeasure(props.toEdit);
-
+        if (!!props.toEdit) {
+            setMeasure({...props.toEdit, valueInGrams: props.toEdit.valueInGrams ?? 0});
+        }
         focusInput();
         setIsLoading(false);
     }, [props.toEdit]);
@@ -28,7 +31,7 @@ function MeasureForm(props) {
 
     useEffect(() => {
         if (!measure.isWeight && !isLoading)
-            setMeasure(prev => ({...prev, valueInGrams: ""}));
+            setMeasure(prev => ({...prev, valueInGrams: 0}));
     }, [measure.isWeight]);
 
     function handleChange(ev) {
@@ -44,11 +47,14 @@ function MeasureForm(props) {
     const handleSubmit = (ev) => {
         ev.preventDefault();
         setIsLoading(true);
-        props.onSubmitted(measure);
-
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 300);
+        return service.createMeasure({...measure})
+            .then(res => props.onSubmitted(res.data))
+            .then(() => props.toggle())
+            .catch(err => {
+                setIsLoading(false);
+                setError(err.error);
+                return err;
+            });
     }
 
     const focusInput = () => nameInput.current.focus();
@@ -60,7 +66,7 @@ function MeasureForm(props) {
             <div className="box">
                 <p className="subtitle">Categories list</p>
                 <hr/>
-                <Form name="measureForm" object={measure} onSubmit={(ev) => handleSubmit(ev)} onClose={props.toggle} isLoading={isLoading} disabled={measure.isBaseline}>
+                <Form name="measureForm" object={measure} onSubmit={(ev) => handleSubmit(ev)} onClose={props.toggle} isLoading={isLoading} disabled={measure.isBaseline} errorText={error}>
                     <TextInput id="measure-name"
                                label="Name"
                                name="name"

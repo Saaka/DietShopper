@@ -27,10 +27,16 @@ function UnitsOfMeasures(props) {
                 setMeasures(data);
             });
     }
-
-    const addMeasure = () => modal.showModal(new MeasureFormModal((saved) => console.log(saved.name)));
     
-    const editMeasure = (measure) => modal.showModal(new MeasureFormModal((saved) => console.log(saved.name), measure));
+    const handleMeasureSaved = (measure) => {
+        setIsLoading(true);
+        loadMeasures()
+            .then(() => setIsLoading(false));        
+    };
+
+    const addMeasure = () => modal.showModal(new MeasureFormModal(handleMeasureSaved));
+    
+    const editMeasure = (measure) => modal.showModal(new MeasureFormModal(handleMeasureSaved, measure));
 
     function renderList() {
         return (

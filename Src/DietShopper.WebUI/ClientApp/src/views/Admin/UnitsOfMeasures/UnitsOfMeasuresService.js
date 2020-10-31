@@ -8,4 +8,12 @@ export class UnitsOfMeasuresService {
             .get(Constants.ApiRoutes.Admin.MEASURES)
             .then(resp => resp.data);
     };
+
+    createMeasure = (measure) => {
+        if(!measure.isWeight)
+            measure.valueInGrams = null;
+        return this.authHttpService
+            .post(Constants.ApiRoutes.Admin.MEASURES_CREATE, measure)
+            .then(response => response.data);
+    };
 }

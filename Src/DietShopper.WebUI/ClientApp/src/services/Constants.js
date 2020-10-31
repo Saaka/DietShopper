@@ -31,6 +31,9 @@ Constants.ApiRoutes.Admin = class AdminRoutes {
     static get MEASURES() {
         return "measures";
     }
+    static get MEASURES_CREATE() {
+        return "measures/create";
+    }
 };
 
 export {Constants};
