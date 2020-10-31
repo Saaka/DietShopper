@@ -8,7 +8,7 @@ const Icon = (props) => {
         if (brands.indexOf(props.name) >= 0)
             return ["fab", props.name];
 
-        return props.name;
+        return ["far", props.name];
     }
 
     return (

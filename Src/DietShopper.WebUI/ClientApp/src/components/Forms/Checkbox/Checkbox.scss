@@ -1,0 +1,12 @@
+@import "src/assets/variables";
+
+.field {
+  label {
+    font-size: $size-6;
+    font-weight: $weight-bold;
+    
+    input.hidden-checkbox {
+      display: none;
+    }
+  }
+}
