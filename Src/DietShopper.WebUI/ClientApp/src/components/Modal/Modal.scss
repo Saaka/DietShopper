@@ -1,11 +1,21 @@
 @import "src/assets/variables";
 
-footer.modal-card-foot {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-div.modal-content {
-  border-radius: 6px;
+div.modal {
+  .modal-close {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  div.modal-content {
+    border-radius: 6px;
+
+    .modal-card {      
+      
+      footer.modal-card-foot {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+    }
+  }
 }
 
 div::-webkit-scrollbar {
