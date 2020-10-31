@@ -4,20 +4,26 @@ import "./Checkbox.scss";
 
 export function Checkbox(props) {
 
-    const icon = () => props.value ? <Icon name="check-square" size="lg"/> : <Icon name="square" size="lg"/>;
-    
+    const icon = () => props.value ? "check-square" : "square";
+
+    const renderIcon = () => props.disabled
+        ? <Icon name={icon()} solid size="lg"/>
+        : <Icon name={icon()} size="lg"/>;
+
     return (
         <div className="field">
-            <label>
-                <input type="checkbox"
-                       id={props.is}
-                       name={props.name}
-                       checked={props.value}
-                       onChange={props.onChange}
-                       className="hidden-checkbox"
-                       disabled={props.disabled}/>
-                {icon()} {props.label}
-            </label>
+            <label className="label">{props.label}</label>
+            <div className="control">
+                <label className="switch">
+                    <input type="checkbox"
+                           id={props.is}
+                           name={props.name}
+                           checked={props.value}
+                           onChange={props.onChange}
+                           disabled={props.disabled}/>
+                    <span className="slider round"></span>
+                </label>
+            </div>
         </div>
     );
 }
