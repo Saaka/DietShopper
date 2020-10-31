@@ -14,7 +14,8 @@ export function Checkbox(props) {
                        name={props.name}
                        checked={props.value}
                        onChange={props.onChange}
-                       className="hidden-checkbox" />
+                       className="hidden-checkbox"
+                       disabled={props.disabled}/>
                 {icon()} {props.label}
             </label>
         </div>
