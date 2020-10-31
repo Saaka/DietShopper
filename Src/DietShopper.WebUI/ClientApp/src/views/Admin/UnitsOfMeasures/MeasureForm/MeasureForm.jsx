@@ -83,7 +83,7 @@ function MeasureForm(props) {
                                name="name"
                                value={measure.name}
                                onChange={handleChange}
-                               disabled={isLoading}
+                               disabled={isLoading || measure.isBaseline}
                                maxLength="32"
                                required
                                error="Measure name is required"
@@ -93,7 +93,7 @@ function MeasureForm(props) {
                                name="symbol"
                                value={measure.symbol}
                                onChange={handleChange}
-                               disabled={isLoading}
+                               disabled={isLoading || measure.isBaseline}
                                maxLength="16"
                                required
                                error="Measure symbol is required"/>
@@ -101,14 +101,14 @@ function MeasureForm(props) {
                               name="isWeight"
                               value={measure.isWeight}
                               onChange={handleCheckboxChange}
-                              disabled={isLoading}
+                              disabled={isLoading || measure.isBaseline}
                               label="Is weight unit"/>
                     <NumberInput id="measure-value-in-grams"
                                  label="Value in grams"
                                  name="valueInGrams"
                                  value={measure.valueInGrams}
                                  onChange={handleChange}
-                                 disabled={!measure.isWeight || isLoading}
+                                 disabled={!measure.isWeight || isLoading || measure.isBaseline}
                                  required={measure.isWeight}
                                  min={0}
                                  max={10000}
