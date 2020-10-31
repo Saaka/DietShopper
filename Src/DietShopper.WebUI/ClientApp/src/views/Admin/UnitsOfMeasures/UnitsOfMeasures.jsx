@@ -27,25 +27,25 @@ function UnitsOfMeasures(props) {
                 setMeasures(data);
             });
     }
-    
+
     const handleMeasureSaved = (measure) => {
         setIsLoading(true);
         loadMeasures()
-            .then(() => setIsLoading(false));        
+            .then(() => setIsLoading(false));
     };
 
     const addMeasure = () => modal.showModal(new MeasureFormModal(handleMeasureSaved));
-    
+
     const editMeasure = (measure) => modal.showModal(new MeasureFormModal(handleMeasureSaved, measure));
-    
+
     const removeMeasure = (measure) => {
-        setIsLoading(true);
-        return measuresService
-            .removeMeasure(measure.measureGuid)
-            .then(() => loadMeasures())
-            .then(() => setIsLoading(false));
-        
-        
+        modal.showModal(new QuestionModal(`Do you want to remove measure "${measure.name}"?`, () => {
+            setIsLoading(true);
+            return measuresService
+                .removeMeasure(measure.measureGuid)
+                .then(() => loadMeasures())
+                .then(() => setIsLoading(false));
+        }));
     }
 
     function renderList() {

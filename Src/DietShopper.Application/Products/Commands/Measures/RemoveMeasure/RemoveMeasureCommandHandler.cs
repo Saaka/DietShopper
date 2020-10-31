@@ -3,6 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using DietShopper.Application.Products.Repositories;
 using DietShopper.Common.Requests;
+using DietShopper.Domain.Enums;
+using DietShopper.Domain.Exceptions;
 
 namespace DietShopper.Application.Products.Commands.Measures.RemoveMeasure
 {
@@ -14,9 +16,13 @@ namespace DietShopper.Application.Products.Commands.Measures.RemoveMeasure
         {
             _measuresRepository = measuresRepository;
         }
+
         public override async Task<RequestResult<Guid>> Handle(RemoveMeasureCommand request, CancellationToken cancellationToken)
         {
             var measure = await _measuresRepository.GetMeasure(request.MeasureGuid);
+            if (measure.IsBaseline)
+                throw new DomainException(ErrorCode.CantRemoveBaselineMeasure, new {request.MeasureGuid});
+
             measure.Deactivate();
             await _measuresRepository.Save(measure);
 

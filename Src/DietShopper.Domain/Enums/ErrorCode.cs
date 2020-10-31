@@ -44,5 +44,6 @@ namespace DietShopper.Domain.Enums
         AuthProviderTokenRequired = 40,
         ProductCategoryNameTaken = 41,
         MeasureNameTaken = 42,
+        CantRemoveBaselineMeasure = 43,
     }
 }
