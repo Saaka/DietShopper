@@ -6,10 +6,6 @@ export function Checkbox(props) {
 
     const icon = () => props.value ? "check-square" : "square";
 
-    const renderIcon = () => props.disabled
-        ? <Icon name={icon()} solid size="lg"/>
-        : <Icon name={icon()} size="lg"/>;
-
     return (
         <div className="field">
             <label className="label">{props.label}</label>

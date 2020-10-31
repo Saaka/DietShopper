@@ -21,6 +21,11 @@
         height: 0;
 
         &:disabled + .slider:before {
+          background-color: $light;
+          border: $grey-light 1px solid;
+        }
+
+        &[disabled]:checked + .slider:before {
           background-color: $grey-light;
         }
 
