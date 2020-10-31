@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {ModalProps} from "components/modal";
+import {ModalBase} from "components/modal";
 
 export function useModal() {
     const [isVisible, setVisible] = useState(false);
@@ -9,7 +9,7 @@ export function useModal() {
         setVisible(prev => !prev);
     }
 
-    function showModal(props) {
+    function showModal(props: ModalBase) {
         setModalProps(props);
 
         setVisible(true);

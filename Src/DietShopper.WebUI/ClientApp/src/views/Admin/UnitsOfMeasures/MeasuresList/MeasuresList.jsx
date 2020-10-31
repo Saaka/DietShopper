@@ -1,7 +1,7 @@
 import React from "react";
 import "./MeasuresList.scss";
 
-export const MeasuresList = ({measures}) => {
+export const MeasuresList = ({measures, onEdit}) => {
 
     return (
         <div>
@@ -14,7 +14,7 @@ export const MeasuresList = ({measures}) => {
                 <tbody>
                 {measures.map(measure =>
                     (
-                        <tr key={measure.measureGuid}>
+                        <tr key={measure.measureGuid} onClick={(ev) => onEdit(measure)}>
                             <td>{measure.name}</td>
                         </tr>
                     )

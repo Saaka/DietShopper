@@ -9,12 +9,12 @@ import "./ProductCategories.scss";
 
 function ProductCategories(props) {
     useDocumentTitle("Product categories - Admin page")
+    const modal = useModal();
     const categoriesService = new ProductCategoriesService();
     const [categories, setCategories] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isFormVisible, setFormVisible] = useState(false);
     const [editedCategory, setEdited] = useState(null);
-    const modal = useModal();
 
     useEffect(() => {
         setIsLoading(true);

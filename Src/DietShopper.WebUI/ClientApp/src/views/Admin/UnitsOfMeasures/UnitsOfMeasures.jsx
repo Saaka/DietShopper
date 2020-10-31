@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from "react"
 import {useDocumentTitle} from "Hooks";
+import {useModal, QuestionModal} from "Modal";
 import {Loader} from "components/common";
 import {MeasuresList} from "./MeasuresList/MeasuresList";
+import {MeasureFormModal} from "./MeasureForm/MeasureFormModal";
 import {UnitsOfMeasuresService} from "./UnitsOfMeasuresService";
 import "./UnitsOfMeasures.scss";
 
 function UnitsOfMeasures(props) {
     useDocumentTitle("Units of measures - Admin page")
+    const modal = useModal();
     const measuresService = new UnitsOfMeasuresService();
     const [measures, setMeasures] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -25,13 +28,15 @@ function UnitsOfMeasures(props) {
             });
     }
 
-    const addMeasure = () => alert("ADD");
+    const addMeasure = () => modal.showModal(new MeasureFormModal((saved) => console.log(saved.name)));
+    
+    const editMeasure = (measure) => modal.showModal(new MeasureFormModal((saved) => console.log(saved.name), measure));
 
     function renderList() {
         return (
             isLoading
                 ? <div className="center"><Loader size="xs" dark/></div>
-                : <MeasuresList measures={measures}/>
+                : <MeasuresList measures={measures} onEdit={editMeasure}/>
         );
     }
 
@@ -54,6 +59,7 @@ function UnitsOfMeasures(props) {
                     {renderList()}
                 </div>
             </div>
+            {modal.render()}
         </section>
     );
 }

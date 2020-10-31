@@ -1,5 +1,4 @@
 import React, {useState, useEffect, useRef} from "react"
-import {Loader} from "components/common";
 import {Form, TextInput} from "components/forms";
 import {ProductCategoriesService} from "../ProductCategoriesService";
 import "./CategoryForm.scss";
