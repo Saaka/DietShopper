@@ -18,9 +18,12 @@ function MeasureForm(props) {
     useEffect(() => {
         if (!!props.toEdit)
             setMeasure(props.toEdit);
+
         focusInput();
         setIsLoading(false);
-    }, []);
+    }, [props.toEdit]);
+
+    useEffect(() => focusInput(), [isLoading]);
 
     useEffect(() => {
         if (!measure.isWeight && !isLoading)
@@ -40,9 +43,11 @@ function MeasureForm(props) {
     const handleSubmit = (ev) => {
         ev.preventDefault();
         setIsLoading(true);
-        props.onSubmit(measure);
+        props.onSubmitted(measure);
 
-        setIsLoading(false);
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 300);
     }
 
     const focusInput = () => nameInput.current.focus();
@@ -61,10 +66,10 @@ function MeasureForm(props) {
                                value={measure.name}
                                onChange={handleChange}
                                disabled={isLoading}
-                               inputRef={nameInput}
                                maxLength="32"
                                required
-                               error="Measure name is required"/>
+                               error="Measure name is required"
+                               inputRef={nameInput}/>
                     <TextInput id="measure-symbol"
                                label="Symbol"
                                name="symbol"

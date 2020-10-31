@@ -4,14 +4,14 @@ import "./CategoriesList.scss";
 
 export function CategoriesList(props) {
 
-    function edit(category){
-        props.onEdit(category);        
+    function edit(category) {
+        props.onEdit(category);
     }
 
-    function remove(category){
+    function remove(category) {
         props.onDelete(category);
     }
-    
+
     return (
         <div>
             <table className="table is-hoverable is-fullwidth">
@@ -20,8 +20,8 @@ export function CategoriesList(props) {
                     (
                         <tr key={cat.productCategoryGuid} className={props.selectedCategory === cat ? "is-selected" : ""}>
                             <td>{cat.name}</td>
-                            <td className="list-action" onClick={(ev) => edit(cat)}><Icon name="edit" /></td>
-                            <td className="list-action" onClick={(ev) => remove(cat)}><Icon name="ban" /></td>
+                            <td className="list-action" onClick={(ev) => edit(cat)}><Icon name="edit"/></td>
+                            <td className="list-action" onClick={(ev) => remove(cat)}><Icon name="ban"/></td>
                         </tr>
                     )
                 )}

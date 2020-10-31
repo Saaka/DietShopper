@@ -30,10 +30,6 @@ function ProductCategories(props) {
             });
     }
 
-    const renderForm = () => isFormVisible
-        ? <CategoryForm toEdit={editedCategory} onClose={closeEditForm} onCreated={handleCategoryCreated} onUpdated={handleCategoryUpdate}/>
-        : "";
-
     function handleCategoryUpdate() {
         setIsLoading(true);
         closeEditForm();
@@ -77,6 +73,10 @@ function ProductCategories(props) {
                                   onDelete={deleteCategory}/>
         );
     }
+
+    const renderForm = () => isFormVisible
+        ? <CategoryForm toEdit={editedCategory} onClose={closeEditForm} onCreated={handleCategoryCreated} onUpdated={handleCategoryUpdate}/>
+        : "";
 
     return (
         <section className="columns is-centered">
