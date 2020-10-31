@@ -37,6 +37,28 @@ namespace DietShopper.Domain.Entities
             ValidateCreation();
         }
 
+        public Measure SetName(string value)
+        {
+            ValidateName(value);
+            Name = value;
+            return this;
+        }
+
+        public Measure SetSymbol(string value)
+        {
+            ValidateSymbol(value);
+            Symbol = value;
+            return this;
+        }
+
+        public Measure SetWeight(bool isWeight, decimal? valueInGrams)
+        {
+            ValidateWeight(isWeight, valueInGrams);
+            IsWeight = isWeight;
+            ValueInGrams = valueInGrams;
+            return this;
+        }
+
         public Measure Deactivate()
         {
             IsActive = false;
@@ -47,33 +69,33 @@ namespace DietShopper.Domain.Entities
         {
             if (MeasureGuid.Equals(Guid.Empty))
                 throw new InternalException(ErrorCode.MeasureGuidRequired);
-            ValidateName();
-            ValidateShortName();
-            ValidateWeight();
+            ValidateName(Name);
+            ValidateSymbol(Symbol);
+            ValidateWeight(IsWeight, ValueInGrams);
         }
 
-        private void ValidateWeight()
+        private void ValidateWeight(bool isWeight, decimal? valueInGrams)
         {
-            if (IsWeight)
+            if (isWeight)
             {
-                if (ValueInGrams == null || ValueInGrams == 0)
+                if (valueInGrams == null || valueInGrams == 0)
                     throw new DomainException(ErrorCode.MeasureValueInGramsRequiredForWeightType);
             }
         }
 
-        private void ValidateName()
+        private void ValidateName(string name)
         {
-            if (string.IsNullOrWhiteSpace(Name))
+            if (string.IsNullOrWhiteSpace(name))
                 throw new DomainException(ErrorCode.MeasureNameRequired);
-            if (Name.Length > MeasureValidationConstants.MeasureNameMaxLength)
+            if (name.Length > MeasureValidationConstants.MeasureNameMaxLength)
                 throw new DomainException(ErrorCode.MeasureNameTooLong);
         }
 
-        private void ValidateShortName()
+        private void ValidateSymbol(string symbol)
         {
-            if (string.IsNullOrWhiteSpace(Symbol))
+            if (string.IsNullOrWhiteSpace(symbol))
                 throw new DomainException(ErrorCode.MeasureSymbolRequired);
-            if (Symbol.Length > MeasureValidationConstants.MeasureSymbolMaxLength)
+            if (symbol.Length > MeasureValidationConstants.MeasureSymbolMaxLength)
                 throw new DomainException(ErrorCode.MeasureSymbolTooLong);
         }
     }
