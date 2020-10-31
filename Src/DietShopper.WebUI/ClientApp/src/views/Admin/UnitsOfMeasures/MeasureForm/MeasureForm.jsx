@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 import {Form, TextInput, Checkbox, NumberInput} from "components/forms";
+import {Message} from "components/common";
 import {Modal} from "Modal";
 import "./MeasureForm.scss";
 
@@ -52,7 +53,7 @@ function MeasureForm(props) {
 
     const focusInput = () => nameInput.current.focus();
 
-    const displayNotEditableInfo = () => <div></div>;
+    const displayNotEditableInfo = () => measure.isBaseline ? <Message className="is-info is-small">Base measure can't be edited</Message> : "";
 
     return (
         <Modal {...props}>
@@ -96,6 +97,7 @@ function MeasureForm(props) {
                                  max={10000}
                                  step={0.01}
                                  error="Valid value in grams is required"/>
+                    {displayNotEditableInfo()}
                 </Form>
             </div>
         </Modal>

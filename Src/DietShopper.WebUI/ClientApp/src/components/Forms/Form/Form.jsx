@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
-import {Loader} from "components/common";
+import {Loader, Message} from "components/common";
 import "./Form.scss";
 
 export function Form(props) {
-    
+
     const handleSubmit = (ev) => {
         props.object._isSubmitted_ = true;
         return props.onSubmit(ev);
@@ -27,19 +27,15 @@ export function Form(props) {
             {loader()}
         </div>;
 
-    const formError = () => !!props.errorText ?
-        <article className="message is-danger is-small">
-            <div className="message-body">
-                {props.errorText}
-            </div>
-        </article>
+    const formError = () => !!props.errorText
+        ? <Message className="is-danger is-small">{props.errorText}</Message>
         : "";
 
     return (
-        <form name={props.name} noValidate onSubmit={(ev) => handleSubmit(ev)} className={getFormClass()} >
+        <form name={props.name} noValidate onSubmit={(ev) => handleSubmit(ev)} className={getFormClass()}>
             {props.children}
             <div>
-                <hr />
+                <hr/>
             </div>
             {buttonGroup()}
             {formError()}
