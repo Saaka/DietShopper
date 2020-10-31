@@ -87,11 +87,10 @@ function MeasureForm(props) {
                                  onChange={handleChange}
                                  disabled={!measure.isWeight || isLoading}
                                  required={measure.isWeight}
-                                 error="Value in grams is required"
                                  min={0}
                                  max={10000}
                                  step={0.01}
-                    />
+                                 error="Valid value in grams is required"/>
                 </Form>
             </div>
         </Modal>

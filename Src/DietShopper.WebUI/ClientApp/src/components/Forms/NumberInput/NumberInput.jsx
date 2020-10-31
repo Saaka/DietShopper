@@ -17,8 +17,8 @@ export function NumberInput(props) {
                        min={props.min}
                        max={props.max}
                        required={props.required}
-                       disabled={props.disabled}
-                />
+                       disabled={props.disabled}/>
+                <div className="control-error">{props.error}</div>
             </div>
         </div>
     );
