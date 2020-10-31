@@ -1,4 +1,5 @@
 using AutoMapper;
+using DietShopper.Application.Products.Commands;
 using DietShopper.Application.Products.Models;
 using DietShopper.Domain.Entities;
 

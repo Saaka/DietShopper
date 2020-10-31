@@ -10,6 +10,7 @@ namespace DietShopper.WebAPI.Controllers.Products.Models
             CreateMap<CreateProductCategoryRequest, CreateProductCategoryCommand>();
             CreateMap<RemoveProductCategoryRequest, RemoveProductCategoryCommand>();
             CreateMap<UpdateProductCategoryRequest, UpdateProductCategoryCommand>();
+            CreateMap<CreateMeasureRequest, CreateMeasureCommand>();
         }
     }
 }

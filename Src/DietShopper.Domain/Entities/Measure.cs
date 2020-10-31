@@ -72,9 +72,9 @@ namespace DietShopper.Domain.Entities
         private void ValidateShortName()
         {
             if (string.IsNullOrWhiteSpace(Symbol))
-                throw new DomainException(ErrorCode.MeasureShortNameRequired);
+                throw new DomainException(ErrorCode.MeasureSymbolRequired);
             if (Symbol.Length > MeasureValidationConstants.MeasureSymbolMaxLength)
-                throw new DomainException(ErrorCode.MeasureShortNameTooLong);
+                throw new DomainException(ErrorCode.MeasureSymbolTooLong);
         }
     }
 }

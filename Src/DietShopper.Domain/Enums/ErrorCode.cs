@@ -22,8 +22,8 @@ namespace DietShopper.Domain.Enums
         MeasureGuidRequired = 18,
         MeasureNameRequired = 19,
         MeasureNameTooLong = 20,
-        MeasureShortNameRequired = 21,
-        MeasureShortNameTooLong = 22,
+        MeasureSymbolRequired = 21,
+        MeasureSymbolTooLong = 22,
         MeasureValueInGramsRequiredForWeightType = 23,
         ProductCategoryNameRequired = 24,
         ProductCategoryNameTooLong = 25,
@@ -43,5 +43,6 @@ namespace DietShopper.Domain.Enums
         ProductNutrientsRequired = 39,
         AuthProviderTokenRequired = 40,
         ProductCategoryNameTaken = 41,
+        MeasureNameTaken = 42,
     }
 }
