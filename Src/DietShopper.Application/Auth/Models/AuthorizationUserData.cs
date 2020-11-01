@@ -2,7 +2,7 @@ using System;
 
 namespace DietShopper.Application.Auth.Models
 {
-    public class AuthUserData
+    public class AuthorizationUserData
     {
         public Guid UserGuid { get; set; }
         public string DisplayName { get; set; }
