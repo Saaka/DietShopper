@@ -45,5 +45,6 @@ namespace DietShopper.Domain.Enums
         ProductCategoryNameTaken = 41,
         MeasureNameTaken = 42,
         CantRemoveBaselineMeasure = 43,
+        MeasureSymbolTaken = 44,
     }
 }

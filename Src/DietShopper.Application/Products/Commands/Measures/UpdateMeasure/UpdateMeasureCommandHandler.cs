@@ -25,6 +25,8 @@ namespace DietShopper.Application.Products.Commands.Measures.UpdateMeasure
         {
             if (await _measuresRepository.IsNameTaken(request.MeasureGuid, request.Name))
                 throw new DomainException(ErrorCode.MeasureNameTaken, new {request.Name});
+            if (await _measuresRepository.IsSymbolTaken(request.MeasureGuid, request.Symbol))
+                throw new DomainException(ErrorCode.MeasureSymbolTaken, new {request.Symbol});
 
             var measure = await _measuresRepository.GetMeasure(request.MeasureGuid);
             measure

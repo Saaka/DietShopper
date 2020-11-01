@@ -30,6 +30,8 @@ namespace DietShopper.Application.Products.Commands.Measures.CreateMeasure
         {
             if (await _measuresRepository.IsNameTaken(request.Name))
                 throw new DomainException(ErrorCode.MeasureNameTaken, new {request.Name});
+            if (await _measuresRepository.IsSymbolTaken(request.Symbol))
+                throw new DomainException(ErrorCode.MeasureSymbolTaken, new {request.Symbol});
             
             var measure = new Measure(_guid.GetGuid(), request.Name, request.Symbol, request.IsWeight, request.ValueInGrams);
             await _measuresRepository.Save(measure);

@@ -12,5 +12,7 @@ namespace DietShopper.Application.Products.Repositories
         Task<Measure> GetMeasure(Guid measureGuid);
         Task<bool> IsNameTaken(string name);
         Task<bool> IsNameTaken(Guid measureGuid, string name);
+        Task<bool> IsSymbolTaken(string symbol);
+        Task<bool> IsSymbolTaken(Guid measureGuid, string symbol);
     }
 }

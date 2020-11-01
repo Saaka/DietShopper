@@ -46,5 +46,16 @@ namespace DietShopper.Persistence.Repositories
                     && x.Name == name
                     && x.IsActive);
         }
+
+        public Task<bool> IsSymbolTaken(string symbol) => IsSymbolTaken(Guid.Empty, symbol);
+
+        public Task<bool> IsSymbolTaken(Guid measureGuid, string symbol)
+        {
+            return _context.Measures
+                .AnyAsync(x =>
+                    x.MeasureGuid != measureGuid
+                    && x.Symbol == symbol
+                    && x.IsActive);
+        }
     }
 }
