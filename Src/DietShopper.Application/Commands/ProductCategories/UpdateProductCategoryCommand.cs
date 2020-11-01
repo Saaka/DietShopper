@@ -7,9 +7,6 @@ namespace DietShopper.Application.Commands.ProductCategories
     public class UpdateProductCategoryCommand : Request<ProductCategoryDto>
     {
         public Guid ProductCategoryGuid { get; set; }
-        public string Name { get; }
-
-        public UpdateProductCategoryCommand(Guid productCategoryGuid, string name)
-            => (ProductCategoryGuid, Name) = (productCategoryGuid, name);
+        public string Name { get; set; }
     }
 }

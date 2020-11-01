@@ -5,11 +5,6 @@ namespace DietShopper.Application.Commands.Measures
 {
     public class RemoveMeasureCommand : Request
     {
-        public Guid MeasureGuid { get; }
-
-        public RemoveMeasureCommand(Guid measureGuid)
-        {
-            MeasureGuid = measureGuid;
-        }
+        public Guid MeasureGuid { get; set; }
     }
 }

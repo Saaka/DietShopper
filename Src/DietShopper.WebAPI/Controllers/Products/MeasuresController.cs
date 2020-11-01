@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DietShopper.Application.Commands.Measures;
 using DietShopper.Application.Models;
-using DietShopper.Application.Queries;
 using DietShopper.Application.Queries.Measures;
-using DietShopper.WebAPI.Controllers.Products.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,18 +22,18 @@ namespace DietShopper.WebAPI.Controllers.Products
 
         [HttpPost]
         [Route("create")]
-        public async Task<ActionResult<MeasureDto>> CreateMeasure(CreateMeasureRequest request)
+        public async Task<ActionResult<MeasureDto>> CreateMeasure(CreateMeasureCommand request)
         {
-            var result = await Mediator.Send(Mapper.Map<CreateMeasureCommand>(request));
+            var result = await Mediator.Send(request);
 
             return GetResponse(result);
         }
 
         [HttpPost]
         [Route("update")]
-        public async Task<ActionResult<MeasureDto>> UpdateMeasure(UpdateMeasureRequest request)
+        public async Task<ActionResult<MeasureDto>> UpdateMeasure(UpdateMeasureCommand request)
         {
-            var result = await Mediator.Send(Mapper.Map<UpdateMeasureCommand>(request));
+            var result = await Mediator.Send(request);
 
             return GetResponse(result);
         }
@@ -44,8 +42,8 @@ namespace DietShopper.WebAPI.Controllers.Products
         [Route("{measureGuid}")]
         public async Task<ActionResult<Guid>> UpdateMeasure(Guid measureGuid)
         {
-            var result = await Mediator.Send(new RemoveMeasureCommand(measureGuid));
-
+            var result = await Mediator.Send(new RemoveMeasureCommand {MeasureGuid = measureGuid});
+            
             return GetResponse(result);
         }
     }

@@ -5,9 +5,6 @@ namespace DietShopper.Application.Auth.Commands
 {
     public class AuthorizeUserWithGoogleCommand : Request<AuthorizationData>
     {
-        public string GoogleToken { get; }
-
-        public AuthorizeUserWithGoogleCommand(string googleToken)
-            => (GoogleToken) = (googleToken);
+        public string GoogleToken { get; set; }
     }
 }
