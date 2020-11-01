@@ -3,7 +3,7 @@ using DietShopper.Domain.Constants.Validation;
 using DietShopper.Domain.Enums;
 using FluentValidation;
 
-namespace DietShopper.Application.Products.Commands.UpdateProductCategory
+namespace DietShopper.Application.Products.Commands.ProductCategories.UpdateProductCategory
 {
     public class UpdateProductCategoryCommandValidator : AbstractValidator<UpdateProductCategoryCommand>
     {

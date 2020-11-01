@@ -1,7 +1,7 @@
 using System;
 using DietShopper.Common.Requests;
 
-namespace DietShopper.Application.Products.Commands
+namespace DietShopper.Application.Products.Commands.ProductCategories
 {
     public class RemoveProductCategoryCommand : Request
     {

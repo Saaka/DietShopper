@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using DietShopper.Application.Products.Repositories;
 using DietShopper.Common.Requests;
 
-namespace DietShopper.Application.Products.Commands.RemoveProductCategory
+namespace DietShopper.Application.Products.Commands.ProductCategories.RemoveProductCategory
 {
     public class RemoveProductCategoryCommandHandler : RequestHandler<RemoveProductCategoryCommand, Guid>
     {

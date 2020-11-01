@@ -7,7 +7,7 @@ using DietShopper.Common.Requests;
 using DietShopper.Domain.Enums;
 using DietShopper.Domain.Exceptions;
 
-namespace DietShopper.Application.Products.Commands.UpdateProductCategory
+namespace DietShopper.Application.Products.Commands.ProductCategories.UpdateProductCategory
 {
     public class UpdateProductCategoryCommandHandler : RequestHandler<UpdateProductCategoryCommand, ProductCategoryDto>
     {

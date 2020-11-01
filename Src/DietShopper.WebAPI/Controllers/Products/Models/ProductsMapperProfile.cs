@@ -1,5 +1,6 @@
 using AutoMapper;
-using DietShopper.Application.Products.Commands;
+using DietShopper.Application.Products.Commands.ProductCategories;
+using DietShopper.Application.Products.Commands.Measures;
 
 namespace DietShopper.WebAPI.Controllers.Products.Models
 {

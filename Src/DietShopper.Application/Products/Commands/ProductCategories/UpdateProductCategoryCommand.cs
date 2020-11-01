@@ -2,7 +2,7 @@ using System;
 using DietShopper.Application.Products.Models;
 using DietShopper.Common.Requests;
 
-namespace DietShopper.Application.Products.Commands
+namespace DietShopper.Application.Products.Commands.ProductCategories
 {
     public class UpdateProductCategoryCommand : Request<ProductCategoryDto>
     {

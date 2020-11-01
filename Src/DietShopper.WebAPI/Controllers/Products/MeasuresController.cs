@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DietShopper.Application.Products.Commands;
+using DietShopper.Application.Products.Commands.Measures;
 using DietShopper.Application.Products.Models;
 using DietShopper.Application.Products.Queries;
 using DietShopper.WebAPI.Controllers.Products.Models;

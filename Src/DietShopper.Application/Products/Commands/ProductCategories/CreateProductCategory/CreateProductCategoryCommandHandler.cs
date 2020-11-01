@@ -9,7 +9,7 @@ using DietShopper.Domain.Entities;
 using DietShopper.Domain.Enums;
 using DietShopper.Domain.Exceptions;
 
-namespace DietShopper.Application.Products.Commands.CreateProductCategory
+namespace DietShopper.Application.Products.Commands.ProductCategories.CreateProductCategory
 {
     public class CreateProductCategoryCommandHandler : RequestHandler<CreateProductCategoryCommand, ProductCategoryDto>
     {
