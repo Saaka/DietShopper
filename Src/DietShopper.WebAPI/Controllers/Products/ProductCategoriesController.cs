@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DietShopper.Application.Products.Commands.ProductCategories;
-using DietShopper.Application.Products.Models;
-using DietShopper.Application.Products.Queries;
+using DietShopper.Application.Commands.ProductCategories;
+using DietShopper.Application.Models;
+using DietShopper.Application.Queries;
+using DietShopper.Application.Queries.ProductCategories;
 using DietShopper.WebAPI.Controllers.Products.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

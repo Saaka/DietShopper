@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DietShopper.Application.Products.Repositories;
+using DietShopper.Application.Repositories;
 using DietShopper.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
