@@ -1,8 +1,8 @@
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using DietShopper.Application.Repositories;
 using DietShopper.Application.Services;
-using DietShopper.Application.Users.Repositories;
 using DietShopper.Common.Requests.Models;
 using DietShopper.Domain.Constants;
 using Microsoft.AspNetCore.Http;

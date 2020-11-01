@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DietShopper.Application.Auth.Models;
 using DietShopper.Application.Auth.Services;
-using DietShopper.Application.Users.Repositories;
+using DietShopper.Application.Repositories;
 using DietShopper.Common.Requests;
 
 namespace DietShopper.Application.Auth.Commands.AuthorizeUserWithGoogle

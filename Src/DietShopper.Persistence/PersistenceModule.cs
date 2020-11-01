@@ -1,5 +1,4 @@
 using DietShopper.Application.Repositories;
-using DietShopper.Application.Users.Repositories;
 using DietShopper.Persistence.Behaviors;
 using DietShopper.Persistence.Repositories;
 using DietShopper.Persistence.Utils;

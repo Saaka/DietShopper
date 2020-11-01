@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using DietShopper.Application.Users.Repositories;
+using DietShopper.Application.Repositories;
 using DietShopper.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 

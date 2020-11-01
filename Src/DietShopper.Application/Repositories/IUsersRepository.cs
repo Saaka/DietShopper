@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using DietShopper.Domain.Entities;
 
-namespace DietShopper.Application.Users.Repositories
+namespace DietShopper.Application.Repositories
 {
     public interface IUsersRepository
     {
