@@ -19,12 +19,9 @@ namespace DietShopper.Domain.Entities
 
         private ProductNutrients() { }
 
-        public ProductNutrients(Guid productNutrientsGuid, Product product,
-            int calories, decimal carbohydrates, decimal proteins, decimal fat, decimal saturatedFat)
+        public ProductNutrients(Guid productNutrientsGuid, int calories, decimal carbohydrates, decimal proteins, decimal fat, decimal saturatedFat)
         {
             ProductNutrientsGuid = productNutrientsGuid;
-            Product = product;
-            ProductId = product.ProductId;
             Calories = calories;
             Carbohydrates = carbohydrates;
             Proteins = proteins;

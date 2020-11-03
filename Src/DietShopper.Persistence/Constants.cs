@@ -11,5 +11,12 @@ namespace DietShopper.Persistence
         {
             public const string Decimal = "decimal(18,2)";
         }
+
+        internal class CacheKeys
+        {
+            public const string ProductCategoryIdCacheKey = "_pc_guid_id__";
+            public const string BaselineMeasureIdCacheKey = "_m_baseline_id_";
+            public const string MeasureIdCacheKey = "_m_guid_id__";
+        }
     }
 }

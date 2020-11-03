@@ -12,5 +12,6 @@ namespace DietShopper.Application.Repositories
         Task<ProductCategory> GetProductCategory(Guid productCategoryGuid);
         Task<bool> IsNameTaken(string name);
         Task<bool> IsNameTaken(Guid productCategoryGuid, string name);
+        Task<int> GetCategoryId(Guid productCategoryGuid);
     }
 }

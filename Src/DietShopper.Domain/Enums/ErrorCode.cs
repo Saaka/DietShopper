@@ -48,5 +48,7 @@ namespace DietShopper.Domain.Enums
         MeasureSymbolTaken = 44,
         ProductMeasureIsRequired = 45,
         MeasureAlreadyAddedForProduct = 46,
+        ProductCategoryNotExists = 47,
+        ProductNutrientsAlreadyExists = 48,
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DietShopper.Application.Repositories;
+using DietShopper.Application.Services;
 using DietShopper.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,10 +12,13 @@ namespace DietShopper.Persistence.Repositories
     public class MeasuresRepository : IMeasuresRepository
     {
         private readonly AppDbContext _context;
+        private readonly ICacheStore _cacheStore;
 
-        public MeasuresRepository(AppDbContext context)
+        public MeasuresRepository(AppDbContext context,
+            ICacheStore cacheStore)
         {
             _context = context;
+            _cacheStore = cacheStore;
         }
 
         public Task<IReadOnlyCollection<Measure>> GetActiveMeasures()
@@ -56,6 +60,17 @@ namespace DietShopper.Persistence.Repositories
                     x.MeasureGuid != measureGuid
                     && x.Symbol == symbol
                     && x.IsActive);
+        }
+
+        public Task<int> GetBaselineMeasureId()
+        {
+            return _cacheStore.GetOrCreateAsync(Constants.CacheKeys.BaselineMeasureIdCacheKey, () => _context.Measures.Where(x => x.IsBaseline).Select(x => x.MeasureId).FirstOrDefaultAsync());
+        }
+
+        public Task<int> GetMeasureId(Guid measureGuid)
+        {
+            return _cacheStore.GetOrCreateAsync($"{Constants.CacheKeys.MeasureIdCacheKey}{measureGuid}", ()
+                => _context.Measures.Where(x => x.MeasureGuid == measureGuid).Select(x => x.MeasureId).FirstOrDefaultAsync());
         }
     }
 }

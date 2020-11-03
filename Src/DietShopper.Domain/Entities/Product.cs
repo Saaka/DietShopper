@@ -61,6 +61,9 @@ namespace DietShopper.Domain.Entities
 
         public Product SetProductNutrients(ProductNutrients nutrients)
         {
+            if (ProductNutrients != null)
+                throw new InternalException(ErrorCode.ProductNutrientsAlreadyExists);
+
             ProductNutrients = nutrients ?? throw new InternalException(ErrorCode.ProductNutrientsRequired);
 
             return this;
