@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DietShopper.Domain.Constants.Validation;
 using DietShopper.Domain.Enums;
 using DietShopper.Domain.Exceptions;
@@ -45,7 +46,20 @@ namespace DietShopper.Domain.Entities
             IsActive = false;
             return this;
         }
-        
+
+        public Product AddProductMeasure(ProductMeasure productMeasure)
+        {
+            if (productMeasure == null)
+                throw new InternalException(ErrorCode.ProductMeasureIsRequired);
+            if (_productMeasures.Any(x => x.ProductMeasureId == productMeasure.ProductMeasureId))
+                return this;
+            if (_productMeasures.Where(x => x.IsActive).Any(x => x.Measure.MeasureGuid == productMeasure.Measure.MeasureGuid))
+                throw new DomainException(ErrorCode.MeasureAlreadyAddedForProduct);
+
+            _productMeasures.Add(productMeasure);
+            return this;
+        }
+
         public Product SetProductNutrients(ProductNutrients nutrients)
         {
             ProductNutrients = nutrients ?? throw new InternalException(ErrorCode.ProductNutrientsRequired);

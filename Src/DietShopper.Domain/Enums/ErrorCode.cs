@@ -46,5 +46,7 @@ namespace DietShopper.Domain.Enums
         MeasureNameTaken = 42,
         CantRemoveBaselineMeasure = 43,
         MeasureSymbolTaken = 44,
+        ProductMeasureIsRequired = 45,
+        MeasureAlreadyAddedForProduct = 46,
     }
 }

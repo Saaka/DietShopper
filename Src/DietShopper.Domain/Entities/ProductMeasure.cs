@@ -18,11 +18,9 @@ namespace DietShopper.Domain.Entities
 
         private ProductMeasure() { }
 
-        public ProductMeasure(Guid productMeasureGuid, Product product, Measure measure, decimal valueInGrams)
+        public ProductMeasure(Guid productMeasureGuid, Measure measure, decimal valueInGrams)
         {
             ProductMeasureGuid = productMeasureGuid;
-            Product = product;
-            ProductId = product.ProductId;
             Measure = measure;
             MeasureId = measure.MeasureId;
             ValueInGrams = valueInGrams;
@@ -49,8 +47,6 @@ namespace DietShopper.Domain.Entities
         {
             if (ProductMeasureGuid.Equals(Guid.Empty))
                 throw new InternalException(ErrorCode.ProductMeasureGuidRequired);
-            if (Product == null)
-                throw new InternalException(ErrorCode.ProductRequiredForProductMeasure);
             if (Measure == null)
                 throw new InternalException(ErrorCode.MeasureRequiredForProductMeasure);
             
