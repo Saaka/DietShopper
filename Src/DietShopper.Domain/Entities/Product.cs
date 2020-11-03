@@ -52,7 +52,7 @@ namespace DietShopper.Domain.Entities
                 throw new InternalException(ErrorCode.ProductMeasureIsRequired);
             if (_productMeasures.Any(x => x.ProductMeasureId == productMeasure.ProductMeasureId))
                 return this;
-            if (_productMeasures.Where(x => x.IsActive).Any(x => x.Measure.MeasureGuid == productMeasure.Measure.MeasureGuid))
+            if (_productMeasures.Where(x => x.IsActive).Any(x => x.MeasureId == productMeasure.MeasureId))
                 throw new DomainException(ErrorCode.MeasureAlreadyAddedForProduct);
 
             _productMeasures.Add(productMeasure);
