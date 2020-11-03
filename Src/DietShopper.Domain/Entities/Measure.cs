@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using DietShopper.Domain.Constants.Validation;
 using DietShopper.Domain.Enums;
 using DietShopper.Domain.Exceptions;
