@@ -24,7 +24,7 @@ namespace DietShopper.Persistence.Configurations
                 .HasMaxLength(ProductValidationConstants.ProductNameMaxLength);
 
             builder.Property(x => x.ShortName)
-                .IsRequired()
+                .IsRequired(false)
                 .HasMaxLength(ProductValidationConstants.ProductShortNameMaxLength);
 
             builder.Property(x => x.Description)
