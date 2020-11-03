@@ -49,8 +49,6 @@ namespace DietShopper.Domain.Entities
         {
             if (ProductNutrientsGuid.Equals(Guid.Empty))
                 throw new InternalException(ErrorCode.ProductNutrientsGuidRequired);
-            if (Product == null)
-                throw new InternalException(ErrorCode.ProductInProductNutrientsRequired);
 
             ValidateNutrients(Calories, Carbohydrates, Proteins, Fat, SaturatedFat);
         }
