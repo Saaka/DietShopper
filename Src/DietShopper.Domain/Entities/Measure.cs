@@ -17,12 +17,6 @@ namespace DietShopper.Domain.Entities
         public bool IsActive { get; private set; }
         public bool IsBaseline { get; private set; }
 
-        private readonly List<Product> _defaultProducts = new List<Product>();
-        public virtual IReadOnlyCollection<Product> DefaultProducts => _defaultProducts.AsReadOnly();
-
-        private readonly List<ProductMeasure> _productMeasures = new List<ProductMeasure>();
-        public virtual IReadOnlyCollection<ProductMeasure> ProductMeasures => _productMeasures.AsReadOnly();
-
         private Measure() { }
 
         public Measure(Guid measureGuid, string name, string symbol, bool isWeight, decimal? valueInGrams)

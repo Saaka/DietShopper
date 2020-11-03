@@ -43,6 +43,16 @@ namespace DietShopper.Persistence.Configurations
                 .WithOne(x => x.Product)
                 .HasForeignKey<ProductNutrients>(x => x.ProductId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(x => x.DefaultMeasure)
+                .WithMany()
+                .HasForeignKey(x => x.DefaultMeasureId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(x => x.ProductCategory)
+                .WithMany()
+                .HasForeignKey(x => x.ProductCategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

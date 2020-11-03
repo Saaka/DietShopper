@@ -13,9 +13,6 @@ namespace DietShopper.Domain.Entities
         public string Name { get; private set; }
         public bool IsActive { get; private set; }
 
-        private readonly List<Product> _products = new List<Product>();
-        public virtual IReadOnlyCollection<Product> Products => _products.AsReadOnly();
-
         private ProductCategory() { }
 
         public ProductCategory(Guid productCategoryGuid, string name)
@@ -38,16 +35,6 @@ namespace DietShopper.Domain.Entities
             ValidateName(name);
             Name = name;
             
-            return this;
-        }
-
-        public ProductCategory AddProduct(Product product)
-        {
-            if (product == null)
-                throw new InternalException(ErrorCode.ProductInCategoryRequired);
-            
-            _products.Add(product);
-
             return this;
         }
 

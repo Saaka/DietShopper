@@ -258,13 +258,13 @@ namespace DietShopper.Persistence.Migrations
             modelBuilder.Entity("DietShopper.Domain.Entities.Product", b =>
                 {
                     b.HasOne("DietShopper.Domain.Entities.Measure", "DefaultMeasure")
-                        .WithMany("DefaultProducts")
+                        .WithMany()
                         .HasForeignKey("DefaultMeasureId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("DietShopper.Domain.Entities.ProductCategory", "ProductCategory")
-                        .WithMany("Products")
+                        .WithMany()
                         .HasForeignKey("ProductCategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -273,7 +273,7 @@ namespace DietShopper.Persistence.Migrations
             modelBuilder.Entity("DietShopper.Domain.Entities.ProductMeasure", b =>
                 {
                     b.HasOne("DietShopper.Domain.Entities.Measure", "Measure")
-                        .WithMany("ProductMeasures")
+                        .WithMany()
                         .HasForeignKey("MeasureId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

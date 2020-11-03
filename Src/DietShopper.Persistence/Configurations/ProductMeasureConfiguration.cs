@@ -24,6 +24,11 @@ namespace DietShopper.Persistence.Configurations
 
             builder.Property(x => x.IsActive)
                 .IsRequired();
+
+            builder.HasOne(x => x.Measure)
+                .WithMany()
+                .HasForeignKey(x => x.MeasureId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

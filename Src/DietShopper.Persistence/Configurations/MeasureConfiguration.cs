@@ -1,3 +1,4 @@
+using DietShopper.Application.Models;
 using DietShopper.Domain.Constants.Validation;
 using DietShopper.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -39,16 +40,6 @@ namespace DietShopper.Persistence.Configurations
 
             builder.Property(x => x.IsBaseline)
                 .IsRequired();
-
-            builder.HasMany(x => x.DefaultProducts)
-                .WithOne(x => x.DefaultMeasure)
-                .HasForeignKey(x => x.DefaultMeasureId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasMany(x => x.ProductMeasures)
-                .WithOne(x => x.Measure)
-                .HasForeignKey(x => x.MeasureId)
-                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
