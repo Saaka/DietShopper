@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml;
 using AutoMapper;
 using DietShopper.Application.Models;
 using DietShopper.Application.Repositories;

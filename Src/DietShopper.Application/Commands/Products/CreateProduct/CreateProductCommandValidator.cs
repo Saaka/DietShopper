@@ -1,3 +1,4 @@
+using System.Linq;
 using DietShopper.Domain.Constants.Validation;
 using DietShopper.Domain.Enums;
 using FluentValidation;
@@ -25,6 +26,10 @@ namespace DietShopper.Application.Commands.Products.CreateProduct
             RuleFor(x => x.ProductCategoryGuid)
                 .NotEmpty()
                 .WithMessageCode(ErrorCode.ProductCategoryGuidRequired);
+
+            RuleFor(x => x.ProductMeasures)
+                .Must(l => l.Select(x=> x.MeasureGuid).Distinct().Count() == l.Count)
+                .WithMessageCode(ErrorCode.ProductMeasuresMustBeUnique);
         }
     }
 }
