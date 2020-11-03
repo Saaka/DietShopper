@@ -123,8 +123,6 @@ namespace DietShopper.Domain.Entities
 
         private void ValidateShortName()
         {
-            if (string.IsNullOrWhiteSpace(ShortName))
-                throw new DomainException(ErrorCode.ProductShortNameRequired);
             if (ShortName.Length > ProductValidationConstants.ProductShortNameMaxLength)
                 throw new DomainException(ErrorCode.ProductShortNameTooLong);
         }
