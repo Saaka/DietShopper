@@ -37,6 +37,7 @@ namespace DietShopper.Application.Commands.Products.CreateProduct
 
         public override async Task<RequestResult<ProductDto>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
+            await ValidateProduct(request);
             var productCategoryId = await GetCategoryId(request.ProductCategoryGuid);
             var defaultMeasureId = await GetDefaultMeasure(request.ProductMeasures);
             var nutrients = CreateProductNutrients(request);
@@ -95,6 +96,12 @@ namespace DietShopper.Application.Commands.Products.CreateProduct
                 throw new DomainException(ErrorCode.ProductCategoryNotExists, new {productCategoryGuid});
 
             return categoryId;
+        }
+
+        private async Task ValidateProduct(CreateProductCommand request)
+        {
+            if (await _productsRepository.IsNameTaken(request.Name))
+                throw new DomainException(ErrorCode.ProductNameNotUnique, new {request.Name});
         }
     }
 }

@@ -1,6 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using DietShopper.Application.Repositories;
 using DietShopper.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DietShopper.Persistence.Repositories
 {
@@ -18,5 +20,8 @@ namespace DietShopper.Persistence.Repositories
             _context.Attach(product);
             return _context.SaveChangesAsync();
         }
+        public Task<bool> IsNameTaken(string name) => IsNameTaken(Guid.Empty, name);
+
+        public Task<bool> IsNameTaken(Guid productGuid, string name) => _context.Products.AnyAsync(x => x.ProductGuid != productGuid && x.Name == name && x.IsActive);
     }
 }
