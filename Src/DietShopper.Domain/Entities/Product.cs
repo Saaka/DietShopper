@@ -124,13 +124,13 @@ namespace DietShopper.Domain.Entities
 
         private void ValidateShortName()
         {
-            if (ShortName.Length > ProductValidationConstants.ProductShortNameMaxLength)
+            if (!string.IsNullOrEmpty(ShortName) && ShortName.Length > ProductValidationConstants.ProductShortNameMaxLength)
                 throw new DomainException(ErrorCode.ProductShortNameTooLong);
         }
 
         private void ValidateDescription()
         {
-            if (Description.Length > ProductValidationConstants.ProductDescriptionMaxLength)
+            if (!string.IsNullOrEmpty(Description) && Description.Length > ProductValidationConstants.ProductDescriptionMaxLength)
                 throw new DomainException(ErrorCode.ProductDescriptionTooLong);
         }
     }

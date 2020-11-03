@@ -51,9 +51,9 @@ namespace DietShopper.Application.Commands.Products.CreateProduct
             return request.Success(_mapper.Map<ProductDto>(product));
         }
 
-        private Task CreateProductMeasures(Product product, IEnumerable<CreateProductCommand.ProductMeasureData> requestProductMeasures)
+        private async Task CreateProductMeasures(Product product, IEnumerable<CreateProductCommand.ProductMeasureData> requestProductMeasures)
         {
-            throw new NotImplementedException();
+            
         }
 
         private ProductNutrients CreateProductNutrients(CreateProductCommand request)
