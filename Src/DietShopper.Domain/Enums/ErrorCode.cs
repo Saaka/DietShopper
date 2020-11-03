@@ -50,5 +50,6 @@ namespace DietShopper.Domain.Enums
         MeasureAlreadyAddedForProduct = 46,
         ProductCategoryNotExists = 47,
         ProductNutrientsAlreadyExists = 48,
+        MeasureNotExists = 49,
     }
 }

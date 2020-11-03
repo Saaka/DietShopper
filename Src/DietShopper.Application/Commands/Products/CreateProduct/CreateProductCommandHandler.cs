@@ -51,9 +51,30 @@ namespace DietShopper.Application.Commands.Products.CreateProduct
             return request.Success(_mapper.Map<ProductDto>(product));
         }
 
-        private async Task CreateProductMeasures(Product product, IEnumerable<CreateProductCommand.ProductMeasureData> requestProductMeasures)
+        private async Task CreateProductMeasures(Product product, IEnumerable<CreateProductCommand.ProductMeasureData> requestedMeasures)
         {
-            
+            var measures = await _measuresRepository.GetMeasures(requestedMeasures.Select(x => x.MeasureGuid));
+            foreach (var measureData in requestedMeasures)
+            {
+                var measure = measures.FirstOrDefault(x => x.MeasureGuid == measureData.MeasureGuid);
+                if (measure == null)
+                    throw new InternalException(ErrorCode.MeasureNotExists, measureData.MeasureGuid.ToString());
+
+                var valueInGrams = measure.IsWeight ? measure.ValueInGrams ?? measureData.ValueInGrams : measureData.ValueInGrams;
+                var productMeasure = new ProductMeasure(_guid.GetGuid(), measure, valueInGrams);
+
+                product.AddProductMeasure(productMeasure);
+            }
+
+            if (!requestedMeasures.Any(x => x.IsDefault))
+            {
+                if (!product.ProductMeasures.Any(x => x.Measure.IsBaseline))
+                {
+                    var baselineMeasure = await _measuresRepository.GetBaselineMeasure();
+                    var productMeasure = new ProductMeasure(_guid.GetGuid(), baselineMeasure, baselineMeasure.ValueInGrams.Value);
+                    product.AddProductMeasure(productMeasure);
+                }
+            }
         }
 
         private ProductNutrients CreateProductNutrients(CreateProductCommand request)

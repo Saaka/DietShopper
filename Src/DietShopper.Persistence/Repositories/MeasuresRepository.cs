@@ -21,13 +21,9 @@ namespace DietShopper.Persistence.Repositories
             _cacheStore = cacheStore;
         }
 
-        public Task<IReadOnlyCollection<Measure>> GetActiveMeasures()
-        {
-            return _context.Measures
-                .Where(x => x.IsActive)
-                .OrderByDescending(x => x.IsBaseline).ThenByDescending(x => x.IsWeight).ThenBy(x => x.Name)
-                .ToReadOnlyCollectionAsync();
-        }
+        public Task<IReadOnlyCollection<Measure>> GetActiveMeasures() => _context.Measures.Where(x => x.IsActive)
+            .OrderByDescending(x => x.IsBaseline).ThenByDescending(x => x.IsWeight).ThenBy(x => x.Name)
+            .ToReadOnlyCollectionAsync();
 
         public Task Save(Measure measure)
         {
@@ -35,42 +31,27 @@ namespace DietShopper.Persistence.Repositories
             return _context.SaveChangesAsync();
         }
 
-        public Task<Measure> GetMeasure(Guid measureGuid)
-        {
-            return _context.Measures.FirstOrDefaultAsync(x => x.MeasureGuid == measureGuid);
-        }
+        public Task<Measure> GetMeasure(Guid measureGuid) => _context.Measures.FirstOrDefaultAsync(x => x.MeasureGuid == measureGuid);
 
         public Task<bool> IsNameTaken(string name) => IsNameTaken(Guid.Empty, name);
 
-        public Task<bool> IsNameTaken(Guid measureGuid, string name)
-        {
-            return _context.Measures
-                .AnyAsync(x =>
-                    x.MeasureGuid != measureGuid
-                    && x.Name == name
-                    && x.IsActive);
-        }
+        public Task<bool> IsNameTaken(Guid measureGuid, string name) => _context.Measures.AnyAsync(x => x.MeasureGuid != measureGuid && x.Name == name && x.IsActive);
 
         public Task<bool> IsSymbolTaken(string symbol) => IsSymbolTaken(Guid.Empty, symbol);
 
         public Task<bool> IsSymbolTaken(Guid measureGuid, string symbol)
-        {
-            return _context.Measures
-                .AnyAsync(x =>
-                    x.MeasureGuid != measureGuid
-                    && x.Symbol == symbol
-                    && x.IsActive);
-        }
+            => _context.Measures.AnyAsync(x => x.MeasureGuid != measureGuid && x.Symbol == symbol && x.IsActive);
 
         public Task<int> GetBaselineMeasureId()
-        {
-            return _cacheStore.GetOrCreateAsync(Constants.CacheKeys.BaselineMeasureIdCacheKey, () => _context.Measures.Where(x => x.IsBaseline).Select(x => x.MeasureId).FirstOrDefaultAsync());
-        }
+            => _cacheStore.GetOrCreateAsync(Constants.CacheKeys.BaselineMeasureIdCacheKey, () => _context.Measures.Where(x => x.IsBaseline).Select(x => x.MeasureId).FirstOrDefaultAsync());
 
         public Task<int> GetMeasureId(Guid measureGuid)
-        {
-            return _cacheStore.GetOrCreateAsync($"{Constants.CacheKeys.MeasureIdCacheKey}{measureGuid}", ()
+            => _cacheStore.GetOrCreateAsync($"{Constants.CacheKeys.MeasureIdCacheKey}{measureGuid}", ()
                 => _context.Measures.Where(x => x.MeasureGuid == measureGuid).Select(x => x.MeasureId).FirstOrDefaultAsync());
-        }
+
+        public Task<IReadOnlyCollection<Measure>> GetMeasures(IEnumerable<Guid> measureGuids)
+            => _context.Measures.Where(x => measureGuids.Contains(x.MeasureGuid)).ToReadOnlyCollectionAsync();
+
+        public Task<Measure> GetBaselineMeasure() => _context.Measures.FirstOrDefaultAsync(x => x.IsBaseline);
     }
 }

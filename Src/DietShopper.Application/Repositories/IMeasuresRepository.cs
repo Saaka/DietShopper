@@ -16,5 +16,7 @@ namespace DietShopper.Application.Repositories
         Task<bool> IsSymbolTaken(Guid measureGuid, string symbol);
         Task<int> GetBaselineMeasureId();
         Task<int> GetMeasureId(Guid measureGuid);
+        Task<IReadOnlyCollection<Measure>> GetMeasures(IEnumerable<Guid> measureGuids);
+        Task<Measure> GetBaselineMeasure();
     }
 }
