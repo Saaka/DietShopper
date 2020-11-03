@@ -19,7 +19,6 @@ namespace DietShopper.Domain.Entities
         public bool IsActive { get; private set; }
 
         public virtual Measure DefaultMeasure { get; private set; }
-        public virtual ProductCategory ProductCategory { get; private set; }
         public virtual ProductNutrients ProductNutrients { get; private set; }
 
         private readonly List<ProductMeasure> _productMeasures = new List<ProductMeasure>();
@@ -67,13 +66,12 @@ namespace DietShopper.Domain.Entities
             return this;
         }
 
-        public Product SetCategory(ProductCategory category)
+        public Product SetCategory(int productCategoryId)
         {
-            if (category == null)
+            if (productCategoryId.Equals(default))
                 throw new InternalException(ErrorCode.ProductCategoryRequired);
 
-            ProductCategoryId = category.ProductCategoryId;
-            ProductCategory = category;
+            ProductCategoryId = productCategoryId;
 
             return this;
         }

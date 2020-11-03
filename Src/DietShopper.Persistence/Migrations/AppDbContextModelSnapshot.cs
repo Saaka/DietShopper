@@ -263,7 +263,7 @@ namespace DietShopper.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("DietShopper.Domain.Entities.ProductCategory", "ProductCategory")
+                    b.HasOne("DietShopper.Domain.Entities.ProductCategory", null)
                         .WithMany()
                         .HasForeignKey("ProductCategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
