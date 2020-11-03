@@ -287,7 +287,7 @@ namespace DietShopper.Persistence.Migrations
 
             modelBuilder.Entity("DietShopper.Domain.Entities.ProductNutrients", b =>
                 {
-                    b.HasOne("DietShopper.Domain.Entities.Product", "Product")
+                    b.HasOne("DietShopper.Domain.Entities.Product", null)
                         .WithOne("ProductNutrients")
                         .HasForeignKey("DietShopper.Domain.Entities.ProductNutrients", "ProductId")
                         .OnDelete(DeleteBehavior.Cascade)

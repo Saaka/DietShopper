@@ -15,8 +15,6 @@ namespace DietShopper.Domain.Entities
         public decimal Fat { get; set; }
         public decimal SaturatedFat { get; set; }
 
-        public virtual Product Product { get; set; }
-
         private ProductNutrients() { }
 
         public ProductNutrients(Guid productNutrientsGuid, int calories, decimal carbohydrates, decimal proteins, decimal fat, decimal saturatedFat)

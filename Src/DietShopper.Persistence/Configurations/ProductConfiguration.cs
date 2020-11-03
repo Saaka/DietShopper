@@ -40,7 +40,7 @@ namespace DietShopper.Persistence.Configurations
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(x => x.ProductNutrients)
-                .WithOne(x => x.Product)
+                .WithOne()
                 .HasForeignKey<ProductNutrients>(x => x.ProductId)
                 .OnDelete(DeleteBehavior.Cascade);
 
