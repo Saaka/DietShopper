@@ -35,7 +35,7 @@ namespace DietShopper.Persistence.Configurations
                 .IsRequired();
 
             builder.HasMany(x => x.ProductMeasures)
-                .WithOne(x => x.Product)
+                .WithOne()
                 .HasForeignKey(x => x.ProductId)
                 .OnDelete(DeleteBehavior.Cascade);
 

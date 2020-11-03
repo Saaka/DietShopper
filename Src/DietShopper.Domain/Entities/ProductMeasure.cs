@@ -12,8 +12,6 @@ namespace DietShopper.Domain.Entities
         public int MeasureId { get; private set; }
         public decimal ValueInGrams { get; private set; }
         public bool IsActive { get; private set; }
-
-        public virtual Product Product { get; private set; }
         public virtual Measure Measure { get; private set; }
 
         private ProductMeasure() { }
