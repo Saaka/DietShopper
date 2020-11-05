@@ -102,6 +102,8 @@ namespace DietShopper.Application.Commands.Products.CreateProduct
         {
             if (await _productsRepository.IsNameTaken(request.Name))
                 throw new DomainException(ErrorCode.ProductNameNotUnique, new {request.Name});
+            if (!string.IsNullOrWhiteSpace(request.ShortName) && await _productsRepository.IsShortNameTaken(request.ShortName))
+                throw new DomainException(ErrorCode.ProductShortNameNotUnique, new {request.Name});
         }
     }
 }

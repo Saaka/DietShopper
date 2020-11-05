@@ -9,5 +9,7 @@ namespace DietShopper.Application.Repositories
         Task Save(Product product);
         Task<bool> IsNameTaken(string name);
         Task<bool> IsNameTaken(Guid productGuid, string name);
+        Task<bool> IsShortNameTaken(string shortName);
+        Task<bool> IsShortNameTaken(Guid productGuid, string shortName);
     }
 }

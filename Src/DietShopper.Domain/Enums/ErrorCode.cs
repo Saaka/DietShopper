@@ -53,5 +53,6 @@ namespace DietShopper.Domain.Enums
         MeasureNotExists = 49,
         ProductMeasuresMustBeUnique = 50,
         ProductNameNotUnique = 51,
+        ProductShortNameNotUnique = 52,
     }
 }
