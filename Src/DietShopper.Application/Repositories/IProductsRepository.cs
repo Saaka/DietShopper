@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using DietShopper.Application.Models;
 using DietShopper.Domain.Entities;
 
 namespace DietShopper.Application.Repositories
@@ -11,5 +12,6 @@ namespace DietShopper.Application.Repositories
         Task<bool> IsNameTaken(Guid productGuid, string name);
         Task<bool> IsShortNameTaken(string shortName);
         Task<bool> IsShortNameTaken(Guid productGuid, string shortName);
+        Task<CompleteProductDto> GetCompleteProduct(Guid productGuid);
     }
 }
