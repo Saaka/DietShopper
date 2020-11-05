@@ -92,7 +92,7 @@ namespace DietShopper.Domain.Entities
 
         private void ValidateCreation()
         {
-            if (ProductGuid.Equals(Guid.Empty))
+            if (ProductGuid.IsEmpty())
                 throw new InternalException(ErrorCode.ProductGuidRequired);
 
             ValidateName();
@@ -116,7 +116,7 @@ namespace DietShopper.Domain.Entities
 
         private void ValidateName()
         {
-            if (string.IsNullOrWhiteSpace(Name))
+            if (Name.IsNullOrWhiteSpace())
                 throw new DomainException(ErrorCode.ProductNameRequired);
             if (Name.Length > ProductValidationConstants.ProductNameMaxLength)
                 throw new DomainException(ErrorCode.ProductNameTooLong);
@@ -124,13 +124,13 @@ namespace DietShopper.Domain.Entities
 
         private void ValidateShortName()
         {
-            if (!string.IsNullOrEmpty(ShortName) && ShortName.Length > ProductValidationConstants.ProductShortNameMaxLength)
+            if (!ShortName.IsNullOrEmpty() && ShortName.Length > ProductValidationConstants.ProductShortNameMaxLength)
                 throw new DomainException(ErrorCode.ProductShortNameTooLong);
         }
 
         private void ValidateDescription()
         {
-            if (!string.IsNullOrEmpty(Description) && Description.Length > ProductValidationConstants.ProductDescriptionMaxLength)
+            if (!Description.IsNullOrWhiteSpace() && Description.Length > ProductValidationConstants.ProductDescriptionMaxLength)
                 throw new DomainException(ErrorCode.ProductDescriptionTooLong);
         }
     }
