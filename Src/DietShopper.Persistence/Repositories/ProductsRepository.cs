@@ -32,7 +32,7 @@ namespace DietShopper.Persistence.Repositories
         {
             var query = from product in _context.Products
                 join productCategory in _context.ProductCategories on product.ProductCategoryId equals productCategory.ProductCategoryId
-                join measure in _context.Measures on product.DefaultMeasureId equals measure.MeasureId
+                join defaultMeasure in _context.Measures on product.DefaultMeasureId equals defaultMeasure.MeasureId
                 join nutrients in _context.ProductNutrients on product.ProductId equals nutrients.ProductId
                 where product.ProductGuid == productGuid
                 select new CompleteProductDto
@@ -42,14 +42,22 @@ namespace DietShopper.Persistence.Repositories
                     ShortName = product.ShortName,
                     Description = product.Description,
                     ProductCategoryGuid = productCategory.ProductCategoryGuid,
-                    DefaultMeasureGuid = measure.MeasureGuid,
+                    DefaultMeasureGuid = defaultMeasure.MeasureGuid,
                     Calories = nutrients.Calories,
                     Carbohydrates = nutrients.Carbohydrates,
                     Proteins = nutrients.Proteins,
                     Fat = nutrients.Fat,
                     SaturatedFat = nutrients.SaturatedFat,
                     IsActive = product.IsActive,
-                    
+                    ProductMeasures = (from measures in _context.Measures
+                        join productMeasure in _context.ProductMeasures on measures.MeasureId equals productMeasure.MeasureId
+                        where productMeasure.ProductId == product.ProductId
+                        select new ProductMeasureDto
+                        {
+                            ProductMeasureGuid = productMeasure.ProductMeasureGuid,   
+                            MeasureGuid = measures.MeasureGuid,
+                            ValueInGrams = productMeasure.ValueInGrams
+                        }).ToList()
                 };
 
             return query.FirstOrDefaultAsync();
