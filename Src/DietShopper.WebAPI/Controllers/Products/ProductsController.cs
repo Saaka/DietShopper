@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using DietShopper.Application.Commands.Products;
 using DietShopper.Application.Models;
 using DietShopper.Application.Queries.Products;
+using DietShopper.Application.Queries.Products.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

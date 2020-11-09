@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using DietShopper.Application.Models;
+using DietShopper.Application.Queries.Products.Models;
 using DietShopper.Application.Repositories;
 using DietShopper.Common.Requests;
 using DietShopper.Domain.Enums;

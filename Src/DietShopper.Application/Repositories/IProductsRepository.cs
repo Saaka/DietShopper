@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using DietShopper.Application.Models;
+using DietShopper.Application.Queries.Products.Models;
 using DietShopper.Domain.Entities;
 
 namespace DietShopper.Application.Repositories
