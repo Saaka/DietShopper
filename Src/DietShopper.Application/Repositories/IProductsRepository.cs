@@ -1,7 +1,8 @@
 using System;
 using System.Threading.Tasks;
-using DietShopper.Application.Models;
 using DietShopper.Application.Queries.Products.Models;
+using DietShopper.Application.Repositories.Models;
+using DietShopper.Common.Models;
 using DietShopper.Domain.Entities;
 
 namespace DietShopper.Application.Repositories
@@ -14,5 +15,6 @@ namespace DietShopper.Application.Repositories
         Task<bool> IsShortNameTaken(string shortName);
         Task<bool> IsShortNameTaken(Guid productGuid, string shortName);
         Task<CompleteProductDto> GetCompleteProduct(Guid productGuid);
+        Task<PagedList<SimpleProductDto>> GetSimpleProductsList(GetSimpleProductsQueryModel query);
     }
 }

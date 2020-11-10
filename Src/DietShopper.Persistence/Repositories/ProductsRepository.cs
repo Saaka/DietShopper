@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using DietShopper.Application.Models;
 using DietShopper.Application.Queries.Products.Models;
 using DietShopper.Application.Repositories;
+using DietShopper.Application.Repositories.Models;
+using DietShopper.Common.Models;
 using DietShopper.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -55,13 +57,36 @@ namespace DietShopper.Persistence.Repositories
                         where productMeasure.ProductId == product.ProductId
                         select new ProductMeasureDto
                         {
-                            ProductMeasureGuid = productMeasure.ProductMeasureGuid,   
+                            ProductMeasureGuid = productMeasure.ProductMeasureGuid,
                             MeasureGuid = measures.MeasureGuid,
                             ValueInGrams = productMeasure.ValueInGrams
                         }).ToList()
                 };
 
             return query.FirstOrDefaultAsync();
+        }
+
+        public async Task<PagedList<SimpleProductDto>> GetSimpleProductsList(GetSimpleProductsQueryModel model)
+        {
+            var query = from product in _context.Products
+                join productCategory in _context.ProductCategories on product.ProductCategoryId equals productCategory.ProductCategoryId
+                select new SimpleProductDto
+                {
+                    Name = product.Name,
+                    ProductGuid = product.ProductGuid,
+                    ProductCategoryGuid = productCategory.ProductCategoryGuid,
+                    ProductCategoryName = productCategory.Name
+                };
+            var totalItemsCount = await query.CountAsync();
+            var items = await query.Skip(model.PageNumber - 1).Take(model.PageSize).ToListAsync();
+
+            return new PagedList<SimpleProductDto>
+            {
+                Items = items,
+                PageNumber = model.PageNumber,
+                PageSize = model.PageSize,
+                TotalItemsCount = totalItemsCount
+            };
         }
     }
 }

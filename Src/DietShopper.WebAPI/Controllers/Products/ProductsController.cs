@@ -4,6 +4,7 @@ using DietShopper.Application.Commands.Products;
 using DietShopper.Application.Models;
 using DietShopper.Application.Queries.Products;
 using DietShopper.Application.Queries.Products.Models;
+using DietShopper.Common.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,14 @@ namespace DietShopper.WebAPI.Controllers.Products
         {
             var result = await Mediator.Send(new GetCompleteProductQuery {ProductGuid = productGuid});
 
+            return GetResponse(result);
+        }
+
+        [HttpPost]
+        [Route("list/simple")]
+        public async Task<ActionResult<PagedList<SimpleProductDto>>> GetProducts(GetSimpleProductsQuery request)
+        {
+            var result = await Mediator.Send(request);
             return GetResponse(result);
         }
     }
