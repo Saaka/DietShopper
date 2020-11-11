@@ -80,13 +80,7 @@ namespace DietShopper.Persistence.Repositories
             var totalItemsCount = await query.CountAsync();
             var items = await query.Skip(model.PageNumber - 1).Take(model.PageSize).ToListAsync();
 
-            return new PagedList<SimpleProductDto>
-            {
-                Items = items,
-                PageNumber = model.PageNumber,
-                PageSize = model.PageSize,
-                TotalItemsCount = totalItemsCount
-            };
+            return new PagedList<SimpleProductDto>(items, model.PageNumber, model.PageSize, totalItemsCount);
         }
     }
 }
