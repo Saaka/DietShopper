@@ -55,5 +55,8 @@ namespace DietShopper.Domain.Enums
         ProductNameNotUnique = 51,
         ProductShortNameNotUnique = 52,
         ProductNotExists = 53,
+        InvalidRequestPageNumber = 54,
+        InvalidRequestPageSize = 55,
+        InvalidPagedListTotalItemsCount = 56,
     }
 }

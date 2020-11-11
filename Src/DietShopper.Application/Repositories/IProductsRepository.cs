@@ -15,6 +15,6 @@ namespace DietShopper.Application.Repositories
         Task<bool> IsShortNameTaken(string shortName);
         Task<bool> IsShortNameTaken(Guid productGuid, string shortName);
         Task<CompleteProductDto> GetCompleteProduct(Guid productGuid);
-        Task<PagedList<SimpleProductDto>> GetSimpleProductsList(GetSimpleProductsQueryModel query);
+        Task<PagedList<SimpleProductDto>> GetSimpleProductsList(GetSimpleProductsQuery query);
     }
 }

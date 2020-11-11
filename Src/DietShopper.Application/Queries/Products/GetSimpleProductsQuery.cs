@@ -27,7 +27,7 @@ namespace DietShopper.Application.Queries.Products
         }
         public override async Task<RequestResult<PagedList<SimpleProductDto>>> Handle(GetSimpleProductsQuery request, CancellationToken cancellationToken)
         {
-            var pagedList = await _productsRepository.GetSimpleProductsList(_mapper.Map<GetSimpleProductsQueryModel>(request));
+            var pagedList = await _productsRepository.GetSimpleProductsList(_mapper.Map<Repositories.Models.GetSimpleProductsQuery>(request));
 
             return request.Success(pagedList);
         }

@@ -7,6 +7,7 @@ using DietShopper.Application.Repositories;
 using DietShopper.Application.Repositories.Models;
 using DietShopper.Common.Models;
 using DietShopper.Domain.Entities;
+using DietShopper.Persistence.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace DietShopper.Persistence.Repositories
@@ -14,10 +15,13 @@ namespace DietShopper.Persistence.Repositories
     public class ProductsRepository : IProductsRepository
     {
         private readonly AppDbContext _context;
+        private readonly IPageableRequestHelper _pageableRequestHelper;
 
-        public ProductsRepository(AppDbContext context)
+        public ProductsRepository(AppDbContext context,
+            IPageableRequestHelper pageableRequestHelper)
         {
             _context = context;
+            _pageableRequestHelper = pageableRequestHelper;
         }
 
         public Task Save(Product product)
@@ -66,7 +70,7 @@ namespace DietShopper.Persistence.Repositories
             return query.FirstOrDefaultAsync();
         }
 
-        public async Task<PagedList<SimpleProductDto>> GetSimpleProductsList(GetSimpleProductsQueryModel model)
+        public Task<PagedList<SimpleProductDto>> GetSimpleProductsList(GetSimpleProductsQuery model)
         {
             var query = from product in _context.Products
                 join productCategory in _context.ProductCategories on product.ProductCategoryId equals productCategory.ProductCategoryId
@@ -77,10 +81,8 @@ namespace DietShopper.Persistence.Repositories
                     ProductCategoryGuid = productCategory.ProductCategoryGuid,
                     ProductCategoryName = productCategory.Name
                 };
-            var totalItemsCount = await query.CountAsync();
-            var items = await query.Skip(model.PageNumber - 1).Take(model.PageSize).ToListAsync();
 
-            return new PagedList<SimpleProductDto>(items, model.PageNumber, model.PageSize, totalItemsCount);
+            return _pageableRequestHelper.GetPagedListAsync(query, model);
         }
     }
 }
