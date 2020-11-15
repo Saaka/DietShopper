@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DietShopper.Application.Queries.Products.Models;
 using DietShopper.Application.Repositories;
-using DietShopper.Application.Repositories.Models;
 using DietShopper.Common.Models;
 using DietShopper.Common.Requests;
 
