@@ -52,7 +52,7 @@ function Products(props) {
 
     return (
         <section className="columns is-centered">
-            <div className="column is-half-desktop">
+            <div className="column is-responsive">
                 <p className="title has-text-light">Products</p>
                 <div className="box">
                     <div className="columns is-mobile subtitle-container">

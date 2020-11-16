@@ -22,6 +22,6 @@ html {
 
 .is-responsive {
   @extend .is-half-fullhd;
-  @extend .is-two-thirds-widescreen;
-  @extend .is-three-quarters-desktop;
+  @extend .is-three-quarters-widescreen;
+  @extend .is-four-fifths-desktop;
 }
