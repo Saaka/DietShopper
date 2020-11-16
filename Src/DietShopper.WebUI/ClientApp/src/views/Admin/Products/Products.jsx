@@ -1,13 +1,34 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import {useDocumentTitle} from "Hooks";
 import {Loader} from "components/common";
 import {ProductsList} from "./ProductsList/ProductsList";
 import "./Products.scss";
+import {ProductsService} from "./ProductsService";
 
 function Products(props) {
     useDocumentTitle("Products - Admin page");
-    const [products, setProducts] = useState([]);
+    const productsService = new ProductsService();
+    const [productsList, setProducts] = useState({
+        items: []
+    });
     const [isLoading, setIsLoading] = useState(true);
+    
+    useEffect(() => {
+        setIsLoading(true);
+        loadProducts()
+            .then(() => setIsLoading(false));
+    }, []);
+
+    function loadProducts() {
+        return productsService
+            .getProducts({
+                pageSize: 10,
+                pageNumber: 1
+            })
+            .then((data) => {
+                setProducts(data);
+            });
+    }
 
     const addProduct = () => {
 
@@ -25,7 +46,7 @@ function Products(props) {
         return(
             isLoading
                 ? <div className="center"><Loader size="xs" dark/></div>
-                : <ProductsList products={products} onEdit={editProduct} onRemove={removeProduct}/>
+                : <ProductsList products={productsList.items} onEdit={editProduct} onRemove={removeProduct}/>
         );
     }
 
