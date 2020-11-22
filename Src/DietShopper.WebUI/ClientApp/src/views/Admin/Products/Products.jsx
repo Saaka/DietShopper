@@ -34,12 +34,13 @@ function Products(props) {
 
     }
 
-    const editProduct = () => {
-
+    const editProduct = (ev, product) => {
+        ev.stopPropagation();
+        
     }
 
-    const removeProduct = () => {
-
+    const removeProduct = (ev, product) => {
+        ev.stopPropagation();
     }
 
    const renderList =() => {
