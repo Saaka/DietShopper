@@ -1,5 +1,5 @@
 import {Admin, Dashboard, Unauthorized, About, Login} from "views/exports";
-import {Products as AdminProducts, ProductCategories, UnitsOfMeasures} from "views/Admin/exports";
+import {Products as AdminProducts, ProductCategories, UnitsOfMeasures, ProductView as AdminProduct} from "views/Admin/exports";
 import {RouteNames} from "./names";
 
 const appRoutes = [
@@ -10,6 +10,22 @@ const appRoutes = [
         component: Dashboard,
         name: "Dashboard",
         icon: "home"
+    },
+    {
+        requireAuth: true,
+        requireAdmin: true,
+        path: RouteNames.AdminProductEdit_Id,
+        component: AdminProduct,
+        name: "Product",
+        icon: "admin"
+    },
+    {
+        requireAuth: true,
+        requireAdmin: true,
+        path: RouteNames.AdminProductCreate,
+        component: AdminProduct,
+        name: "Product",
+        icon: "admin"
     },
     {
         requireAuth: true,

@@ -2,10 +2,13 @@ import React, {useEffect, useState} from "react"
 import {useDocumentTitle} from "Hooks";
 import {Loader} from "components/common";
 import {ProductsList} from "./ProductsList/ProductsList";
+import {useHistory} from "react-router-dom";
 import "./Products.scss";
 import {ProductsService} from "./ProductsService";
+import {RouteNames} from "routes/names";
 
 function Products(props) {
+    const history = useHistory();
     useDocumentTitle("Products - Admin page");
     const productsService = new ProductsService();
     const [productsList, setProducts] = useState({
@@ -31,11 +34,12 @@ function Products(props) {
     }
 
     const addProduct = () => {
-
+        history.push(RouteNames.AdminProductCreate);
     }
 
     const editProduct = (ev, product) => {
         ev.stopPropagation();
+        history.push(RouteNames.AdminProductEdit + product.productGuid);
         
     }
 
