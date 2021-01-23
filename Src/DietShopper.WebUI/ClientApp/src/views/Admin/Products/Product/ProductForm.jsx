@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-function ProductView(props) {
+function ProductForm(props) {
     const [title, setTitle] = useState("");
 
     useEffect(() => {
@@ -28,4 +28,4 @@ function ProductView(props) {
     )
 }
 
-export {ProductView};
+export {ProductForm};

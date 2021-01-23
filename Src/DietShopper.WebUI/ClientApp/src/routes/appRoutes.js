@@ -1,5 +1,5 @@
 import {Admin, Dashboard, Unauthorized, About, Login} from "views/exports";
-import {Products as AdminProducts, ProductCategories, UnitsOfMeasures, ProductView as AdminProduct} from "views/Admin/exports";
+import {Products as AdminProducts, ProductCategories, UnitsOfMeasures, ProductForm as AdminProduct} from "views/Admin/exports";
 import {RouteNames} from "./names";
 
 const appRoutes = [
