@@ -3,24 +3,36 @@ import {useDocumentTitle} from "Hooks";
 import {Form, TextInput} from "components/forms";
 import {useHistory} from "react-router-dom";
 import {RouteNames} from "routes/names";
+import {ProductsService} from "../ProductsService";
 import "./ProductForm.scss";
 
 function ProductForm(props) {
     const nameInput = useRef(null);
     const history = useHistory();
-    const [title, setTitle] = useState("Product form - Admin page");
+    const productsService = new ProductsService();
+
+    const [isNew, setIsNew] = useState(true);
+    const [title, setTitle] = useState("Product - Admin page");
     const [subtitle, setSubtitle] = useState("");
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState("");
-    const [product, setProduct] = useState({productGuid: "", name: ""});
+    const [product, setProduct] = useState({productGuid: "", name: "", shortName: "", description: ""});
     useDocumentTitle(title);
 
     useEffect(() => {
         let productGuid = props.match.params.productGuid;
         if (!!productGuid) {
+            setIsNew(false);
             setSubtitle("Edit product");
-        } else
+            productsService.getProduct(productGuid)
+                .then(resp => {
+                    setProduct(resp);
+                    setTitle(`${resp.name} - Product - Admin page`);
+                });
+        } else {
+            setIsNew(true);
             setSubtitle("Create product");
+        }
     }, []);
 
     useEffect(() => focusInput(), [isLoading]);
@@ -28,7 +40,16 @@ function ProductForm(props) {
     function submitCategory(ev) {
         ev.preventDefault();
         setError("");
-        setLoading(true);
+
+        if (isNew) {
+            setLoading(true);
+            productsService.createProduct(product)
+                .then(closeForm)
+                .catch((err)=> {
+                    setError(err.error);
+                    setLoading(false);
+                });
+        }
     }
 
     function handleChange(ev) {
