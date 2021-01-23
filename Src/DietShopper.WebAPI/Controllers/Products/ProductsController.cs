@@ -21,6 +21,14 @@ namespace DietShopper.WebAPI.Controllers.Products
 
             return GetResponse(result);
         }
+        [HttpPost]
+        [Route("update")]
+        public async Task<ActionResult<ProductDto>> UpdateProduct(UpdateProductCommand request)
+        {
+            var result = await Mediator.Send(request);
+
+            return GetResponse(result);
+        }
 
         [HttpGet]
         [Route("{productGuid}")]
