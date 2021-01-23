@@ -6,8 +6,9 @@ using DietShopper.Common.Requests;
 
 namespace DietShopper.Application.Commands.Products
 {
-    public class CreateProductCommand : Request<ProductDto>
+    public class UpdateProductCommand : Request<ProductDto>
     {
+        public Guid ProductGuid { get; set; }
         public string Name { get; set; }
         public string ShortName { get; set; }
         public string Description { get; set; }
@@ -17,6 +18,6 @@ namespace DietShopper.Application.Commands.Products
         public decimal Proteins { get; set; }
         public decimal Fat { get; set; }
         public decimal SaturatedFat { get; set; }
-        public List<CreateProductMeasureDto> ProductMeasures { get; set; } = new List<CreateProductMeasureDto>();
+        public List<UpdateProductMeasureDto> ProductMeasures { get; set; } = new List<UpdateProductMeasureDto>();
     }
 }

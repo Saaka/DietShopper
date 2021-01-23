@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using DietShopper.Application.Commands.Products.Models;
 using DietShopper.Application.Models;
 using DietShopper.Application.Repositories;
 using DietShopper.Application.Services;
@@ -51,7 +52,7 @@ namespace DietShopper.Application.Commands.Products.CreateProduct
             return request.Success(_mapper.Map<ProductDto>(product));
         }
 
-        private async Task CreateProductMeasures(Product product, IEnumerable<CreateProductCommand.ProductMeasureData> requestedMeasures)
+        private async Task CreateProductMeasures(Product product, IEnumerable<CreateProductMeasureDto> requestedMeasures)
         {
             var measures = await _measuresRepository.GetMeasures(requestedMeasures.Select(x => x.MeasureGuid));
             foreach (var measureData in requestedMeasures)
@@ -80,7 +81,7 @@ namespace DietShopper.Application.Commands.Products.CreateProduct
         private ProductNutrients CreateProductNutrients(CreateProductCommand request)
             => new ProductNutrients(_guid.GetGuid(), request.Calories, request.Carbohydrates, request.Proteins, request.Fat, request.SaturatedFat);
 
-        private async Task<int> GetDefaultMeasure(IEnumerable<CreateProductCommand.ProductMeasureData> productMeasures)
+        private async Task<int> GetDefaultMeasure(IEnumerable<CreateProductMeasureDto> productMeasures)
         {
             if (!productMeasures.Any(x => x.IsDefault))
                 return await _measuresRepository.GetBaselineMeasureId();
