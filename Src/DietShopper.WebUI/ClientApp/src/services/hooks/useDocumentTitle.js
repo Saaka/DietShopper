@@ -17,7 +17,7 @@ function useDocumentTitle(pageTitle) {
         return () => {
             setDocumentTitle(appName);
         };
-    });
+    }, [pageTitle]);
 }
 
 export {useDocumentTitle};
