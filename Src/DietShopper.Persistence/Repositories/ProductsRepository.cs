@@ -30,6 +30,14 @@ namespace DietShopper.Persistence.Repositories
             return _context.SaveChangesAsync();
         }
 
+        public Task<Product> GetProductEntity(Guid productGuid) => _context
+            .Products
+            .Include(x=> x.ProductNutrients)
+            .Include(x=> x.ProductCategory)
+            .Include(x => x.ProductMeasures)
+            .ThenInclude(x => x.Measure)
+            .FirstOrDefaultAsync(x => x.ProductGuid == productGuid);
+
         public Task<bool> IsNameTaken(string name) => IsNameTaken(Guid.Empty, name);
         public Task<bool> IsNameTaken(Guid productGuid, string name) => _context.Products.AnyAsync(x => x.ProductGuid != productGuid && x.Name == name && x.IsActive);
         public Task<bool> IsShortNameTaken(string name) => IsShortNameTaken(Guid.Empty, name);

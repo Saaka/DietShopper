@@ -20,6 +20,7 @@ namespace DietShopper.Domain.Entities
 
         public virtual Measure DefaultMeasure { get; private set; }
         public virtual ProductNutrients ProductNutrients { get; private set; }
+        public virtual ProductCategory ProductCategory { get; private set; }
 
         private readonly List<ProductMeasure> _productMeasures = new List<ProductMeasure>();
         public virtual IReadOnlyCollection<ProductMeasure> ProductMeasures => _productMeasures.AsReadOnly();
@@ -43,6 +44,30 @@ namespace DietShopper.Domain.Entities
         public Product Deactivate()
         {
             IsActive = false;
+            return this;
+        }
+
+        public Product SetName(string name)
+        {
+            ValidateName(name);
+            
+            Name = name;
+            return this;
+        }
+
+        public Product SetShortName(string shortName)
+        {
+            ValidateShortName(shortName);
+
+            ShortName = shortName;
+            return this;
+        }
+
+        public Product SetDescription(string description)
+        {
+            ValidateDescription(description);
+
+            Description = description;
             return this;
         }
 
@@ -95,9 +120,9 @@ namespace DietShopper.Domain.Entities
             if (ProductGuid.IsEmpty())
                 throw new InternalException(ErrorCode.ProductGuidRequired);
 
-            ValidateName();
-            ValidateShortName();
-            ValidateDescription();
+            ValidateName(Name);
+            ValidateShortName(ShortName);
+            ValidateDescription(Description);
             ValidateProductCategory();
             ValidateDefaultMeasure();
         }
@@ -114,23 +139,23 @@ namespace DietShopper.Domain.Entities
                 throw new DomainException(ErrorCode.ProductCategoryRequired);
         }
 
-        private void ValidateName()
+        private void ValidateName(string name)
         {
-            if (Name.IsNullOrWhiteSpace())
+            if (name.IsNullOrWhiteSpace())
                 throw new DomainException(ErrorCode.ProductNameRequired);
-            if (Name.Length > ProductValidationConstants.ProductNameMaxLength)
+            if (name.Length > ProductValidationConstants.ProductNameMaxLength)
                 throw new DomainException(ErrorCode.ProductNameTooLong);
         }
 
-        private void ValidateShortName()
+        private void ValidateShortName(string shortName)
         {
-            if (!ShortName.IsNullOrEmpty() && ShortName.Length > ProductValidationConstants.ProductShortNameMaxLength)
+            if (!shortName.IsNullOrEmpty() && shortName.Length > ProductValidationConstants.ProductShortNameMaxLength)
                 throw new DomainException(ErrorCode.ProductShortNameTooLong);
         }
 
-        private void ValidateDescription()
+        private void ValidateDescription(string description)
         {
-            if (!Description.IsNullOrWhiteSpace() && Description.Length > ProductValidationConstants.ProductDescriptionMaxLength)
+            if (!description.IsNullOrWhiteSpace() && description.Length > ProductValidationConstants.ProductDescriptionMaxLength)
                 throw new DomainException(ErrorCode.ProductDescriptionTooLong);
         }
     }
