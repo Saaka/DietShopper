@@ -85,6 +85,24 @@ namespace DietShopper.Application.Commands.Products.UpdateProduct
             {
                 measureToDeactivate.Deactivate();
             }
+
+            if (!requestedMeasures.Any(x => x.IsDefault))
+            {
+                if (!product.ProductMeasures.Any(x => x.IsActive && x.Measure.IsBaseline))
+                {
+                    var baselineMeasure = await _measuresRepository.GetBaselineMeasure();
+                    var productMeasure = new ProductMeasure(_guid.GetGuid(), baselineMeasure, baselineMeasure.ValueInGrams.Value);
+                    
+                    product
+                        .AddProductMeasure(productMeasure)
+                        .SetDefaultMeasure(baselineMeasure);
+                }
+                else
+                {
+                    var defaultMeasure = product.ProductMeasures.First(x => x.IsActive && x.Measure.IsBaseline);
+                    product.SetDefaultMeasure(defaultMeasure.Measure);
+                }
+            }
         }
 
         private async Task UpdateCategory(Product product, Guid productCategoryGuid)

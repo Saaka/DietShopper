@@ -52,7 +52,7 @@ namespace DietShopper.Application.Commands.Products.CreateProduct
             return request.Success(_mapper.Map<ProductDto>(product));
         }
 
-        private async Task CreateProductMeasures(Product product, IEnumerable<CreateProductMeasureDto> requestedMeasures)
+        private async Task CreateProductMeasures(Product product, IReadOnlyCollection<CreateProductMeasureDto> requestedMeasures)
         {
             var measures = await _measuresRepository.GetMeasures(requestedMeasures.Select(x => x.MeasureGuid));
             foreach (var measureData in requestedMeasures)
