@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace DietShopper.WebAPI.Filters
@@ -17,16 +18,19 @@ namespace DietShopper.WebAPI.Filters
     public class CustomExceptionFilterAttribute : ExceptionFilterAttribute
     {
         private readonly IWebHostEnvironment _env;
+        private readonly ILogger _logger;
 
-        public CustomExceptionFilterAttribute(IWebHostEnvironment env)
+        public CustomExceptionFilterAttribute(IWebHostEnvironment env, ILogger<CustomExceptionFilterAttribute> logger)
         {
             _env = env;
+            _logger = logger;
         }
 
         public override void OnException(ExceptionContext context)
         {
             var exception = context.Exception;
             context.HttpContext.Response.ContentType = "application/json";
+            _logger.LogError(exception, exception.Message);
 
             switch (exception)
             {
@@ -40,7 +44,7 @@ namespace DietShopper.WebAPI.Filters
                     HandleInternalException(context, internalException);
                     break;
                 default:
-                    HandleApplicationExceptions(context,  exception);
+                    HandleApplicationExceptions(context, exception);
                     break;
             }
         }
@@ -62,7 +66,7 @@ namespace DietShopper.WebAPI.Filters
             context.Result = new JsonResult(new
             {
                 Error = nameof(InternalException),
-                Code = (int)exception.ErrorCode,
+                Code = (int) exception.ErrorCode,
                 ErrorDetails = exception.Message,
                 Trace = GetTrace(context)
             });
@@ -82,6 +86,7 @@ namespace DietShopper.WebAPI.Filters
         {
             var code = exception switch
             {
+                ArgumentNullException _ => HttpStatusCode.BadRequest,
                 ArgumentException _ => HttpStatusCode.BadRequest,
                 InvalidOperationException _ => HttpStatusCode.Forbidden,
                 UnauthorizedAccessException _ => HttpStatusCode.Unauthorized,
@@ -91,7 +96,7 @@ namespace DietShopper.WebAPI.Filters
             context.HttpContext.Response.StatusCode = (int) code;
             context.Result = new JsonResult(new
             {
-                Error = context.Exception.Message,
+                Error = code.ToString(),
                 Trace = GetTrace(context)
             });
         }
