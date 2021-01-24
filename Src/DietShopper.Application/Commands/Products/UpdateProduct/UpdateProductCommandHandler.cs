@@ -50,6 +50,7 @@ namespace DietShopper.Application.Commands.Products.UpdateProduct
             await UpdateCategory(product, request.ProductCategoryGuid);
             await UpsertMeasures(product, request.ProductMeasures);
 
+            await _productsRepository.Save(product);
             return request.Success(_mapper.Map<ProductDto>(product));
         }
 
