@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useDocumentTitle} from "Hooks";
-import {Form, Select, TextInput} from "components/forms";
+import {Form, Select, TextInput, NumberInput} from "components/forms";
 import {useHistory} from "react-router-dom";
 import {RouteNames} from "routes/names";
 import {ProductsService, ProductCategoriesService, UnitsOfMeasuresService} from "Services";
@@ -18,7 +18,17 @@ function ProductForm(props) {
     const [subtitle, setSubtitle] = useState("");
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState("");
-    const [product, setProduct] = useState({productGuid: "", name: "", shortName: "", description: ""});
+    const [product, setProduct] = useState({
+        productGuid: "",
+        name: "",
+        shortName: "",
+        description: "",
+        calories: 0,
+        carbohydrates: 0,
+        proteins: 0,
+        fat: 0,
+        saturatedFat: 0
+    });
     const [categories, setCategories] = useState([]);
     const [measures, setMeasures] = useState([]);
     useDocumentTitle(title);
@@ -54,7 +64,7 @@ function ProductForm(props) {
         categoriesService
             .getProductCategories()
             .then(onCategoriesLoaded)
-            .then((dict) => updateSelectedCategory(dict[0].id, categories))
+            .then((dict) => updateSelectedCategory(dict[0].id, dict))
             .then(loadMeasures)
             .then(setLoading(false));
     }
@@ -137,6 +147,14 @@ function ProductForm(props) {
                                    maxLength="64"
                                    required
                                    error="Product name is required"/>
+                        <Select id="product-category"
+                                label="Product category"
+                                name="productCategoryGuid"
+                                onChange={handleCategoryChange}
+                                disabled={isLoading}
+                                values={categories}
+                                value={product.productCategoryGuid}
+                                required/>
                         <TextInput id="product-shortName"
                                    label="Short name"
                                    name="shortName"
@@ -151,13 +169,56 @@ function ProductForm(props) {
                                    onChange={handleChange}
                                    disabled={isLoading}
                                    maxLength="256"/>
-                        <Select id="product-category"
-                                label="Product category"
-                                name="productCategoryGuid"
-                                onChange={handleCategoryChange}
-                                values={categories}
-                                value={product.productCategoryGuid}
-                                required/>
+                        <NumberInput id="calories"
+                                     label="Calories"
+                                     name="calories"
+                                     value={product.calories}
+                                     onChange={handleChange}
+                                     disabled={isLoading}
+                                     min={0}
+                                     max={5000}
+                                     step={1}
+                                     error="Calories value is invalid"/>
+                        <NumberInput id="carbohydrates"
+                                     label="Carbohydrates"
+                                     name="carbohydrates"
+                                     value={product.carbohydrates}
+                                     onChange={handleChange}
+                                     disabled={isLoading}
+                                     min={0}
+                                     max={100}
+                                     step={0.1}
+                                     error="Carbohydrates value is invalid"/>
+                        <NumberInput id="proteins"
+                                     label="Proteins"
+                                     name="proteins"
+                                     value={product.proteins}
+                                     onChange={handleChange}
+                                     disabled={isLoading}
+                                     min={0}
+                                     max={100}
+                                     step={0.1}
+                                     error="Proteins value is invalid"/>
+                        <NumberInput id="fat"
+                                     label="Fat"
+                                     name="fat"
+                                     value={product.fat}
+                                     onChange={handleChange}
+                                     disabled={isLoading}
+                                     min={0}
+                                     max={100}
+                                     step={0.1}
+                                     error="Fat value is invalid"/>
+                        <NumberInput id="saturated-fat"
+                                     label="Saturated fat"
+                                     name="saturatedFat"
+                                     value={product.saturatedFat}
+                                     onChange={handleChange}
+                                     disabled={isLoading}
+                                     min={0}
+                                     max={product.fat}
+                                     step={0.1}
+                                     error="Saturated fat value is invalid"/>
                     </Form>
                 </div>
             </div>
