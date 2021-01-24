@@ -3,7 +3,7 @@ import {useDocumentTitle} from "Hooks";
 import {Form, TextInput} from "components/forms";
 import {useHistory} from "react-router-dom";
 import {RouteNames} from "routes/names";
-import {ProductsService} from "../ProductsService";
+import {ProductsService} from "Services";
 import "./ProductForm.scss";
 
 function ProductForm(props) {

@@ -4,7 +4,7 @@ import {Loader} from "components/common";
 import {ProductsList} from "./ProductsList/ProductsList";
 import {useHistory} from "react-router-dom";
 import "./Products.scss";
-import {ProductsService} from "./ProductsService";
+import {ProductsService} from "Services";
 import {RouteNames} from "routes/names";
 
 function Products(props) {

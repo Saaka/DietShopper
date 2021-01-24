@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from "react"
 import {Form, TextInput} from "components/forms";
-import {ProductCategoriesService} from "../ProductCategoriesService";
+import {ProductCategoriesService} from "Services";
 import "./CategoryForm.scss";
 
 function CategoryForm(props) {

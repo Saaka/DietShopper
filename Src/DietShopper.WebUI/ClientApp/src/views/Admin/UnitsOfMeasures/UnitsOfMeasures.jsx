@@ -4,7 +4,7 @@ import {useModal, QuestionModal} from "Modal";
 import {Loader} from "components/common";
 import {MeasuresList} from "./MeasuresList/MeasuresList";
 import {MeasureFormModal} from "./MeasureForm/MeasureFormModal";
-import {UnitsOfMeasuresService} from "./UnitsOfMeasuresService";
+import {UnitsOfMeasuresService} from "Services";
 import "./UnitsOfMeasures.scss";
 
 function UnitsOfMeasures(props) {

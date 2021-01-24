@@ -3,7 +3,7 @@ import {useDocumentTitle} from "Hooks";
 import {useModal, QuestionModal} from "Modal";
 import {CategoryForm} from "./CategoryForm/CategoryForm";
 import {CategoriesList} from "./CateoriesList/CategoriesList";
-import {ProductCategoriesService} from "./ProductCategoriesService";
+import {ProductCategoriesService} from "Services";
 import {Loader} from "components/common";
 import "./ProductCategories.scss";
 

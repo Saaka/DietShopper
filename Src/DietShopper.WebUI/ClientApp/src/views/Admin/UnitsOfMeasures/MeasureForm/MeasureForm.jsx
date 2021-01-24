@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from "react";
 import {Form, TextInput, Checkbox, NumberInput} from "components/forms";
 import {Message} from "components/common";
 import {Modal} from "Modal";
-import {UnitsOfMeasuresService} from "../UnitsOfMeasuresService";
+import {UnitsOfMeasuresService} from "Services";
 import "./MeasureForm.scss";
 
 function MeasureForm(props) {
