@@ -3,7 +3,7 @@ import {useDocumentTitle} from "Hooks";
 import {Form, Select, TextInput} from "components/forms";
 import {useHistory} from "react-router-dom";
 import {RouteNames} from "routes/names";
-import {ProductsService, ProductCategoriesService} from "Services";
+import {ProductsService, ProductCategoriesService, UnitsOfMeasuresService} from "Services";
 import "./ProductForm.scss";
 
 function ProductForm(props) {
@@ -11,6 +11,7 @@ function ProductForm(props) {
     const history = useHistory();
     const productsService = new ProductsService();
     const categoriesService = new ProductCategoriesService();
+    const measuresService = new UnitsOfMeasuresService();
 
     const [isNew, setIsNew] = useState(true);
     const [title, setTitle] = useState("Product - Admin page");
@@ -19,6 +20,7 @@ function ProductForm(props) {
     const [error, setError] = useState("");
     const [product, setProduct] = useState({productGuid: "", name: "", shortName: "", description: ""});
     const [categories, setCategories] = useState([]);
+    const [measures, setMeasures] = useState([]);
     useDocumentTitle(title);
 
     useEffect(() => {
@@ -41,12 +43,8 @@ function ProductForm(props) {
                 setTitle(`${resp.name} - Product - Admin page`);
             })
             .then(categoriesService.getProductCategories)
-            .then(resp => {
-                setCategories(resp.map(el => ({
-                    id: el.productCategoryGuid,
-                    name: el.name
-                })));
-            })
+            .then(onCategoriesLoaded)
+            .then(loadMeasures)
             .then(setLoading(false));
     }
 
@@ -55,16 +53,24 @@ function ProductForm(props) {
         setSubtitle("Create product");
         categoriesService
             .getProductCategories()
-            .then(resp => {
-                let dict = resp.map(el => ({
-                    id: el.productCategoryGuid,
-                    name: el.name
-                }));
-                setCategories(dict);
-                return dict
-            })
+            .then(onCategoriesLoaded)
             .then((dict) => updateSelectedCategory(dict[0].id, categories))
+            .then(loadMeasures)
             .then(setLoading(false));
+    }
+
+    const onCategoriesLoaded = (response) => {
+        let dict = response.map(el => ({
+            id: el.productCategoryGuid,
+            name: el.name
+        }));
+        setCategories(dict);
+        return dict
+    }
+
+    const loadMeasures = () => {
+        return measuresService.getMeasures()
+            .then(resp => setMeasures(resp));
     }
 
     useEffect(() => focusInput(), [isLoading]);
