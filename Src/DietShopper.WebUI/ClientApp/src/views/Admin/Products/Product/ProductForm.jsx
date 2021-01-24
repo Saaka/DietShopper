@@ -112,6 +112,11 @@ function ProductForm(props) {
         setProduct(prod => ({...prod, [name]: value}));
     }
 
+    function handleNumberChange(ev) {
+        const {name, value} = ev.target;
+        setProduct(prod => ({...prod, [name]: Number(value)}));
+    }
+
     const focusInput = () => nameInput.current.focus();
 
     const closeForm = () => history.push(RouteNames.AdminProducts);
@@ -170,10 +175,10 @@ function ProductForm(props) {
                                    disabled={isLoading}
                                    maxLength="256"/>
                         <NumberInput id="calories"
-                                     label="Calories"
+                                     label="Energy value (kcal)"
                                      name="calories"
                                      value={product.calories}
-                                     onChange={handleChange}
+                                     onChange={handleNumberChange}
                                      disabled={isLoading}
                                      min={0}
                                      max={5000}
@@ -183,7 +188,7 @@ function ProductForm(props) {
                                      label="Carbohydrates"
                                      name="carbohydrates"
                                      value={product.carbohydrates}
-                                     onChange={handleChange}
+                                     onChange={handleNumberChange}
                                      disabled={isLoading}
                                      min={0}
                                      max={100}
@@ -193,7 +198,7 @@ function ProductForm(props) {
                                      label="Proteins"
                                      name="proteins"
                                      value={product.proteins}
-                                     onChange={handleChange}
+                                     onChange={handleNumberChange}
                                      disabled={isLoading}
                                      min={0}
                                      max={100}
@@ -203,7 +208,7 @@ function ProductForm(props) {
                                      label="Fat"
                                      name="fat"
                                      value={product.fat}
-                                     onChange={handleChange}
+                                     onChange={handleNumberChange}
                                      disabled={isLoading}
                                      min={0}
                                      max={100}
@@ -213,7 +218,7 @@ function ProductForm(props) {
                                      label="Saturated fat"
                                      name="saturatedFat"
                                      value={product.saturatedFat}
-                                     onChange={handleChange}
+                                     onChange={handleNumberChange}
                                      disabled={isLoading}
                                      min={0}
                                      max={product.fat}
