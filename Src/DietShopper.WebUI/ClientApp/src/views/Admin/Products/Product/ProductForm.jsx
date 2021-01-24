@@ -1,15 +1,16 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useDocumentTitle} from "Hooks";
-import {Form, TextInput} from "components/forms";
+import {Form, Select, TextInput} from "components/forms";
 import {useHistory} from "react-router-dom";
 import {RouteNames} from "routes/names";
-import {ProductsService} from "Services";
+import {ProductsService, ProductCategoriesService} from "Services";
 import "./ProductForm.scss";
 
 function ProductForm(props) {
     const nameInput = useRef(null);
     const history = useHistory();
     const productsService = new ProductsService();
+    const categoriesService = new ProductCategoriesService();
 
     const [isNew, setIsNew] = useState(true);
     const [title, setTitle] = useState("Product - Admin page");
@@ -17,23 +18,54 @@ function ProductForm(props) {
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [product, setProduct] = useState({productGuid: "", name: "", shortName: "", description: ""});
+    const [categories, setCategories] = useState([]);
     useDocumentTitle(title);
 
     useEffect(() => {
         let productGuid = props.match.params.productGuid;
+        setLoading(true);
         if (!!productGuid) {
-            setIsNew(false);
-            setSubtitle("Edit product");
-            productsService.getProduct(productGuid)
-                .then(resp => {
-                    setProduct(resp);
-                    setTitle(`${resp.name} - Product - Admin page`);
-                });
+            loadExistingProduct(productGuid);
         } else {
-            setIsNew(true);
-            setSubtitle("Create product");
+            initializeNewProduct();
         }
     }, []);
+
+    function loadExistingProduct(productGuid) {
+        setIsNew(false);
+        setSubtitle("Edit product");
+        productsService
+            .getProduct(productGuid)
+            .then(resp => {
+                setProduct(resp);
+                setTitle(`${resp.name} - Product - Admin page`);
+            })
+            .then(categoriesService.getProductCategories)
+            .then(resp => {
+                setCategories(resp.map(el => ({
+                    id: el.productCategoryGuid,
+                    name: el.name
+                })));
+            })
+            .then(setLoading(false));
+    }
+
+    function initializeNewProduct() {
+        setIsNew(true);
+        setSubtitle("Create product");
+        categoriesService
+            .getProductCategories()
+            .then(resp => {
+                let dict = resp.map(el => ({
+                    id: el.productCategoryGuid,
+                    name: el.name
+                }));
+                setCategories(dict);
+                return dict
+            })
+            .then((dict) => updateSelectedCategory(dict[0].id, categories))
+            .then(setLoading(false));
+    }
 
     useEffect(() => focusInput(), [isLoading]);
 
@@ -45,15 +77,14 @@ function ProductForm(props) {
         if (isNew) {
             productsService.createProduct(product)
                 .then(closeForm)
-                .catch((err)=> {
+                .catch((err) => {
                     setError(err.error);
                     setLoading(false);
                 });
-        }
-        else {
+        } else {
             productsService.updateProduct(product)
                 .then(closeForm)
-                .catch((err)=> {
+                .catch((err) => {
                     setError(err.error);
                     setLoading(false);
                 });
@@ -68,6 +99,18 @@ function ProductForm(props) {
     const focusInput = () => nameInput.current.focus();
 
     const closeForm = () => history.push(RouteNames.AdminProducts);
+
+    const handleCategoryChange = (ev) => {
+        const {value} = ev.target;
+        updateSelectedCategory(value, categories);
+    }
+
+    const updateSelectedCategory = (value, categories) => {
+        if (!value || categories.length === 0)
+            return;
+
+        setProduct(p => ({...p, productCategoryGuid: value}));
+    }
 
     return (
         <section className="columns is-centered">
@@ -102,6 +145,13 @@ function ProductForm(props) {
                                    onChange={handleChange}
                                    disabled={isLoading}
                                    maxLength="256"/>
+                        <Select id="product-category"
+                                label="Product category"
+                                name="productCategoryGuid"
+                                onChange={handleCategoryChange}
+                                values={categories}
+                                value={product.productCategoryGuid}
+                                required/>
                     </Form>
                 </div>
             </div>
