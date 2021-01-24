@@ -43,6 +43,9 @@ Constants.ApiRoutes.Admin = class AdminRoutes {
     static get PRODUCTS_CREATE() {
         return "products/create";
     }
+    static get PRODUCTS_UPDATE() {
+        return "products/update";
+    }
     static get PRODUCTS_GET() {
         return "products/"
     }

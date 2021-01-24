@@ -40,10 +40,18 @@ function ProductForm(props) {
     function submitCategory(ev) {
         ev.preventDefault();
         setError("");
+        setLoading(true);
 
         if (isNew) {
-            setLoading(true);
             productsService.createProduct(product)
+                .then(closeForm)
+                .catch((err)=> {
+                    setError(err.error);
+                    setLoading(false);
+                });
+        }
+        else {
+            productsService.updateProduct(product)
                 .then(closeForm)
                 .catch((err)=> {
                     setError(err.error);

@@ -20,4 +20,10 @@ export class ProductsService {
             .post(Constants.ApiRoutes.Admin.PRODUCTS_CREATE, request)
             .then(resp => resp.data);
     }
+
+    updateProduct = (request) => {
+        return this.authHttpService
+            .post(Constants.ApiRoutes.Admin.PRODUCTS_UPDATE, request)
+            .then(resp => resp.data);
+    }
 }
