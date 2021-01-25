@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using DietShopper.Application.Models;
 using DietShopper.Application.Queries.Products.Models;
 using DietShopper.Application.Repositories;
 using DietShopper.Application.Repositories.Models;

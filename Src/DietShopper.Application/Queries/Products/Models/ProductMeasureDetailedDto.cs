@@ -1,6 +1,6 @@
 using System;
 
-namespace DietShopper.Application.Models
+namespace DietShopper.Application.Queries.Products.Models
 {
     public class ProductMeasureDetailedDto
     {

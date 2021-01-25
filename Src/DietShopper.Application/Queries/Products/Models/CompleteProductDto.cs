@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using DietShopper.Application.Models;
 
 namespace DietShopper.Application.Queries.Products.Models
 {
