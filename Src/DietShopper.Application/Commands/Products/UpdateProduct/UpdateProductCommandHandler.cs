@@ -57,6 +57,13 @@ namespace DietShopper.Application.Commands.Products.UpdateProduct
         private async Task UpsertMeasures(Product product, IReadOnlyCollection<UpdateProductMeasureDto> requestedMeasures)
         {
             var measures = await _measuresRepository.GetMeasures(requestedMeasures.Select(x => x.MeasureGuid));
+
+            foreach (var measureToDeactivate in product.ProductMeasures
+                .Where(x => x.IsActive && x.ProductMeasureId != 0 && !requestedMeasures.Any(rm => rm.ProductMeasureGuid.HasValue && rm.ProductMeasureGuid == x.ProductMeasureGuid)).ToList())
+            {
+                measureToDeactivate.Deactivate();
+            }
+            
             foreach (var measureData in requestedMeasures)
             {
                 if (measureData.ProductMeasureGuid.HasValue)
@@ -79,12 +86,6 @@ namespace DietShopper.Application.Commands.Products.UpdateProduct
 
                     product.AddProductMeasure(productMeasure);
                 }
-            }
-
-            foreach (var measureToDeactivate in product.ProductMeasures
-                .Where(x => x.IsActive && !requestedMeasures.Any(rm => rm.ProductMeasureGuid.HasValue && rm.ProductMeasureGuid == x.ProductMeasureGuid)).ToList())
-            {
-                measureToDeactivate.Deactivate();
             }
 
             if (!requestedMeasures.Any(x => x.IsDefault))

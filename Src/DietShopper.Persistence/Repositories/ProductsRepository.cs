@@ -66,7 +66,7 @@ namespace DietShopper.Persistence.Repositories
                     IsActive = product.IsActive,
                     ProductMeasures = (from measures in _context.Measures
                         join productMeasure in _context.ProductMeasures on measures.MeasureId equals productMeasure.MeasureId
-                        where productMeasure.ProductId == product.ProductId
+                        where productMeasure.ProductId == product.ProductId && productMeasure.IsActive
                         select new ProductMeasureDto
                         {
                             ProductMeasureGuid = productMeasure.ProductMeasureGuid,
