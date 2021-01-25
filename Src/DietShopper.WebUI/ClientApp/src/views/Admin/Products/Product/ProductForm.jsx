@@ -28,7 +28,8 @@ function ProductForm(props) {
         carbohydrates: 0,
         proteins: 0,
         fat: 0,
-        saturatedFat: 0
+        saturatedFat: 0,
+        productMeasures: []
     });
     const [categories, setCategories] = useState([]);
     const [measures, setMeasures] = useState([]);

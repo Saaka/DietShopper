@@ -71,7 +71,11 @@ namespace DietShopper.Persistence.Repositories
                         {
                             ProductMeasureGuid = productMeasure.ProductMeasureGuid,
                             MeasureGuid = measures.MeasureGuid,
-                            ValueInGrams = productMeasure.ValueInGrams
+                            Name = measures.Name,
+                            Symbol = measures.Symbol,
+                            ValueInGrams = productMeasure.ValueInGrams,
+                            IsWeight = measures.IsWeight,
+                            IsDefault = defaultMeasure.MeasureId == measures.MeasureId
                         }).ToList()
                 };
 
