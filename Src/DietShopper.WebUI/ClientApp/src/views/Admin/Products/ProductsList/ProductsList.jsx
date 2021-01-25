@@ -3,13 +3,6 @@ import {Icon} from "components/common";
 import "./ProductsList.scss";
 
 export const ProductsList = ({products, onEdit, onRemove}) => {
-    
-    const test = (ev, message) => {
-        
-        console.log(ev);
-        console.log(message);
-    }
-    
     return (
         <div>
             <table className="table is-hoverable is-fullwidth products-table">

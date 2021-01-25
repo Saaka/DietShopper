@@ -226,7 +226,8 @@ function ProductForm(props) {
                                      max={product.fat}
                                      step={0.1}
                                      error="Saturated fat value is invalid"/>
-                        <ProductMeasures product={product} />
+                        <ProductMeasures product={product} measures={measures}
+                                         setProduct={setProduct}/>
                     </Form>
                 </div>
             </div>
