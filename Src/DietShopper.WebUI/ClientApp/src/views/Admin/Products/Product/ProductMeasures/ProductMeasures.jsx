@@ -5,13 +5,16 @@ import {ProductMeasureFormModal} from "./ProductMeasureFormModal";
 import "./ProductMeasures.scss";
 
 const ProductMeasures = (props) => {
-    const [productMeasure, setProductMeasure] = useState(null);
     const modal = useModal();
 
     const onEdit = (ev, measure) => {
         ev.stopPropagation();
-        setProductMeasure(measure);
-        modal.showModal(new ProductMeasureFormModal(props.setProduct, measure, props.measures));
+        modal.showModal(new ProductMeasureFormModal(props.product, props.setProduct, props.measures, measure));
+    }
+
+    const addMeasure = (ev) => {
+        ev.stopPropagation();
+        modal.showModal(new ProductMeasureFormModal(props.product, props.setProduct, props.measures));
     }
 
     const onRemove = (ev, measure) => {
@@ -28,7 +31,12 @@ const ProductMeasures = (props) => {
 
     return (
         <div>
-            <label className="label">Measures</label>
+            <div>
+                <label className="label">Measures</label>
+                <button type="button" className="button is-small"
+                        onClick={(ev) => addMeasure(ev)}>Add measure
+                </button>
+            </div>
             <table className="table is-hoverable is-fullwidth measures-table">
                 <thead>
                 <tr>

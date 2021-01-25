@@ -8,16 +8,22 @@ const ProductMeasureForm = (props) => {
     const [isNew, setIsNew] = useState(true);
 
     useEffect(() => {
+        const measures = props.measures
+            .filter(el => !props.product.productMeasures.some(pm => pm.measureGuid === el.measureGuid) || (!!props.measure && props.measure.measureGuid === el.measureGuid))
+            .map(el => ({
+            ...el,
+            id: el.measureGuid
+        }));
         if (!!props.measure) {
             setMeasure(props.measure);
-            setAvailableMeasures(props.measures.map(el => ({
-                ...el,
-                id: el.measureGuid
-            })));
             setIsNew(false);
+        } else {
+            updateSelectedMeasure(measures[0].id, measures);
         }
-    }, []);
 
+        setAvailableMeasures(measures);
+    }, []);
+    
     const getTitle = () => isNew == null ? "Add product measure" : "Edit product measure";
 
     const saveChanges = (ev) => {
@@ -58,26 +64,22 @@ const ProductMeasureForm = (props) => {
 
     const handleMeasureChange = (ev) => {
         const {value} = ev.target;
-        updateSelectedMeasure(value);
+        updateSelectedMeasure(value, availableMeasures);
     }
 
-    const updateSelectedMeasure = (value) => {
-        if (!value || availableMeasures.length === 0)
+    const updateSelectedMeasure = (value, measures) => {
+        if (!value || measures.length === 0)
             return;
 
-        const selectedMeasure = availableMeasures.find(el => el.measureGuid === value);
+        const selectedMeasure = measures.find(el => el.measureGuid === value);
 
         setMeasure(p => ({
             ...p,
             measureGuid: value,
             name: selectedMeasure.name,
-            symbol: selectedMeasure.symbol
+            symbol: selectedMeasure.symbol,
+            isWeight: selectedMeasure.isWeight
         }));
-    }
-
-    const getMeasures = () => {
-
-        return props.measures;
     }
 
     const buttonGroup = () =>

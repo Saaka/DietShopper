@@ -3,9 +3,9 @@ import {ModalBase} from "components/modal";
 import {ProductMeasureForm} from "./ProductMeasureForm";
 
 export class ProductMeasureFormModal extends ModalBase {
-    constructor(setProduct, measure, measures) {
+    constructor(product, setProduct, measures, measure) {
         super();
 
-        this.buildModal = (toggle) => <ProductMeasureForm setProduct={setProduct} measure={measure} measures={measures} toggle={toggle}/>;
+        this.buildModal = (toggle) => <ProductMeasureForm product={product} setProduct={setProduct} measure={measure} measures={measures} toggle={toggle}/>;
     }
 }
