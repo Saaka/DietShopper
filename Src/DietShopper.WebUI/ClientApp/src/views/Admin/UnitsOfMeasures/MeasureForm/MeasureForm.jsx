@@ -39,6 +39,11 @@ function MeasureForm(props) {
         setMeasure(prev => ({...prev, [name]: value}));
     }
 
+    function handleNumberChange(ev) {
+        const {name, value} = ev.target;
+        setMeasure(prev => ({...prev, [name]: Number(value)}));
+    }
+
     function handleCheckboxChange(ev) {
         const {name, checked} = ev.target;
         setMeasure(prev => ({...prev, [name]: checked}));
@@ -107,7 +112,7 @@ function MeasureForm(props) {
                                  label="Value in grams"
                                  name="valueInGrams"
                                  value={measure.valueInGrams}
-                                 onChange={handleChange}
+                                 onChange={handleNumberChange}
                                  disabled={!measure.isWeight || isLoading || measure.isBaseline}
                                  required={measure.isWeight}
                                  min={0}
