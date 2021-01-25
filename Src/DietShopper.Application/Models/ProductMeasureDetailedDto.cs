@@ -2,7 +2,7 @@ using System;
 
 namespace DietShopper.Application.Models
 {
-    public class ProductMeasureDto
+    public class ProductMeasureDetailedDto
     {
         public Guid ProductMeasureGuid { get; set; }
         public Guid MeasureGuid { get; set; }

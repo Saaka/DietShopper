@@ -18,6 +18,6 @@ namespace DietShopper.Application.Queries.Products.Models
         public decimal Proteins { get; set; }
         public decimal Fat { get; set; }
         public decimal SaturatedFat { get; set; }
-        public List<ProductMeasureDto> ProductMeasures { get; set; } = new List<ProductMeasureDto>();
+        public List<ProductMeasureDetailedDto> ProductMeasures { get; set; } = new List<ProductMeasureDetailedDto>();
     }
 }
