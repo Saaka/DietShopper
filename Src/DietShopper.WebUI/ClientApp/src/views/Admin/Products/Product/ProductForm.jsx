@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useDocumentTitle} from "Hooks";
 import {Form, Select, TextInput, NumberInput} from "components/forms";
+import {ProductMeasures} from "./ProductMeasures/ProductMeasures";
 import {useHistory} from "react-router-dom";
 import {RouteNames} from "routes/names";
 import {ProductsService, ProductCategoriesService, UnitsOfMeasuresService} from "Services";
@@ -224,6 +225,7 @@ function ProductForm(props) {
                                      max={product.fat}
                                      step={0.1}
                                      error="Saturated fat value is invalid"/>
+                        <ProductMeasures product={product} />
                     </Form>
                 </div>
             </div>
