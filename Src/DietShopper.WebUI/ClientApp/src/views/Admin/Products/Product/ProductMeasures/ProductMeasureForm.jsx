@@ -1,35 +1,83 @@
 import React, {useState, useEffect} from "react";
 import {Modal} from "Modal";
-import {TextInput, Checkbox, NumberInput} from "components/forms";
+import {Checkbox, NumberInput, Select} from "components/forms";
 
 const ProductMeasureForm = (props) => {
     const [measure, setMeasure] = useState({isDefault: false});
+    const [availableMeasures, setAvailableMeasures] = useState([]);
+    const [isNew, setIsNew] = useState(true);
 
     useEffect(() => {
-        if (!!props.measure)
+        if (!!props.measure) {
             setMeasure(props.measure);
+            setAvailableMeasures(props.measures.map(el => ({
+                ...el,
+                id: el.measureGuid
+            })));
+            setIsNew(false);
+        }
     }, []);
 
-    const getTitle = () => props.measure == null ? "Add product measure" : "Edit product measure";
+    const getTitle = () => isNew == null ? "Add product measure" : "Edit product measure";
 
     const saveChanges = (ev) => {
 
-        props.setProduct(prod =>({
-            ...prod,
-            productMeasures: prod.productMeasures.map(el => el.measureGuid === measure.measureGuid ? {
-                ...el,
-                isDefault: measure.isDefault
-            } : {
-                ...el,
-                isDefault: measure.isDefault ? false : el.isDefault
-            })
-        }));
+        if (isNew) {
+            props.setProduct(prod => ({
+                ...prod,
+                productMeasures: prod.productMeasures.map(el => ({
+                    ...el,
+                    isDefault: measure.isDefault ? false : el.isDefault
+                })).concat([measure])
+            }))
+        } else {
+            props.setProduct(prod => ({
+                ...prod,
+                productMeasures: prod.productMeasures.map(el => el.measureGuid === measure.measureGuid ? {
+                    ...el,
+                    isDefault: measure.isDefault,
+                    valueInGrams: measure.valueInGrams
+                } : {
+                    ...el,
+                    isDefault: measure.isDefault ? false : el.isDefault
+                })
+            }));
+        }
         props.toggle();
+    }
+
+    const handleNumberChange = (ev) => {
+        const {name, value} = ev.target;
+        setMeasure(prev => ({...prev, [name]: Number(value)}));
     }
 
     function handleCheckboxChange(ev) {
         const {name, checked} = ev.target;
         setMeasure(prev => ({...prev, [name]: checked}));
+    }
+
+    const handleMeasureChange = (ev) => {
+        const {value} = ev.target;
+        updateSelectedMeasure(value);
+    }
+
+    const updateSelectedMeasure = (value) => {
+        if (!value || availableMeasures.length === 0)
+            return;
+
+        const selectedMeasure = availableMeasures.find(el => el.measureGuid === value);
+
+        setMeasure(p => ({
+            ...p,
+            measureGuid: value,
+            name: selectedMeasure.name,
+            symbol: selectedMeasure.symbol
+        }));
+    }
+
+    const getMeasures = () => {
+
+        return props.measures;
     }
 
     const buttonGroup = () =>
@@ -51,6 +99,21 @@ const ProductMeasureForm = (props) => {
                 <p className="subtitle">{getTitle()}</p>
                 <hr/>
                 <label className="label">{measure.name}</label>
+                <Select label="Measure"
+                        name="measureGuid"
+                        onChange={handleMeasureChange}
+                        values={availableMeasures}
+                        value={measure.measureGuid}
+                        disabled={!isNew}
+                        required/>
+                <NumberInput label="Value in grams"
+                             name="valueInGrams"
+                             value={measure.valueInGrams}
+                             min={0}
+                             max={10000}
+                             step={0.01}
+                             disabled={measure.isWeight}
+                             onChange={handleNumberChange}/>
                 <Checkbox name="isDefault"
                           value={measure.isDefault}
                           onChange={handleCheckboxChange}
