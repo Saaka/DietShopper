@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react"
 import {useDocumentTitle} from "Hooks";
-import {Loader} from "components/common";
 import {ProductsList} from "./ProductsList/ProductsList";
 import {useHistory} from "react-router-dom";
 import "./Products.scss";
@@ -15,7 +14,7 @@ function Products(props) {
         items: []
     });
     const [isLoading, setIsLoading] = useState(true);
-    
+
     useEffect(() => {
         setIsLoading(true);
         loadProducts(10, 1)
@@ -39,19 +38,11 @@ function Products(props) {
 
     const editProduct = (ev, product) => {
         ev.stopPropagation();
-        history.push(RouteNames.AdminProductEdit + product.productGuid);        
+        history.push(RouteNames.AdminProductEdit + product.productGuid);
     }
 
     const removeProduct = (ev, product) => {
         ev.stopPropagation();
-    }
-
-   const renderList =() => {
-        return(
-            isLoading
-                ? <div className="center"><Loader size="xs" dark/></div>
-                : <ProductsList products={productsList.items} pageOptions={productsList.options} onEdit={editProduct} onRemove={removeProduct} fetch={loadProducts}/>
-        );
     }
 
     return (
@@ -70,7 +61,13 @@ function Products(props) {
                         </div>
                     </div>
                     <hr/>
-                    {renderList()}
+                    <ProductsList isLoading={isLoading} 
+                                  setIsLoading={setIsLoading}
+                                  products={productsList.items} 
+                                  pageOptions={productsList.options}
+                                  onEdit={editProduct} 
+                                  onRemove={removeProduct} 
+                                  fetch={loadProducts}/>
                 </div>
             </div>
         </section>

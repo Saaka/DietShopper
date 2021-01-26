@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 
 const Pagination = (props) => {
-    const [isFetching, setIsFetching] = useState(false);
     const [pagingSettings, setPagingSettings] = useState({
         pageNumber: 1,
         pageSize: 10,
@@ -16,16 +15,18 @@ const Pagination = (props) => {
     });
 
     useEffect(() => {
+        if (props.options == null) return;
+        
         calculatePagingSettings(props.options);
     }, [props.options]);
 
     const handleFetch = (pageNumber) => {
-        setIsFetching(true);
+        props.setIsLoading(true);
         return props
             .fetch(pagingSettings.pageSize, pageNumber)
-            .finally(() => setIsFetching(false));
+            .finally(() => props.setIsLoading(false));
     }
-    
+
     const calculatePagingSettings = (options) => {
         const buttonsCount = 5;
         const maxButtonsFromEdge = Math.ceil(buttonsCount / 2);
@@ -52,11 +53,12 @@ const Pagination = (props) => {
                     number: 1,
                     isLink: true,
                 }, {
+                    number: -1,
                     isLink: false
                 }];
             } else {
                 let toGenerate = maxButtonsFromEdge;
-                if(settings.pageNumber === maxButtonsFromEdge)
+                if (settings.pageNumber === maxButtonsFromEdge)
                     toGenerate++;
                 settings.pages = getLinksWithNumbers(toGenerate, 1);
             }
@@ -67,6 +69,7 @@ const Pagination = (props) => {
 
             if (isFarFromLastPage(settings, maxButtonsFromEdge)) {
                 settings.pages.push({
+                    number: -2,
                     isLink: false
                 }, {
                     number: settings.totalPages,
@@ -74,10 +77,10 @@ const Pagination = (props) => {
                 });
             } else {
                 let toGenerate = maxButtonsFromEdge;
-                if(settings.pageNumber === settings.totalPages - maxButtonsFromEdge + 1)
+                if (settings.pageNumber === settings.totalPages - maxButtonsFromEdge + 1)
                     toGenerate++;
                 let offset = settings.pageNumber - 1;
-                if(settings.pageNumber === settings.totalPages)
+                if (settings.pageNumber === settings.totalPages)
                     offset--;
                 settings.pages.push(...getLinksWithNumbers(toGenerate, offset));
             }
@@ -96,25 +99,28 @@ const Pagination = (props) => {
     }));
 
     const renderPageLink = (page) => (
-        <li>
+        <li key={page.number}>
             <a className={"pagination-link " + (page.number === pagingSettings.pageNumber ? "is-current" : "")}
-               aria-label={"Goto page " + page.number} onClick={() => handleFetch(page.number)} disabled={isFetching}>{page.number}</a>
+               aria-label={"Goto page " + page.number} onClick={() => handleFetch(page.number)}
+               disabled={props.isLoading}>{page.number}</a>
         </li>
     );
 
-    const renderEllipsis = () => (
-        <li>
+    const renderEllipsis = (page) => (
+        <li key={page.number}>
             <span className="pagination-ellipsis">&hellip;</span>
         </li>
     );
 
     return (
         <nav className="pagination" role="navigation" aria-label="pagination">
-            <a className="pagination-previous" disabled={!pagingSettings.hasPreviousPage || isFetching} onClick={() => handleFetch(pagingSettings.pageNumber - 1)}>Previous</a>
-            <a className="pagination-next" disabled={!pagingSettings.hasNextPage || isFetching} onClick={() => handleFetch(pagingSettings.pageNumber + 1)}>Next page</a>
+            <a className="pagination-previous" disabled={!pagingSettings.hasPreviousPage || props.isLoading}
+               onClick={() => handleFetch(pagingSettings.pageNumber - 1)}>Previous</a>
+            <a className="pagination-next" disabled={!pagingSettings.hasNextPage || props.isLoading}
+               onClick={() => handleFetch(pagingSettings.pageNumber + 1)}>Next page</a>
             <ul className="pagination-list">
                 {pagingSettings.pages.map(page => (
-                    page.isLink ? renderPageLink(page) : renderEllipsis()
+                    page.isLink ? renderPageLink(page) : renderEllipsis(page)
                 ))}
             </ul>
         </nav>
