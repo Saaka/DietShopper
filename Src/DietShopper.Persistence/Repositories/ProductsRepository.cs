@@ -93,6 +93,8 @@ namespace DietShopper.Persistence.Repositories
                     ProductCategoryName = productCategory.Name
                 };
 
+            query = query.OrderBy(x => x.Name);
+
             return _pageableRequestHelper.GetPagedListAsync(query, model);
         }
     }
