@@ -1,8 +1,9 @@
 import React from "react";
 import {Icon} from "components/common";
+import {Pagination} from "components/navigation";
 import "./ProductsList.scss";
 
-export const ProductsList = ({products, onEdit, onRemove}) => {
+export const ProductsList = ({products, pageOptions, onEdit, onRemove, fetch}) => {
     return (
         <div>
             <table className="table is-hoverable is-fullwidth products-table">
@@ -23,6 +24,7 @@ export const ProductsList = ({products, onEdit, onRemove}) => {
                 )}
                 </tbody>
             </table>
+            <Pagination options={pageOptions} fetch={fetch}/>
         </div>
     );
 }

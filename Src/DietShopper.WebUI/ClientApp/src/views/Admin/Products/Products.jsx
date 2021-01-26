@@ -18,15 +18,15 @@ function Products(props) {
     
     useEffect(() => {
         setIsLoading(true);
-        loadProducts()
+        loadProducts(10, 1)
             .then(() => setIsLoading(false));
     }, []);
 
-    function loadProducts() {
+    function loadProducts(pageSize, pageNumber) {
         return productsService
             .getProducts({
-                pageSize: 10,
-                pageNumber: 1
+                pageSize: pageSize,
+                pageNumber: pageNumber
             })
             .then((data) => {
                 setProducts(data);
@@ -39,8 +39,7 @@ function Products(props) {
 
     const editProduct = (ev, product) => {
         ev.stopPropagation();
-        history.push(RouteNames.AdminProductEdit + product.productGuid);
-        
+        history.push(RouteNames.AdminProductEdit + product.productGuid);        
     }
 
     const removeProduct = (ev, product) => {
@@ -51,7 +50,7 @@ function Products(props) {
         return(
             isLoading
                 ? <div className="center"><Loader size="xs" dark/></div>
-                : <ProductsList products={productsList.items} onEdit={editProduct} onRemove={removeProduct}/>
+                : <ProductsList products={productsList.items} pageOptions={productsList.options} onEdit={editProduct} onRemove={removeProduct} fetch={loadProducts}/>
         );
     }
 

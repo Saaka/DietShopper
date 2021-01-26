@@ -8,19 +8,14 @@ namespace DietShopper.Common.Models
 {
     public class PagedList<T>
     {
-        public PagedList(IEnumerable<T> items, int pageNumber, int pageSize, int totalItemsCount)
+        public PagedList(IList<T> items, int pageNumber, int pageSize, int totalItemsCount)
         {
             Validate(items, pageNumber, pageSize, totalItemsCount);
             Items = items?.ToList() ?? new List<T>();
-            PageNumber = pageNumber;
-            PageSize = pageSize;
-            TotalItemsCount = totalItemsCount;
-            TotalPages = (int) Math.Ceiling((decimal) TotalItemsCount / PageSize);
-            HasNextPage = PageNumber < TotalPages;
-            HasPreviousPage = PageNumber > 1;
+            Options = new PaginationOptions(pageNumber, pageSize, totalItemsCount);
         }
 
-        private void Validate(IEnumerable<T> items, int pageNumber, int pageSize, int totalItemsCount)
+        private void Validate(IList<T> items, int pageNumber, int pageSize, int totalItemsCount)
         {
             if (pageNumber < 1)
                 throw new InternalException(ErrorCode.InvalidRequestPageNumber);
@@ -31,11 +26,6 @@ namespace DietShopper.Common.Models
         }
 
         public IReadOnlyCollection<T> Items { get; }
-        public int PageNumber { get; }
-        public int PageSize { get; }
-        public int TotalItemsCount { get; }
-        public int TotalPages { get; }
-        public bool HasNextPage { get; }
-        public bool HasPreviousPage { get; }
+        public PaginationOptions Options { get; }
     }
 }
