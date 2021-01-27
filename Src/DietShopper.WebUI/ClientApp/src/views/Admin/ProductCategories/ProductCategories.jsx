@@ -82,7 +82,7 @@ function ProductCategories(props) {
         <section className="columns is-centered">
             <div className="column is-responsive">
                 <p className="title has-text-light">Products categories</p>
-                <div className="columns columns-content">
+                <div className="columns columns-mobile-inverted">
                     <div className="column is-half">
                         <div className="box">
                             <div className="columns is-mobile subtitle-container">
@@ -90,7 +90,7 @@ function ProductCategories(props) {
                                     <p className="subtitle">Categories list</p>
                                 </div>
                                 <div className="column">
-                                    <button className="button is-small add-category"
+                                    <button className="button is-small is-link button-add-item"
                                             onClick={() => setFormVisible(true)}>Add category
                                     </button>
                                 </div>

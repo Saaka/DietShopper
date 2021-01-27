@@ -55,7 +55,7 @@ function Products(props) {
                             <p className="subtitle">Products list</p>
                         </div>
                         <div className="column">
-                            <button className="button is-link is-small add-category"
+                            <button className="button is-link is-small button-add-item"
                                     onClick={() => addProduct()}>Add product
                             </button>
                         </div>

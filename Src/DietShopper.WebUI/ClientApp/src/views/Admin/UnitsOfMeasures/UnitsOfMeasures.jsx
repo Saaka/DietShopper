@@ -66,7 +66,7 @@ function UnitsOfMeasures(props) {
                             <p className="subtitle">Measures list</p>
                         </div>
                         <div className="column">
-                            <button className="button is-small add-category"
+                            <button className="button is-small is-link button-add-item"
                                     onClick={() => addMeasure()}>Add measure
                             </button>
                         </div>
