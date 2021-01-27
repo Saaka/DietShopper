@@ -6,7 +6,7 @@ using DietShopper.Common.Requests;
 
 namespace DietShopper.Application.Commands.Products
 {
-    public class UpdateProductCommand : Request<ProductDto>
+    public class UpdateProductCommand : Request<ProductDto>, IRequestWithAdminAuthorization
     {
         public Guid ProductGuid { get; set; }
         public string Name { get; set; }

@@ -3,7 +3,7 @@ using DietShopper.Common.Requests;
 
 namespace DietShopper.Application.Commands.Measures
 {
-    public class CreateMeasureCommand : Request<MeasureDto>
+    public class CreateMeasureCommand : Request<MeasureDto>, IRequestWithAdminAuthorization
     {
         public string Name { get; set; }
         public string Symbol { get; set; }

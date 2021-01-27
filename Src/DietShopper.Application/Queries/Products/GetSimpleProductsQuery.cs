@@ -8,7 +8,7 @@ using DietShopper.Common.Requests;
 
 namespace DietShopper.Application.Queries.Products
 {
-    public class GetSimpleProductsQuery : Request<PagedList<SimpleProductDto>>
+    public class GetSimpleProductsQuery : Request<PagedList<SimpleProductDto>>, IRequestWithBasicAuthorization
     {
         public int PageSize { get; set; }
         public int PageNumber { get; set; }

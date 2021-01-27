@@ -10,7 +10,7 @@ using FluentValidation;
 
 namespace DietShopper.Application.Queries.Products
 {
-    public class GetCompleteProductQuery : Request<CompleteProductDto>
+    public class GetCompleteProductQuery : Request<CompleteProductDto>, IRequestWithBasicAuthorization
     {
         public Guid ProductGuid { get; set; }
     }

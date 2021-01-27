@@ -8,7 +8,7 @@ using DietShopper.Common.Requests;
 
 namespace DietShopper.Application.Queries.ProductCategories
 {
-    public class GetProductCategoriesQuery : Request<IEnumerable<ProductCategoryDto>> { }
+    public class GetProductCategoriesQuery : Request<IEnumerable<ProductCategoryDto>>, IRequestWithBasicAuthorization { }
 
     public class GetProductCategoriesQueryHandler : RequestHandler<GetProductCategoriesQuery, IEnumerable<ProductCategoryDto>>
     {

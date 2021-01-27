@@ -15,7 +15,8 @@ namespace DietShopper.Shared
             services
                 .AddTransient<IRestsharpClientFactory, RestsharpClientFactory>()
                 .AddTransient<IGuid, GuidProvider>()
-                .AddTransient<ICacheStore, MemoryCacheStore>();
+                .AddTransient<ICacheStore, MemoryCacheStore>()
+                .AddTransient<IRequestAuthorizationValidator, RequestAuthorizationValidator>();
 
             return services;
         }

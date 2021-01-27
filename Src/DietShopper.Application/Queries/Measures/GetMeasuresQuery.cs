@@ -8,7 +8,7 @@ using DietShopper.Common.Requests;
 
 namespace DietShopper.Application.Queries.Measures
 {
-    public class GetMeasuresQuery : Request<IEnumerable<MeasureDto>> { }
+    public class GetMeasuresQuery : Request<IEnumerable<MeasureDto>>, IRequestWithBasicAuthorization { }
 
     public class GetMeasuresQueryHandler : RequestHandler<GetMeasuresQuery, IEnumerable<MeasureDto>>
     {
