@@ -21,19 +21,13 @@ namespace DietShopper.Shared
             return services;
         }
 
-        public static IServiceCollection AddSharedLoggerBehavior(this IServiceCollection services)
-        {
-            services
-                .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestLogger<,>));
-            return services;
-        }
+        public static IServiceCollection AddSharedLoggerBehavior(this IServiceCollection services) =>
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestLogger<,>));
 
-        public static IServiceCollection AddCommandValidationBehavior(this IServiceCollection services)
-        {
-            services
-                .AddTransient(typeof(IPipelineBehavior<,>), typeof(CommandValidationBehavior<,>));
+        public static IServiceCollection AddCommandValidationBehavior(this IServiceCollection services) =>
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CommandValidationBehavior<,>));
 
-            return services;
-        }
+        public static IServiceCollection AddRequestAuthorizationValidationBehavior(this IServiceCollection services) =>
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestAuthorizationValidatorBehavior<,>));
     }
 }

@@ -15,12 +15,7 @@ namespace DietShopper.WebAPI.Configuration
             return services;
         }
 
-        public static IServiceCollection AddAuthorizationBehavior(this IServiceCollection services)
-        {
-            services
-                .AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
-
-            return services;
-        }
+        public static IServiceCollection AddAuthorizationBehavior(this IServiceCollection services) => 
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
     }
 }

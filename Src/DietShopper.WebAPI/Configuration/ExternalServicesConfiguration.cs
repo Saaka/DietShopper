@@ -38,6 +38,7 @@ namespace DietShopper.WebAPI.Configuration
 
                 .AddSharedLoggerBehavior()
                 .AddAuthorizationBehavior()
+                .AddRequestAuthorizationValidationBehavior()
                 .AddPersistenceModuleBehaviors()
                 .AddCommandValidationBehavior();            
 
