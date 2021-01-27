@@ -29,21 +29,16 @@ const Pagination = (props) => {
 
     const calculatePagingSettings = (options) => {
         const buttonsCount = 5;
-        const maxButtonsFromEdge = Math.ceil(buttonsCount / 2);
+        const maxButtonsFromEdge = 3;
 
         let settings = {
-            pageNumber: options.pageNumber,
-            pageSize: options.pageSize,
-            totalItemsCount: options.totalItemsCount,
-            totalPages: options.totalPages,
-            hasPreviousPage: options.hasPreviousPage,
-            hasNextPage: options.hasNextPage,
+            ...options,
             pages: [{
                 number: 1,
                 isLink: true
             }]
         };
-        if (settings.totalItemsCount === 0 || settings.totalPages === 1) return;
+        if (hasOnePage(settings)) return;
 
         if (settings.totalPages <= buttonsCount) {
             settings.pages = getLinksWithNumbers(settings.totalPages, 1);
@@ -89,6 +84,7 @@ const Pagination = (props) => {
         setPagingSettings(settings);
     }
 
+    const hasOnePage = (settings) => settings.totalItemsCount === 0 || settings.totalPages === 1;
     const isInTheMiddle = (settings, maxButtonsFromEdge) => isFarFromFirstPage(settings, maxButtonsFromEdge) && isFarFromLastPage(settings, maxButtonsFromEdge);
     const isFarFromFirstPage = (settings, maxButtonsFromEdge) => settings.pageNumber > maxButtonsFromEdge;
     const isFarFromLastPage = (settings, maxButtonsFromEdge) => settings.totalPages - settings.pageNumber > maxButtonsFromEdge - 1;
