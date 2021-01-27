@@ -85,7 +85,7 @@ const ProductMeasureForm = (props) => {
     const buttonGroup = () =>
         <div className="field is-grouped">
             <div className="control">
-                <button type="submit" className="button is-primary" onClick={(ev) => saveChanges(ev)}>Save changes
+                <button type="submit" className="button is-link" onClick={(ev) => saveChanges(ev)}>Save changes
                 </button>
             </div>
             <div className="control">

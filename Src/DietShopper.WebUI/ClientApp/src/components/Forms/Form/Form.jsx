@@ -16,7 +16,7 @@ export function Form(props) {
     const buttonGroup = () =>
         <div className="field is-grouped">
             <div className="control">
-                <button type="submit" className="button is-primary" disabled={props.isLoading || props.disabled}>Submit</button>
+                <button type="submit" className="button is-link" disabled={props.isLoading || props.disabled}>Submit</button>
             </div>
             <div className="control">
                 <button type="button" onClick={(ev) => props.onClose(ev)}
