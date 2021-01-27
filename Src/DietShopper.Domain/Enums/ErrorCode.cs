@@ -58,5 +58,9 @@ namespace DietShopper.Domain.Enums
         InvalidRequestPageNumber = 54,
         InvalidRequestPageSize = 55,
         InvalidPagedListTotalItemsCount = 56,
+        RecipeNameRequired = 57,
+        RecipeNameTooLong = 58,
+        RecipeGuidRequired = 59,
+        RecipeOwnerRequired = 60,
     }
 }
