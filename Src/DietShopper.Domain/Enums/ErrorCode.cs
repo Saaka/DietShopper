@@ -62,5 +62,12 @@ namespace DietShopper.Domain.Enums
         RecipeNameTooLong = 58,
         RecipeGuidRequired = 59,
         RecipeOwnerRequired = 60,
+        IngredientRequired = 61,
+        IngredientAlreadyAddedToRecipe = 62,
+        IngredientGuidRequired = 63,
+        MeasureRequired = 64,
+        InvalidProductAmount = 65,
+        InvalidProductAmountInGrams = 66,
+        IngredientNoteTooLong = 67,
     }
 }
