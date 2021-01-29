@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DietShopper.Domain.Constants.Validation;
 using DietShopper.Domain.Enums;
 using DietShopper.Domain.Exceptions;
@@ -13,6 +14,9 @@ namespace DietShopper.Domain.Entities
         public string Email { get; private set; }
         public string ImageUrl { get; private set; }
         public bool IsAdmin { get; private set; }
+
+        private readonly List<Recipe> _recipes = new List<Recipe>();
+        public virtual IReadOnlyCollection<Recipe> Recipes => _recipes.AsReadOnly();
 
         private User()
         {

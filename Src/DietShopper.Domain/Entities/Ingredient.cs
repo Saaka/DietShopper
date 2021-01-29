@@ -51,6 +51,12 @@ namespace DietShopper.Domain.Entities
             return this;
         }
 
+        public Ingredient Deactivate()
+        {
+            IsActive = false;
+            return this;
+        }
+
         private void ValidateCreation()
         {
             if (IngredientGuid.Equals(Guid.Empty))
@@ -76,12 +82,6 @@ namespace DietShopper.Domain.Entities
                 throw new DomainException(ErrorCode.InvalidProductAmount);
             if (amountInGrams <= 0)
                 throw new DomainException(ErrorCode.InvalidProductAmountInGrams);
-        }
-
-        public Ingredient Deactivate()
-        {
-            IsActive = false;
-            return this;
         }
     }
 }
