@@ -17,8 +17,7 @@ namespace DietShopper.Persistence.Behaviors
             _transactionScopeManager = transactionScopeManager;
         }    
         
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
-            RequestHandlerDelegate<TResponse> next)
+        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
             if (_transactionScopeManager.IsTransactionCreatedForScope)
                 return await next();
@@ -33,8 +32,7 @@ namespace DietShopper.Persistence.Behaviors
                 Timeout = TransactionManager.DefaultTimeout,
                 IsolationLevel = IsolationLevel.Serializable
             };
-            using (var transactionScope = new TransactionScope(
-                TransactionScopeOption.Required, options, TransactionScopeAsyncFlowOption.Enabled))
+            using (var transactionScope = new TransactionScope(TransactionScopeOption.Required, options, TransactionScopeAsyncFlowOption.Enabled))
             {
                 _transactionScopeManager.SetTransactionCreated(true);
                 var result = await next();

@@ -14,8 +14,7 @@ namespace DietShopper.Persistence.Repositories
         private readonly AppDbContext _context;
         private readonly ICacheStore _cacheStore;
 
-        public MeasuresRepository(AppDbContext context,
-            ICacheStore cacheStore)
+        public MeasuresRepository(AppDbContext context, ICacheStore cacheStore)
         {
             _context = context;
             _cacheStore = cacheStore;

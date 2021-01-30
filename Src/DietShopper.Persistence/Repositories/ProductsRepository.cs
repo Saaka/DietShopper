@@ -16,8 +16,7 @@ namespace DietShopper.Persistence.Repositories
         private readonly AppDbContext _context;
         private readonly IPageableRequestHelper _pageableRequestHelper;
 
-        public ProductsRepository(AppDbContext context,
-            IPageableRequestHelper pageableRequestHelper)
+        public ProductsRepository(AppDbContext context, IPageableRequestHelper pageableRequestHelper)
         {
             _context = context;
             _pageableRequestHelper = pageableRequestHelper;
