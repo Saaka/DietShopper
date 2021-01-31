@@ -37,6 +37,11 @@ namespace DietShopper.Persistence.Configurations
                 .IsRequired()
                 .HasMaxLength(UserValidationConstants.EmailMaxLength)
                 .HasDefaultValue(string.Empty);
+
+            builder.HasMany(x => x.Recipes)
+                .WithOne(x => x.Owner)
+                .HasForeignKey(x => x.OwnerId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
