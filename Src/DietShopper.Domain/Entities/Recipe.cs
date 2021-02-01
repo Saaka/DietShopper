@@ -94,7 +94,7 @@ namespace DietShopper.Domain.Entities
         private void ValidateDescription(string description)
         {
             if (description.Length > RecipeValidationConstant.RecipeDescMaxLength)
-                throw new DomainException(ErrorCode.RecipeNameTooLong);
+                throw new DomainException(ErrorCode.RecipeDescriptionTooLong);
         }
     }
 }
