@@ -11,7 +11,7 @@ namespace DietShopper.Domain.Entities
         public Guid IngredientGuid { get; private set; }
         public int RecipeId { get; private set; }
         public int ProductId { get; private set; }
-        public int MeasureId { get; private set; }
+        public int ProductMeasureId { get; set; }
         public decimal Amount { get; private set; }
         public decimal AmountInGrams { get; private set; }
         public string Note { get; private set; }
@@ -19,13 +19,13 @@ namespace DietShopper.Domain.Entities
 
         public virtual Recipe Recipe { get; private set; }
         public virtual Product Product { get; private set; }
-        public virtual Measure Measure { get; private set; }
+        public virtual ProductMeasure ProductMeasure { get; private set; }
 
-        public Ingredient(Guid ingredientGuid, int productId, int measureId, decimal amount, decimal amountInGrams, string note)
+        public Ingredient(Guid ingredientGuid, int productId, int productMeasureId, decimal amount, decimal amountInGrams, string note)
         {
             IngredientGuid = ingredientGuid;
             ProductId = productId;
-            MeasureId = measureId;
+            ProductMeasureId = productMeasureId;
             Amount = amount;
             AmountInGrams = amountInGrams;
             Note = note;
@@ -63,8 +63,8 @@ namespace DietShopper.Domain.Entities
                 throw new DomainException(ErrorCode.IngredientGuidRequired);
             if (ProductId.Equals(default))
                 throw new DomainException(ErrorCode.ProductRequired);
-            if (MeasureId.Equals(default))
-                throw new DomainException(ErrorCode.MeasureRequired);
+            if (ProductMeasureId.Equals(default))
+                throw new DomainException(ErrorCode.ProductMeasureIsRequired);
 
             ValidateAmount(Amount, AmountInGrams);
             ValidateNote(Note);
