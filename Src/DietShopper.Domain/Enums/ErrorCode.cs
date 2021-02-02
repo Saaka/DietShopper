@@ -70,5 +70,6 @@ namespace DietShopper.Domain.Enums
         InvalidProductAmountInGrams = 66,
         IngredientNoteTooLong = 67,
         RecipeDescriptionTooLong = 68,
+        ProductMeasureNotFound = 69,
     }
 }

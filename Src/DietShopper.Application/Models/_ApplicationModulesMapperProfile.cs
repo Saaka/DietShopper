@@ -10,6 +10,7 @@ namespace DietShopper.Application.Models
             CreateMap<ProductCategory, ProductCategoryDto>();
             CreateMap<Measure, MeasureDto>();
             CreateMap<Product, ProductDto>();
+            CreateMap<Recipe, RecipeDto>();
         }
     }
 }
