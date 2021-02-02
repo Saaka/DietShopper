@@ -10,12 +10,12 @@ using FluentValidation;
 
 namespace DietShopper.Application.Queries.Products
 {
-    public class GetCompleteProductQuery : Request<CompleteProductDto>, IRequestWithBasicAuthorization
+    public class GetCompleteProductQuery : Request<CompleteProductQueryResultDto>, IRequestWithBasicAuthorization
     {
         public Guid ProductGuid { get; set; }
     }
 
-    public class GetCompleteProductQueryHandler : RequestHandler<GetCompleteProductQuery, CompleteProductDto>
+    public class GetCompleteProductQueryHandler : RequestHandler<GetCompleteProductQuery, CompleteProductQueryResultDto>
     {
         private readonly IProductsRepository _productsRepository;
 
@@ -24,7 +24,7 @@ namespace DietShopper.Application.Queries.Products
             _productsRepository = productsRepository;
         }
 
-        public override async Task<RequestResult<CompleteProductDto>> Handle(GetCompleteProductQuery request, CancellationToken cancellationToken)
+        public override async Task<RequestResult<CompleteProductQueryResultDto>> Handle(GetCompleteProductQuery request, CancellationToken cancellationToken)
         {
             var productData = await _productsRepository.GetCompleteProduct(request.ProductGuid);
             return productData == null 

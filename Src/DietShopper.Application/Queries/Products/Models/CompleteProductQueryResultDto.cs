@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DietShopper.Application.Queries.Products.Models
 {
-    public class CompleteProductDto
+    public class CompleteProductQueryResultDto
     {
         public Guid ProductGuid { get; set; }
         public string Name { get; set; }

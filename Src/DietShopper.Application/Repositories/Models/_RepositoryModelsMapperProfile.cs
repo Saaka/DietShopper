@@ -7,7 +7,7 @@ namespace DietShopper.Application.Repositories.Models
     {
         public RepositoryModelsMapperProfile()
         {
-            CreateMap<Queries.Products.GetSimpleProductsQuery, GetSimpleProductsQuery>();
+            CreateMap<GetSimpleProductsQuery, GetSimpleProductsQueryDto>();
         }
     }
 }

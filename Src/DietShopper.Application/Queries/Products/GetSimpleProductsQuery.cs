@@ -8,13 +8,13 @@ using DietShopper.Common.Requests;
 
 namespace DietShopper.Application.Queries.Products
 {
-    public class GetSimpleProductsQuery : Request<PagedList<SimpleProductDto>>, IRequestWithBasicAuthorization
+    public class GetSimpleProductsQuery : Request<PagedList<SimpleProductQueryResultDto>>, IRequestWithBasicAuthorization
     {
         public int PageSize { get; set; }
         public int PageNumber { get; set; }
     }
 
-    public class GetSimpleProductsQueryHandler : RequestHandler<GetSimpleProductsQuery, PagedList<SimpleProductDto>>
+    public class GetSimpleProductsQueryHandler : RequestHandler<GetSimpleProductsQuery, PagedList<SimpleProductQueryResultDto>>
     {
         private readonly IMapper _mapper;
         private readonly IProductsRepository _productsRepository;
@@ -24,9 +24,9 @@ namespace DietShopper.Application.Queries.Products
             _mapper = mapper;
             _productsRepository = productsRepository;
         }
-        public override async Task<RequestResult<PagedList<SimpleProductDto>>> Handle(GetSimpleProductsQuery request, CancellationToken cancellationToken)
+        public override async Task<RequestResult<PagedList<SimpleProductQueryResultDto>>> Handle(GetSimpleProductsQuery request, CancellationToken cancellationToken)
         {
-            var pagedList = await _productsRepository.GetSimpleProductsList(_mapper.Map<Repositories.Models.GetSimpleProductsQuery>(request));
+            var pagedList = await _productsRepository.GetSimpleProductsList(_mapper.Map<Repositories.Models.GetSimpleProductsQueryDto>(request));
 
             return request.Success(pagedList);
         }

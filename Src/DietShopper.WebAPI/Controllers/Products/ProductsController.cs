@@ -32,7 +32,7 @@ namespace DietShopper.WebAPI.Controllers.Products
 
         [HttpGet]
         [Route("{productGuid}")]
-        public async Task<ActionResult<CompleteProductDto>> GetProduct(Guid productGuid)
+        public async Task<ActionResult<CompleteProductQueryResultDto>> GetProduct(Guid productGuid)
         {
             var result = await Mediator.Send(new GetCompleteProductQuery {ProductGuid = productGuid});
 
@@ -41,7 +41,7 @@ namespace DietShopper.WebAPI.Controllers.Products
 
         [HttpPost]
         [Route("list/simple")]
-        public async Task<ActionResult<PagedList<SimpleProductDto>>> GetProducts(GetSimpleProductsQuery request)
+        public async Task<ActionResult<PagedList<SimpleProductQueryResultDto>>> GetProducts(GetSimpleProductsQuery request)
         {
             var result = await Mediator.Send(request);
             return GetResponse(result);

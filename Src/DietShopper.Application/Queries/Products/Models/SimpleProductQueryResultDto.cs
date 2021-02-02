@@ -2,7 +2,7 @@ using System;
 
 namespace DietShopper.Application.Queries.Products.Models
 {
-    public class SimpleProductDto
+    public class SimpleProductQueryResultDto
     {
         public Guid ProductGuid { get; set; }
         public Guid ProductCategoryGuid { get; set; }

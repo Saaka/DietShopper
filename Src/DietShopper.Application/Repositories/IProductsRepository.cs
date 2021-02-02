@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using DietShopper.Application.Commands.Products.Models;
 using DietShopper.Application.Queries.Products.Models;
 using DietShopper.Application.Repositories.Models;
 using DietShopper.Common.Models;
@@ -15,7 +17,8 @@ namespace DietShopper.Application.Repositories
         Task<bool> IsNameTaken(Guid productGuid, string name);
         Task<bool> IsShortNameTaken(string shortName);
         Task<bool> IsShortNameTaken(Guid productGuid, string shortName);
-        Task<CompleteProductDto> GetCompleteProduct(Guid productGuid);
-        Task<PagedList<SimpleProductDto>> GetSimpleProductsList(GetSimpleProductsQuery query);
+        Task<CompleteProductQueryResultDto> GetCompleteProduct(Guid productGuid);
+        Task<PagedList<SimpleProductQueryResultDto>> GetSimpleProductsList(GetSimpleProductsQueryDto queryDto);
+        Task<IReadOnlyCollection<ProductGuidDto>> GetProductIdsByGuids(IEnumerable<Guid> productGuids);
     }
 }

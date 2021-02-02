@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DietShopper.Application.Commands.Products.Models;
 using DietShopper.Application.Queries.Products.Models;
 using DietShopper.Application.Repositories;
 using DietShopper.Application.Repositories.Models;
@@ -30,8 +32,8 @@ namespace DietShopper.Persistence.Repositories
 
         public Task<Product> GetProductEntity(Guid productGuid) => _context
             .Products
-            .Include(x=> x.ProductNutrients)
-            .Include(x=> x.ProductCategory)
+            .Include(x => x.ProductNutrients)
+            .Include(x => x.ProductCategory)
             .Include(x => x.ProductMeasures)
             .ThenInclude(x => x.Measure)
             .FirstOrDefaultAsync(x => x.ProductGuid == productGuid);
@@ -41,14 +43,14 @@ namespace DietShopper.Persistence.Repositories
         public Task<bool> IsShortNameTaken(string name) => IsShortNameTaken(Guid.Empty, name);
         public Task<bool> IsShortNameTaken(Guid productGuid, string shortName) => _context.Products.AnyAsync(x => x.ProductGuid != productGuid && x.ShortName == shortName && x.IsActive);
 
-        public Task<CompleteProductDto> GetCompleteProduct(Guid productGuid)
+        public Task<CompleteProductQueryResultDto> GetCompleteProduct(Guid productGuid)
         {
             var query = from product in _context.Products
                 join productCategory in _context.ProductCategories on product.ProductCategoryId equals productCategory.ProductCategoryId
                 join defaultMeasure in _context.Measures on product.DefaultMeasureId equals defaultMeasure.MeasureId
                 join nutrients in _context.ProductNutrients on product.ProductId equals nutrients.ProductId
                 where product.ProductGuid == productGuid
-                select new CompleteProductDto
+                select new CompleteProductQueryResultDto
                 {
                     ProductGuid = product.ProductGuid,
                     Name = product.Name,
@@ -80,11 +82,11 @@ namespace DietShopper.Persistence.Repositories
             return query.FirstOrDefaultAsync();
         }
 
-        public Task<PagedList<SimpleProductDto>> GetSimpleProductsList(GetSimpleProductsQuery model)
+        public Task<PagedList<SimpleProductQueryResultDto>> GetSimpleProductsList(GetSimpleProductsQueryDto model)
         {
             var query = from product in _context.Products
                 join productCategory in _context.ProductCategories on product.ProductCategoryId equals productCategory.ProductCategoryId
-                select new SimpleProductDto
+                select new SimpleProductQueryResultDto
                 {
                     Name = product.Name,
                     ProductGuid = product.ProductGuid,
@@ -95,6 +97,19 @@ namespace DietShopper.Persistence.Repositories
             query = query.OrderBy(x => x.Name);
 
             return _pageableRequestHelper.GetPagedListAsync(query, model);
+        }
+
+        public Task<IReadOnlyCollection<ProductGuidDto>> GetProductIdsByGuids(IEnumerable<Guid> productGuids)
+        {
+            var query = from product in _context.Products
+                where productGuids.Contains(product.ProductGuid)
+                select new ProductGuidDto
+                {
+                    ProductId = product.ProductId,
+                    ProductGuid = product.ProductGuid
+                };
+
+            return query.ToReadOnlyCollectionAsync();
         }
     }
 }
