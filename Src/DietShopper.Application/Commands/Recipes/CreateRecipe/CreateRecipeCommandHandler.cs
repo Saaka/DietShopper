@@ -16,14 +16,16 @@ namespace DietShopper.Application.Commands.Recipes.CreateRecipe
         private readonly IGuid _guid;
         private readonly IRecipesRepository _recipesRepository;
         private readonly IProductsRepository _productsRepository;
+        private readonly IProductMeasuresRepository _productMeasuresRepository;
 
-        public CreateRecipeCommandHandler(IGuid guid, IRecipesRepository recipesRepository, IProductsRepository productsRepository)
+        public CreateRecipeCommandHandler(IGuid guid, IRecipesRepository recipesRepository, IProductsRepository productsRepository, IProductMeasuresRepository productMeasuresRepository)
         {
             _guid = guid;
             _recipesRepository = recipesRepository;
             _productsRepository = productsRepository;
+            _productMeasuresRepository = productMeasuresRepository;
         }
-        
+
         public override async Task<RequestResult<RecipeDto>> Handle(CreateRecipeCommand request, CancellationToken cancellationToken)
         {
             var recipe = new Recipe(_guid.GetGuid(), request.Context.User.UserId, request.Name, request.Description);
@@ -35,6 +37,7 @@ namespace DietShopper.Application.Commands.Recipes.CreateRecipe
         private async Task CreateIngredients(Recipe recipe, List<CreateRecipeIngredientDto> ingredientModels)
         {
             var productIds = await _productsRepository.GetProductIdsByGuids(ingredientModels.Select(x => x.ProductGuid));
+            var productMeasures = await _productMeasuresRepository.GetProductMeasureBaseByGuids(ingredientModels.Select(x => x.ProductMeasureGuid));
         }
     }
 }

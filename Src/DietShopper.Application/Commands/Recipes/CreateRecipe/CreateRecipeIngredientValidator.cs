@@ -14,9 +14,9 @@ namespace DietShopper.Application.Commands.Recipes.CreateRecipe
                 .NotEmpty()
                 .WithMessageCode(ErrorCode.ProductGuidRequired);
             
-            RuleFor(x => x.MeasureGuid)
+            RuleFor(x => x.ProductMeasureGuid)
                 .NotEmpty()
-                .WithMessageCode(ErrorCode.MeasureGuidRequired);
+                .WithMessageCode(ErrorCode.ProductMeasureGuidRequired);
             
             RuleFor(x => x.Amount)
                 .GreaterThan(Decimal.Zero)
