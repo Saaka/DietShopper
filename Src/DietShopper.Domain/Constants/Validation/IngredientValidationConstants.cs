@@ -3,6 +3,6 @@ namespace DietShopper.Domain.Constants.Validation
     public static class IngredientValidationConstants
     {
         public const int NoteMaxLength = 100;
-        public const decimal MaxAmount = 10000;
+        public const decimal MaxAmount = 100000;
     }
 }
