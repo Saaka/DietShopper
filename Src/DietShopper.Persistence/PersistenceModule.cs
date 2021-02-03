@@ -16,16 +16,17 @@ namespace DietShopper.Persistence
             services
                 .AddTransient<IDbInitializer, DbInitializer>()
                 .AddTransient<IPageableRequestHelper, PageableRequestHelper>()
-                
                 .AddTransient<IUsersRepository, UsersRepository>()
                 .AddTransient<IProductCategoriesRepository, ProductCategoryRepository>()
                 .AddTransient<IMeasuresRepository, MeasuresRepository>()
                 .AddTransient<IProductsRepository, ProductsRepository>()
+                .AddTransient<IProductMeasuresRepository, ProductMeasuresRepository>()
+                .AddTransient<IRecipesRepository, RecipesRepository>()
                 ;
 
             return services;
         }
-        
+
         public static IServiceCollection AddAppDbContext(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString(Constants.AppConnectionString);
@@ -42,7 +43,6 @@ namespace DietShopper.Persistence
         {
             services
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionScopeBehavior<,>))
-                
                 .AddScoped<ITransactionScopeManager, TransactionScopeManager>();
 
             return services;

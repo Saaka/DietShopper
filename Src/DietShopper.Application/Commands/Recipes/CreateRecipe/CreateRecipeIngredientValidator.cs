@@ -19,7 +19,7 @@ namespace DietShopper.Application.Commands.Recipes.CreateRecipe
                 .WithMessageCode(ErrorCode.ProductMeasureGuidRequired);
             
             RuleFor(x => x.Amount)
-                .GreaterThan(Decimal.Zero)
+                .GreaterThan(decimal.Zero)
                 .WithMessageCode(ErrorCode.InvalidProductAmount);
 
             RuleFor(x => x.Note)
