@@ -19,6 +19,8 @@ namespace DietShopper.Application.Commands.Recipes.CreateRecipe
                 .WithMessageCode(ErrorCode.ProductMeasureGuidRequired);
             
             RuleFor(x => x.Amount)
+                .LessThan(IngredientValidationConstants.MaxAmount)
+                .WithMessageCode(ErrorCode.InvalidProductAmount)
                 .GreaterThan(decimal.Zero)
                 .WithMessageCode(ErrorCode.InvalidProductAmount);
 
