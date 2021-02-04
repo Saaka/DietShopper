@@ -71,5 +71,6 @@ namespace DietShopper.Domain.Enums
         IngredientNoteTooLong = 67,
         RecipeDescriptionTooLong = 68,
         ProductMeasureNotFound = 69,
+        IngredientsMustBeUnique = 70,
     }
 }
