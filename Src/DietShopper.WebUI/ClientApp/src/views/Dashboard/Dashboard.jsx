@@ -6,11 +6,16 @@ function Dashboard(props) {
     useDocumentTitle("Dashboard");
 
     return (
-        <section className="section center">
-            <div>
-                <figure className="image is-128x128 has-border">
-                    <img src="https://picsum.photos/128/128/" alt="Logo" style={{maxWidth: "256px"}}/>
-                </figure>
+        <section className="section columns is-centered">
+            <div className="column is-half-desktop">
+                <div className="tile is-parent">
+                    <div className="tile box" onClick={() => console.log("recipes") /*redirectTo(RouteNames.MyRecipes)*/}>
+                        <div className="content">
+                            <p className="title">My Recipes</p>
+                            <p className="subtitle">Manage your recipes</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     );
